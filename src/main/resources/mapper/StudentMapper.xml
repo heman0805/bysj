@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heman.bysj.mapper.StudentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.heman.bysj.model.entity.Student">
+        <id column="id" property="id" />
+        <result column="value" property="value" />
+    </resultMap>
+
+  <!--  <select id="listTest" resultMap="BaseResultMap">
+        SELECT * FROM student
+    </select>-->
+
+   <select id="listTest" resultType="com.heman.bysj.model.entity.Student">
+            SELECT * FROM student
+   </select>
+
+    <select id="selectById" parameterType="Integer" resultType="com.heman.bysj.model.entity.Student">
+            select * from student where sid = #{id}
+    </select>
+</mapper>
