@@ -2,6 +2,7 @@ package com.heman.bysj.controller;
 
 import com.heman.bysj.model.entity.Leave;
 import com.heman.bysj.service.LeaveService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ public class StudentLeaveController {
 
     @RequestMapping(value="/api/leave")
     @ResponseBody
-    public void test(){
+    public void insertIntoLeave(){
         Leave leave = new Leave();
         leave.setNid(1);
         leave.setnTime(new Timestamp(System.currentTimeMillis()));

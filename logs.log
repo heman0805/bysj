@@ -1,0 +1,39 @@
+2020-03-08 20:26:00.087  INFO 7048 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 7048 (E:\bysj_hm\bysj\bysj\target\classes started by lenovo in E:\bysj_hm\bysj\bysj)
+2020-03-08 20:26:00.103  INFO 7048 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
+2020-03-08 20:26:03.683 ERROR 7048 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2020-03-08 20:26:04.119 ERROR 7048 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2020-03-08 20:26:04.500  INFO 7048 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-03-08 20:26:04.527 ERROR 7048 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2020-03-08 20:26:04.530  INFO 7048 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-03-08 20:26:04.531  INFO 7048 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-03-08 20:26:05.093  INFO 7048 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-03-08 20:26:05.093  INFO 7048 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4818 ms
+2020-03-08 20:26:06.388  INFO 7048 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-08 20:26:06.883  INFO 7048 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-03-08 20:26:06.883  INFO 7048 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 9.388 seconds (JVM running for 14.832)
+2020-03-08 20:28:05.971  INFO 14240 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 14240 (E:\bysj_hm\bysj\bysj\target\classes started by lenovo in E:\bysj_hm\bysj\bysj)
+2020-03-08 20:28:06.016  INFO 14240 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
+2020-03-08 20:28:09.086 ERROR 14240 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2020-03-08 20:28:09.409 ERROR 14240 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2020-03-08 20:28:09.585  INFO 14240 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-03-08 20:28:09.603 ERROR 14240 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2020-03-08 20:28:09.605  INFO 14240 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-03-08 20:28:09.606  INFO 14240 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-03-08 20:28:10.134  INFO 14240 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-03-08 20:28:10.136  INFO 14240 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3952 ms
+2020-03-08 20:28:11.263  INFO 14240 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-08 20:28:11.796  INFO 14240 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-03-08 20:28:11.813  INFO 14240 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 7.416 seconds (JVM running for 11.717)
+2020-03-08 20:29:10.834  INFO 10176 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 10176 (E:\bysj_hm\bysj\bysj\target\classes started by lenovo in E:\bysj_hm\bysj\bysj)
+2020-03-08 20:29:10.848  INFO 10176 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
+2020-03-08 20:29:13.790 ERROR 10176 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2020-03-08 20:29:14.086 ERROR 10176 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2020-03-08 20:29:14.269  INFO 10176 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-03-08 20:29:14.289 ERROR 10176 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2020-03-08 20:29:14.291  INFO 10176 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-03-08 20:29:14.292  INFO 10176 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-03-08 20:29:14.759  INFO 10176 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-03-08 20:29:14.760  INFO 10176 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3730 ms
+2020-03-08 20:29:15.806  INFO 10176 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-08 20:29:16.292  INFO 10176 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-03-08 20:29:16.300  INFO 10176 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 7.332 seconds (JVM running for 10.848)
