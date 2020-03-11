@@ -2,7 +2,6 @@ package com.heman.bysj.controller;
 
 
 import com.heman.bysj.jooq.tables.records.StudentRecord;
-import com.heman.bysj.model.entity.Student;
 import com.heman.bysj.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
