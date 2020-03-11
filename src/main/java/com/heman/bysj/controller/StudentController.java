@@ -1,6 +1,7 @@
 package com.heman.bysj.controller;
 
 
+import com.heman.bysj.jooq.tables.records.StudentRecord;
 import com.heman.bysj.model.entity.Student;
 import com.heman.bysj.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class StudentController {
     @CrossOrigin
     @RequestMapping(value="/api/test",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public List<Student> test(){
-        List<Student> testList = studentService.listTest();
+    public List<StudentRecord> test(){
+        List<StudentRecord> testList = studentService.listTest();
         return  testList;
     }
 }

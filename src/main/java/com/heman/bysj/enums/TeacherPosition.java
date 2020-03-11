@@ -1,4 +1,4 @@
-package com.heman.bysj.model.enums;
+package com.heman.bysj.enums;
 
 public class TeacherPosition {
 

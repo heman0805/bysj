@@ -1,7 +1,7 @@
 package com.heman.bysj.service;
 
-import com.heman.bysj.model.entity.Leave;
+import com.heman.bysj.jooq.tables.records.LeaveRecord;
 
 public interface LeaveService {
-    String insertIntoLeave(Leave leave,String param);
+    String insertLeave(LeaveRecord leave , String param);
 }
