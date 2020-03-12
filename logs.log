@@ -1,170 +1,46 @@
-2020-03-11 16:47:43.630  INFO 12272 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 12272 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
-2020-03-11 16:47:43.753  INFO 12272 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
-2020-03-11 16:47:48.607 ERROR 12272 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 16:47:49.117 ERROR 12272 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 16:47:49.476  INFO 12272 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2020-03-11 16:47:49.509 ERROR 12272 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 16:47:49.512  INFO 12272 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-03-11 16:47:49.513  INFO 12272 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
-2020-03-11 16:47:50.126  INFO 12272 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-03-11 16:47:50.126  INFO 12272 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 5982 ms
-2020-03-11 16:47:50.298  WARN 12272 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'studentController': Unsatisfied dependency expressed through field 'studentService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'studentServiceImpl': Unsatisfied dependency expressed through field 'studentDao'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'studentDaoImpl': Unsatisfied dependency expressed through field 'dslContext'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dslContext' defined in class path resource [org/springframework/boot/autoconfigure/jooq/JooqAutoConfiguration$DslContextConfiguration.class]: Unsatisfied dependency expressed through method 'dslContext' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jooqConfiguration' defined in class path resource [org/springframework/boot/autoconfigure/jooq/JooqAutoConfiguration$DslContextConfiguration.class]: Unexpected exception during bean creation; nested exception is java.lang.TypeNotPresentException: Type org.jooq.RecordUnmapperProvider not present
-2020-03-11 16:47:50.313  INFO 12272 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2020-03-11 16:47:50.376  INFO 12272 --- [main] ConditionEvaluationReportLoggingListener : 
+2020-03-12 11:56:47.947  WARN 4156 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16h17m37s276ms375µs859ns).
+2020-03-12 11:57:16.319  INFO 17640 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 17640 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
+2020-03-12 11:57:16.363  INFO 17640 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
+2020-03-12 11:57:20.293  INFO 17640 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-03-12 11:57:20.331  INFO 17640 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-03-12 11:57:20.333  INFO 17640 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-03-12 11:57:20.338  INFO 17640 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.14] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+2020-03-12 11:57:20.339  INFO 17640 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.14] using APR version [1.6.2].
+2020-03-12 11:57:20.340  INFO 17640 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2020-03-12 11:57:20.341  INFO 17640 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2020-03-12 11:57:21.586  INFO 17640 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2l  25 May 2017]
+2020-03-12 11:57:22.403  INFO 17640 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-03-12 11:57:22.405  INFO 17640 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 5778 ms
+2020-03-12 11:57:22.840  INFO 17640 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-03-12 11:57:23.445  INFO 17640 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-03-12 11:57:25.254  INFO 17640 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-12 11:57:25.870  INFO 17640 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-03-12 11:57:25.879  INFO 17640 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 11.757 seconds (JVM running for 17.47)
+2020-03-12 12:28:42.595  INFO 17736 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 17736 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
+2020-03-12 12:28:42.605  INFO 17736 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
+2020-03-12 12:28:47.617  INFO 17736 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-03-12 12:28:47.646  INFO 17736 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-03-12 12:28:47.648  INFO 17736 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-03-12 12:28:47.653  INFO 17736 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.14] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+2020-03-12 12:28:47.653  INFO 17736 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.14] using APR version [1.6.2].
+2020-03-12 12:28:47.654  INFO 17736 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2020-03-12 12:28:47.655  INFO 17736 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2020-03-12 12:28:48.819  INFO 17736 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2l  25 May 2017]
+2020-03-12 12:28:49.337  INFO 17736 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-03-12 12:28:49.338  INFO 17736 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 6494 ms
+2020-03-12 12:28:49.729  INFO 17736 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-03-12 12:28:50.222  INFO 17736 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-03-12 12:28:51.798  INFO 17736 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-12 12:28:52.393  INFO 17736 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-03-12 12:28:52.402  INFO 17736 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 11.367 seconds (JVM running for 15.614)
+2020-03-12 12:28:59.480  INFO 17736 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-03-12 12:28:59.481  INFO 17736 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-03-12 12:28:59.504  INFO 17736 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 23 ms
+2020-03-12 12:29:02.881 ERROR 17736 --- [http-nio-8080-exec-6] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
 
-Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
-2020-03-11 16:47:50.407 ERROR 12272 --- [main] o.s.boot.SpringApplication               : Application run failed
-
-org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'studentController': Unsatisfied dependency expressed through field 'studentService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'studentServiceImpl': Unsatisfied dependency expressed through field 'studentDao'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'studentDaoImpl': Unsatisfied dependency expressed through field 'dslContext'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dslContext' defined in class path resource [org/springframework/boot/autoconfigure/jooq/JooqAutoConfiguration$DslContextConfiguration.class]: Unsatisfied dependency expressed through method 'dslContext' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jooqConfiguration' defined in class path resource [org/springframework/boot/autoconfigure/jooq/JooqAutoConfiguration$DslContextConfiguration.class]: Unexpected exception during bean creation; nested exception is java.lang.TypeNotPresentException: Type org.jooq.RecordUnmapperProvider not present
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:643) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:130) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1422) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:879) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:878) ~[spring-context-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) ~[spring-boot-2.2.5.RELEASE.jar:2.2.5.RELEASE]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747) [spring-boot-2.2.5.RELEASE.jar:2.2.5.RELEASE]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) [spring-boot-2.2.5.RELEASE.jar:2.2.5.RELEASE]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) [spring-boot-2.2.5.RELEASE.jar:2.2.5.RELEASE]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) [spring-boot-2.2.5.RELEASE.jar:2.2.5.RELEASE]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.2.5.RELEASE.jar:2.2.5.RELEASE]
-	at com.heman.bysj.BysjApplication.main(BysjApplication.java:11) [classes/:na]
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'studentServiceImpl': Unsatisfied dependency expressed through field 'studentDao'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'studentDaoImpl': Unsatisfied dependency expressed through field 'dslContext'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dslContext' defined in class path resource [org/springframework/boot/autoconfigure/jooq/JooqAutoConfiguration$DslContextConfiguration.class]: Unsatisfied dependency expressed through method 'dslContext' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jooqConfiguration' defined in class path resource [org/springframework/boot/autoconfigure/jooq/JooqAutoConfiguration$DslContextConfiguration.class]: Unexpected exception during bean creation; nested exception is java.lang.TypeNotPresentException: Type org.jooq.RecordUnmapperProvider not present
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:643) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:130) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1422) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1287) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1207) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:640) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	... 19 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'studentDaoImpl': Unsatisfied dependency expressed through field 'dslContext'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dslContext' defined in class path resource [org/springframework/boot/autoconfigure/jooq/JooqAutoConfiguration$DslContextConfiguration.class]: Unsatisfied dependency expressed through method 'dslContext' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jooqConfiguration' defined in class path resource [org/springframework/boot/autoconfigure/jooq/JooqAutoConfiguration$DslContextConfiguration.class]: Unexpected exception during bean creation; nested exception is java.lang.TypeNotPresentException: Type org.jooq.RecordUnmapperProvider not present
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:643) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:130) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1422) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1287) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1207) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:640) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	... 32 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dslContext' defined in class path resource [org/springframework/boot/autoconfigure/jooq/JooqAutoConfiguration$DslContextConfiguration.class]: Unsatisfied dependency expressed through method 'dslContext' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jooqConfiguration' defined in class path resource [org/springframework/boot/autoconfigure/jooq/JooqAutoConfiguration$DslContextConfiguration.class]: Unexpected exception during bean creation; nested exception is java.lang.TypeNotPresentException: Type org.jooq.RecordUnmapperProvider not present
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:798) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:539) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1338) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:557) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1287) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1207) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:640) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	... 45 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jooqConfiguration' defined in class path resource [org/springframework/boot/autoconfigure/jooq/JooqAutoConfiguration$DslContextConfiguration.class]: Unexpected exception during bean creation; nested exception is java.lang.TypeNotPresentException: Type org.jooq.RecordUnmapperProvider not present
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:530) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1287) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1207) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:885) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:789) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	... 58 common frames omitted
-Caused by: java.lang.TypeNotPresentException: Type org.jooq.RecordUnmapperProvider not present
-	at sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:117) ~[na:1.8.0_121]
-	at sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:125) ~[na:1.8.0_121]
-	at sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49) ~[na:1.8.0_121]
-	at sun.reflect.generics.visitor.Reifier.reifyTypeArguments(Reifier.java:68) ~[na:1.8.0_121]
-	at sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:138) ~[na:1.8.0_121]
-	at sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49) ~[na:1.8.0_121]
-	at sun.reflect.generics.repository.ConstructorRepository.getParameterTypes(ConstructorRepository.java:94) ~[na:1.8.0_121]
-	at java.lang.reflect.Executable.getGenericParameterTypes(Executable.java:283) ~[na:1.8.0_121]
-	at java.lang.reflect.Method.getGenericParameterTypes(Method.java:283) ~[na:1.8.0_121]
-	at org.springframework.core.MethodParameter.getGenericParameterType(MethodParameter.java:513) ~[spring-core-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.core.SerializableTypeWrapper$MethodParameterTypeProvider.getType(SerializableTypeWrapper.java:292) ~[spring-core-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.core.SerializableTypeWrapper.forTypeProvider(SerializableTypeWrapper.java:107) ~[spring-core-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.core.ResolvableType.forType(ResolvableType.java:1406) ~[spring-core-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.core.ResolvableType.forMethodParameter(ResolvableType.java:1327) ~[spring-core-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.core.ResolvableType.forMethodParameter(ResolvableType.java:1309) ~[spring-core-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.core.ResolvableType.forMethodParameter(ResolvableType.java:1276) ~[spring-core-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.config.DependencyDescriptor.getResolvableType(DependencyDescriptor.java:314) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.GenericTypeAwareAutowireCandidateResolver.checkGenericTypeMatch(GenericTypeAwareAutowireCandidateResolver.java:77) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.GenericTypeAwareAutowireCandidateResolver.isAutowireCandidate(GenericTypeAwareAutowireCandidateResolver.java:69) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.annotation.QualifierAnnotationAutowireCandidateResolver.isAutowireCandidate(QualifierAnnotationAutowireCandidateResolver.java:147) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.isAutowireCandidate(DefaultListableBeanFactory.java:794) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.isAutowireCandidate(DefaultListableBeanFactory.java:757) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.isAutowireCandidate(DefaultListableBeanFactory.java:741) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1466) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1250) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1207) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:885) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:789) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:539) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1338) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:557) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517) ~[spring-beans-5.2.4.RELEASE.jar:5.2.4.RELEASE]
-	... 67 common frames omitted
-Caused by: java.lang.ClassNotFoundException: org.jooq.RecordUnmapperProvider
-	at java.net.URLClassLoader.findClass(URLClassLoader.java:381) ~[na:1.8.0_121]
-	at java.lang.ClassLoader.loadClass(ClassLoader.java:424) ~[na:1.8.0_121]
-	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) ~[na:1.8.0_121]
-	at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ~[na:1.8.0_121]
-	at java.lang.Class.forName0(Native Method) ~[na:1.8.0_121]
-	at java.lang.Class.forName(Class.java:348) ~[na:1.8.0_121]
-	at sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:114) ~[na:1.8.0_121]
-	... 99 common frames omitted
-
-2020-03-11 17:14:50.400  INFO 12064 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 12064 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
-2020-03-11 17:14:50.478  INFO 12064 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
-2020-03-11 17:14:53.285 ERROR 12064 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 17:14:53.629 ERROR 12064 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 17:14:53.867  INFO 12064 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2020-03-11 17:14:53.883 ERROR 12064 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 17:14:53.883  INFO 12064 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-03-11 17:14:53.883  INFO 12064 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
-2020-03-11 17:14:54.398  INFO 12064 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-03-11 17:14:54.398  INFO 12064 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3733 ms
-2020-03-11 17:14:54.742  INFO 12064 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-03-11 17:14:55.305  INFO 12064 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-03-11 17:14:56.905  INFO 12064 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-03-11 17:14:57.499  INFO 12064 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2020-03-11 17:14:57.515  INFO 12064 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 8.678 seconds (JVM running for 13.569)
-2020-03-11 17:15:08.044  INFO 12064 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-03-11 17:15:08.045  INFO 12064 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-03-11 17:15:08.067  INFO 12064 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 21 ms
-2020-03-11 17:15:09.061 ERROR 12064 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.ClassCastException: org.jooq.impl.SelectImpl cannot be cast to com.heman.bysj.jooq.tables.records.TeacherRecord] with root cause
-
-java.lang.ClassCastException: org.jooq.impl.SelectImpl cannot be cast to com.heman.bysj.jooq.tables.records.TeacherRecord
-	at com.heman.bysj.jooqService.Impl.TeacherDaoImpl.selectById(TeacherDaoImpl.java:41) ~[classes/:na]
-	at com.heman.bysj.service.impl.LeaveServiceImpl.insertLeave(LeaveServiceImpl.java:115) ~[classes/:na]
-	at com.heman.bysj.controller.StudentLeaveController.insertIntoLeave(StudentLeaveController.java:36) ~[classes/:na]
+java.lang.NullPointerException: null
+	at com.heman.bysj.jooqService.Impl.TeacherDaoImpl.insertTeacher(TeacherDaoImpl.java:47) ~[classes/:na]
+	at com.heman.bysj.controller.UserController.insertIntoLeave(UserController.java:25) ~[classes/:na]
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_121]
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_121]
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_121]
@@ -216,25 +92,44 @@ java.lang.ClassCastException: org.jooq.impl.SelectImpl cannot be cast to com.hem
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.31.jar:9.0.31]
 	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_121]
 
-2020-03-11 17:18:17.281  INFO 12104 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 12104 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
-2020-03-11 17:18:17.313  INFO 12104 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
-2020-03-11 17:18:20.492 ERROR 12104 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 17:18:20.774 ERROR 12104 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 17:18:20.945  INFO 12104 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2020-03-11 17:18:20.961 ERROR 12104 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 17:18:20.961  INFO 12104 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-03-11 17:18:20.961  INFO 12104 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
-2020-03-11 17:18:21.399  INFO 12104 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-03-11 17:18:21.399  INFO 12104 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3899 ms
-2020-03-11 17:18:21.727  INFO 12104 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-03-11 17:18:22.149  INFO 12104 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-03-11 17:18:23.570  INFO 12104 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-03-11 17:18:24.055  INFO 12104 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2020-03-11 17:18:24.070  INFO 12104 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 8.281 seconds (JVM running for 11.897)
-2020-03-11 17:18:46.197  INFO 12104 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-03-11 17:18:46.198  INFO 12104 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-03-11 17:18:46.222  INFO 12104 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 22 ms
-2020-03-11 17:18:47.105  INFO 12104 --- [http-nio-8080-exec-1] org.jooq.Constants                       : 
+2020-03-12 12:30:40.834  INFO 16212 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 16212 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
+2020-03-12 12:30:40.992  INFO 16212 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
+2020-03-12 12:30:44.498  INFO 16212 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-03-12 12:30:44.525  INFO 16212 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-03-12 12:30:44.527  INFO 16212 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-03-12 12:30:44.533  INFO 16212 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.14] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+2020-03-12 12:30:44.533  INFO 16212 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.14] using APR version [1.6.2].
+2020-03-12 12:30:44.534  INFO 16212 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2020-03-12 12:30:44.535  INFO 16212 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2020-03-12 12:30:45.691  INFO 16212 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2l  25 May 2017]
+2020-03-12 12:30:46.234  INFO 16212 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-03-12 12:30:46.234  INFO 16212 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 5086 ms
+2020-03-12 12:30:46.645  INFO 16212 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-03-12 12:30:47.176  INFO 16212 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-03-12 12:30:48.783  INFO 16212 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-12 12:30:49.399  INFO 16212 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-03-12 12:30:49.412  INFO 16212 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 10.075 seconds (JVM running for 14.422)
+2020-03-12 12:31:13.598  INFO 14796 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 14796 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
+2020-03-12 12:31:13.607  INFO 14796 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
+2020-03-12 12:31:17.317  INFO 14796 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-03-12 12:31:17.344  INFO 14796 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-03-12 12:31:17.346  INFO 14796 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-03-12 12:31:17.350  INFO 14796 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.14] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+2020-03-12 12:31:17.351  INFO 14796 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.14] using APR version [1.6.2].
+2020-03-12 12:31:17.352  INFO 14796 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2020-03-12 12:31:17.353  INFO 14796 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2020-03-12 12:31:18.527  INFO 14796 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2l  25 May 2017]
+2020-03-12 12:31:19.019  INFO 14796 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-03-12 12:31:19.020  INFO 14796 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 5136 ms
+2020-03-12 12:31:19.366  INFO 14796 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-03-12 12:31:19.858  INFO 14796 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-03-12 12:31:21.518  INFO 14796 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-12 12:31:22.102  INFO 14796 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-03-12 12:31:22.111  INFO 14796 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 10.014 seconds (JVM running for 14.09)
+2020-03-12 12:31:27.115  INFO 14796 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-03-12 12:31:27.116  INFO 14796 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-03-12 12:31:27.143  INFO 14796 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 26 ms
+2020-03-12 12:31:27.507  INFO 14796 --- [http-nio-8080-exec-1] org.jooq.Constants                       : 
                                       
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -254,25 +149,97 @@ java.lang.ClassCastException: org.jooq.impl.SelectImpl cannot be cast to com.hem
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.12.4
                                       
-2020-03-11 17:21:45.140  INFO 15484 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 15484 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
-2020-03-11 17:21:45.140  INFO 15484 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
-2020-03-11 17:21:47.672 ERROR 15484 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 17:21:47.937 ERROR 15484 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 17:21:48.125  INFO 15484 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2020-03-11 17:21:48.140 ERROR 15484 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 17:21:48.140  INFO 15484 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-03-11 17:21:48.140  INFO 15484 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
-2020-03-11 17:21:48.609  INFO 15484 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-03-11 17:21:48.609  INFO 15484 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3312 ms
-2020-03-11 17:21:48.922  INFO 15484 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-03-11 17:21:49.406  INFO 15484 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-03-11 17:21:50.750  INFO 15484 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-03-11 17:21:51.219  INFO 15484 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2020-03-11 17:21:51.219  INFO 15484 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 7.544 seconds (JVM running for 11.142)
-2020-03-11 17:47:51.540  INFO 15484 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-03-11 17:47:51.542  INFO 15484 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-03-11 17:47:51.565  INFO 15484 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 23 ms
-2020-03-11 17:47:53.561  INFO 15484 --- [http-nio-8080-exec-1] org.jooq.Constants                       : 
+2020-03-12 12:31:28.002 ERROR 14796 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.DataIntegrityViolationException: jOOQ; SQL [insert into `bysj`.`teacher` (`name`, `username`, `password`, `college`, `profession`, `position`) values (?, ?, ?, ?, ?, ?)]; Data truncation: Data too long for column 'college' at row 1; nested exception is com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column 'college' at row 1] with root cause
+
+com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column 'college' at row 1
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4072) ~[mysql-connector-java-5.1.21.jar:na]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4006) ~[mysql-connector-java-5.1.21.jar:na]
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2468) ~[mysql-connector-java-5.1.21.jar:na]
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2629) ~[mysql-connector-java-5.1.21.jar:na]
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2719) ~[mysql-connector-java-5.1.21.jar:na]
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2155) ~[mysql-connector-java-5.1.21.jar:na]
+	at com.mysql.jdbc.PreparedStatement.execute(PreparedStatement.java:1379) ~[mysql-connector-java-5.1.21.jar:na]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44) ~[HikariCP-3.4.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java) ~[HikariCP-3.4.2.jar:na]
+	at org.jooq.tools.jdbc.DefaultPreparedStatement.execute(DefaultPreparedStatement.java:209) ~[jooq-3.12.4.jar:na]
+	at org.jooq.impl.AbstractQuery.execute(AbstractQuery.java:450) ~[jooq-3.12.4.jar:na]
+	at org.jooq.impl.AbstractDMLQuery.execute(AbstractDMLQuery.java:874) ~[jooq-3.12.4.jar:na]
+	at org.jooq.impl.AbstractQuery.execute(AbstractQuery.java:368) ~[jooq-3.12.4.jar:na]
+	at org.jooq.impl.AbstractDelegatingQuery.execute(AbstractDelegatingQuery.java:119) ~[jooq-3.12.4.jar:na]
+	at com.heman.bysj.jooqService.Impl.TeacherDaoImpl.insertTeacher(TeacherDaoImpl.java:49) ~[classes/:na]
+	at com.heman.bysj.controller.UserController.insertIntoLeave(UserController.java:27) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_121]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_121]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_121]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_121]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190) ~[spring-web-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) ~[spring-webmvc-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:879) ~[spring-webmvc-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793) ~[spring-webmvc-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040) ~[spring-webmvc-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943) ~[spring-webmvc-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634) ~[tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741) ~[tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.31.jar:9.0.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.4.RELEASE.jar:5.2.4.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541) [tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) [tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:367) [tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868) [tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1639) [tomcat-embed-core-9.0.31.jar:9.0.31]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.31.jar:9.0.31]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_121]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_121]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.31.jar:9.0.31]
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_121]
+
+2020-03-12 12:32:41.963  INFO 17548 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 17548 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
+2020-03-12 12:32:41.991  INFO 17548 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
+2020-03-12 12:32:45.253  INFO 17548 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-03-12 12:32:45.279  INFO 17548 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-03-12 12:32:45.281  INFO 17548 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-03-12 12:32:45.285  INFO 17548 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.14] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+2020-03-12 12:32:45.286  INFO 17548 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.14] using APR version [1.6.2].
+2020-03-12 12:32:45.287  INFO 17548 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2020-03-12 12:32:45.288  INFO 17548 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2020-03-12 12:32:46.430  INFO 17548 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2l  25 May 2017]
+2020-03-12 12:32:46.977  INFO 17548 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-03-12 12:32:46.978  INFO 17548 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4810 ms
+2020-03-12 12:32:47.381  INFO 17548 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-03-12 12:32:47.841  INFO 17548 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-03-12 12:32:49.322  INFO 17548 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-12 12:32:49.833  INFO 17548 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-03-12 12:32:49.842  INFO 17548 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 9.473 seconds (JVM running for 13.169)
+2020-03-12 12:32:52.693  INFO 17548 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-03-12 12:32:52.694  INFO 17548 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-03-12 12:32:52.711  INFO 17548 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 16 ms
+2020-03-12 12:32:53.006  INFO 17548 --- [http-nio-8080-exec-1] org.jooq.Constants                       : 
                                       
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -292,25 +259,27 @@ java.lang.ClassCastException: org.jooq.impl.SelectImpl cannot be cast to com.hem
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.12.4
                                       
-2020-03-11 17:51:31.846  INFO 14912 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 14912 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
-2020-03-11 17:51:31.860  INFO 14912 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
-2020-03-11 17:51:34.907 ERROR 14912 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 17:51:35.312 ERROR 14912 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 17:51:35.541  INFO 14912 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2020-03-11 17:51:35.564 ERROR 14912 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 17:51:35.566  INFO 14912 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-03-11 17:51:35.567  INFO 14912 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
-2020-03-11 17:51:36.099  INFO 14912 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-03-11 17:51:36.100  INFO 14912 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4074 ms
-2020-03-11 17:51:36.482  INFO 14912 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-03-11 17:51:36.967  INFO 14912 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-03-11 17:51:38.566  INFO 14912 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-03-11 17:51:39.196  INFO 14912 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2020-03-11 17:51:39.206  INFO 14912 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 8.86 seconds (JVM running for 13.013)
-2020-03-11 17:52:35.092  INFO 14912 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-03-11 17:52:35.093  INFO 14912 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-03-11 17:52:35.117  INFO 14912 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 23 ms
-2020-03-11 17:52:36.160  INFO 14912 --- [http-nio-8080-exec-2] org.jooq.Constants                       : 
+2020-03-12 12:35:09.030  INFO 15528 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 15528 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
+2020-03-12 12:35:09.039  INFO 15528 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
+2020-03-12 12:35:12.600  INFO 15528 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-03-12 12:35:12.623  INFO 15528 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-03-12 12:35:12.625  INFO 15528 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-03-12 12:35:12.629  INFO 15528 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.14] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+2020-03-12 12:35:12.630  INFO 15528 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.14] using APR version [1.6.2].
+2020-03-12 12:35:12.630  INFO 15528 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2020-03-12 12:35:12.631  INFO 15528 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2020-03-12 12:35:13.792  INFO 15528 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2l  25 May 2017]
+2020-03-12 12:35:14.369  INFO 15528 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-03-12 12:35:14.369  INFO 15528 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 5137 ms
+2020-03-12 12:35:14.778  INFO 15528 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-03-12 12:35:15.244  INFO 15528 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-03-12 12:35:16.736  INFO 15528 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-12 12:35:17.304  INFO 15528 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-03-12 12:35:17.314  INFO 15528 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 9.712 seconds (JVM running for 13.687)
+2020-03-12 12:35:20.231  INFO 15528 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-03-12 12:35:20.232  INFO 15528 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-03-12 12:35:20.250  INFO 15528 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 18 ms
+2020-03-12 12:35:20.598  INFO 15528 --- [http-nio-8080-exec-1] org.jooq.Constants                       : 
                                       
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -330,26 +299,27 @@ java.lang.ClassCastException: org.jooq.impl.SelectImpl cannot be cast to com.hem
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.12.4
                                       
-2020-03-11 17:52:36.373  INFO 14912 --- [http-nio-8080-exec-2] c.h.bysj.service.impl.LeaveServiceImpl   : 当前请假学生的姓名为：赫嫚
-2020-03-11 18:06:29.857  INFO 16296 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 16296 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
-2020-03-11 18:06:29.868  INFO 16296 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
-2020-03-11 18:06:32.807 ERROR 16296 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 18:06:33.172 ERROR 16296 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 18:06:33.381  INFO 16296 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2020-03-11 18:06:33.407 ERROR 16296 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 18:06:33.409  INFO 16296 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-03-11 18:06:33.409  INFO 16296 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
-2020-03-11 18:06:33.877  INFO 16296 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-03-11 18:06:33.877  INFO 16296 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3807 ms
-2020-03-11 18:06:34.227  INFO 16296 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-03-11 18:06:34.646  INFO 16296 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-03-11 18:06:35.979  INFO 16296 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-03-11 18:06:36.498  INFO 16296 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2020-03-11 18:06:36.507  INFO 16296 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 8.272 seconds (JVM running for 12.003)
-2020-03-11 18:06:45.038  INFO 16296 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-03-11 18:06:45.040  INFO 16296 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-03-11 18:06:45.059  INFO 16296 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 19 ms
-2020-03-11 18:06:45.934  INFO 16296 --- [http-nio-8080-exec-1] org.jooq.Constants                       : 
+2020-03-12 12:36:36.583  INFO 15116 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 15116 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
+2020-03-12 12:36:36.593  INFO 15116 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
+2020-03-12 12:36:40.727  INFO 15116 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-03-12 12:36:40.762  INFO 15116 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-03-12 12:36:40.763  INFO 15116 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-03-12 12:36:40.770  INFO 15116 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.14] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+2020-03-12 12:36:40.771  INFO 15116 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.14] using APR version [1.6.2].
+2020-03-12 12:36:40.772  INFO 15116 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2020-03-12 12:36:40.773  INFO 15116 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2020-03-12 12:36:41.929  INFO 15116 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2l  25 May 2017]
+2020-03-12 12:36:42.451  INFO 15116 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-03-12 12:36:42.452  INFO 15116 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 5638 ms
+2020-03-12 12:36:42.810  INFO 15116 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-03-12 12:36:43.283  INFO 15116 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-03-12 12:36:44.847  INFO 15116 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-12 12:36:45.403  INFO 15116 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-03-12 12:36:45.410  INFO 15116 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 10.47 seconds (JVM running for 14.583)
+2020-03-12 12:36:50.215  INFO 15116 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-03-12 12:36:50.216  INFO 15116 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-03-12 12:36:50.237  INFO 15116 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 21 ms
+2020-03-12 12:36:50.572  INFO 15116 --- [http-nio-8080-exec-1] org.jooq.Constants                       : 
                                       
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -369,136 +339,3 @@ java.lang.ClassCastException: org.jooq.impl.SelectImpl cannot be cast to com.hem
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.12.4
                                       
-2020-03-11 18:06:46.108  INFO 16296 --- [http-nio-8080-exec-1] c.h.bysj.service.impl.LeaveServiceImpl   : 当前请假学生的姓名为：赫嫚
-2020-03-11 18:06:46.109  INFO 16296 --- [http-nio-8080-exec-1] c.h.bysj.service.impl.LeaveServiceImpl   : 请假时间超过三天
-2020-03-11 18:06:46.152  INFO 16296 --- [http-nio-8080-exec-1] c.h.bysj.service.impl.LeaveServiceImpl   : 审批教师为：赫嫚
-2020-03-11 18:06:46.252  INFO 16296 --- [http-nio-8080-exec-1] c.h.bysj.service.impl.LeaveServiceImpl   : 插入结果：1
-2020-03-11 18:09:21.835  INFO 15032 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 15032 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
-2020-03-11 18:09:21.845  INFO 15032 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
-2020-03-11 18:09:24.916 ERROR 15032 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 18:09:25.248 ERROR 15032 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 18:09:25.442  INFO 15032 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2020-03-11 18:09:25.468 ERROR 15032 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 18:09:25.471  INFO 15032 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-03-11 18:09:25.474  INFO 15032 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
-2020-03-11 18:09:25.991  INFO 15032 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-03-11 18:09:25.992  INFO 15032 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3949 ms
-2020-03-11 18:09:26.390  INFO 15032 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-03-11 18:09:26.903  INFO 15032 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-03-11 18:09:28.343  INFO 15032 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-03-11 18:09:28.994  INFO 15032 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2020-03-11 18:09:29.002  INFO 15032 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 8.727 seconds (JVM running for 12.945)
-2020-03-11 18:09:39.625  INFO 15032 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-03-11 18:09:39.627  INFO 15032 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-03-11 18:09:39.649  INFO 15032 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 22 ms
-2020-03-11 18:09:40.803  INFO 15032 --- [http-nio-8080-exec-1] org.jooq.Constants                       : 
-                                      
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@  @@        @@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@        @@@@@@@@@@
-@@@@@@@@@@@@@@@@  @@  @@    @@@@@@@@@@
-@@@@@@@@@@  @@@@  @@  @@    @@@@@@@@@@
-@@@@@@@@@@        @@        @@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@        @@        @@@@@@@@@@
-@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
-@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
-@@@@@@@@@@        @@  @  @  @@@@@@@@@@
-@@@@@@@@@@        @@        @@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.12.4
-                                      
-2020-03-11 18:09:41.035  INFO 15032 --- [http-nio-8080-exec-1] c.h.bysj.service.impl.LeaveServiceImpl   : 当前请假学生的姓名为：赫嫚
-2020-03-11 18:09:41.036  INFO 15032 --- [http-nio-8080-exec-1] c.h.bysj.service.impl.LeaveServiceImpl   : 请假时间超过三天
-2020-03-11 18:09:41.077  INFO 15032 --- [http-nio-8080-exec-1] c.h.bysj.service.impl.LeaveServiceImpl   : 审批教师为：赫嫚
-2020-03-11 18:09:41.171  INFO 15032 --- [http-nio-8080-exec-1] c.h.bysj.service.impl.LeaveServiceImpl   : 插入结果：1
-2020-03-11 18:10:01.538  INFO 15032 --- [http-nio-8080-exec-3] c.h.bysj.service.impl.LeaveServiceImpl   : 当前请假学生的姓名为：赫嫚
-2020-03-11 18:10:01.538  INFO 15032 --- [http-nio-8080-exec-3] c.h.bysj.service.impl.LeaveServiceImpl   : 请假时间超过三天
-2020-03-11 18:10:01.544  INFO 15032 --- [http-nio-8080-exec-3] c.h.bysj.service.impl.LeaveServiceImpl   : 审批教师为：赫嫚
-2020-03-11 18:10:01.558  INFO 15032 --- [http-nio-8080-exec-3] c.h.bysj.service.impl.LeaveServiceImpl   : 插入结果：1
-2020-03-11 18:14:36.174  INFO 7480 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 7480 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
-2020-03-11 18:14:36.186  INFO 7480 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
-2020-03-11 18:14:39.288 ERROR 7480 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 18:14:39.648 ERROR 7480 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 18:14:39.883  INFO 7480 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2020-03-11 18:14:39.905 ERROR 7480 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 18:14:39.907  INFO 7480 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-03-11 18:14:39.908  INFO 7480 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
-2020-03-11 18:14:40.424  INFO 7480 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-03-11 18:14:40.425  INFO 7480 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4010 ms
-2020-03-11 18:14:40.804  INFO 7480 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-03-11 18:14:41.310  INFO 7480 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-03-11 18:14:42.783  INFO 7480 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-03-11 18:14:43.374  INFO 7480 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2020-03-11 18:14:43.385  INFO 7480 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 8.725 seconds (JVM running for 12.861)
-2020-03-11 18:15:25.282  INFO 7480 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-03-11 18:15:25.284  INFO 7480 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-03-11 18:15:25.304  INFO 7480 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 20 ms
-2020-03-11 18:15:26.284  INFO 7480 --- [http-nio-8080-exec-2] org.jooq.Constants                       : 
-                                      
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@  @@        @@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@        @@@@@@@@@@
-@@@@@@@@@@@@@@@@  @@  @@    @@@@@@@@@@
-@@@@@@@@@@  @@@@  @@  @@    @@@@@@@@@@
-@@@@@@@@@@        @@        @@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@        @@        @@@@@@@@@@
-@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
-@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
-@@@@@@@@@@        @@  @  @  @@@@@@@@@@
-@@@@@@@@@@        @@        @@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.12.4
-                                      
-2020-03-11 18:15:26.470  INFO 7480 --- [http-nio-8080-exec-2] c.h.bysj.service.impl.LeaveServiceImpl   : 当前请假学生的姓名为：赫嫚
-2020-03-11 18:15:26.471  INFO 7480 --- [http-nio-8080-exec-2] c.h.bysj.service.impl.LeaveServiceImpl   : 请假时间小于三天
-2020-03-11 18:15:26.550  INFO 7480 --- [http-nio-8080-exec-2] c.h.bysj.service.impl.LeaveServiceImpl   : 插入结果：1
-2020-03-11 18:56:35.707  INFO 8168 --- [main] com.heman.bysj.BysjApplication           : Starting BysjApplication on Lenovo-PC with PID 8168 (E:\bysj\bysj\target\classes started by lenovo in E:\bysj\bysj)
-2020-03-11 18:56:35.743  INFO 8168 --- [main] com.heman.bysj.BysjApplication           : No active profile set, falling back to default profiles: default
-2020-03-11 18:56:38.712 ERROR 8168 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 18:56:39.060 ERROR 8168 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 18:56:39.245  INFO 8168 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2020-03-11 18:56:39.273 ERROR 8168 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.1.29] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
-2020-03-11 18:56:39.276  INFO 8168 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-03-11 18:56:39.279  INFO 8168 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
-2020-03-11 18:56:39.842  INFO 8168 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-03-11 18:56:39.842  INFO 8168 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3814 ms
-2020-03-11 18:56:40.199  INFO 8168 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-03-11 18:56:40.757  INFO 8168 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-03-11 18:56:42.170  INFO 8168 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-03-11 18:56:42.750  INFO 8168 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2020-03-11 18:56:42.762  INFO 8168 --- [main] com.heman.bysj.BysjApplication           : Started BysjApplication in 8.691 seconds (JVM running for 13.368)
-2020-03-11 18:57:42.573  INFO 8168 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-03-11 18:57:42.575  INFO 8168 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-03-11 18:57:42.622  INFO 8168 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 47 ms
-2020-03-11 18:57:44.072  INFO 8168 --- [http-nio-8080-exec-1] org.jooq.Constants                       : 
-                                      
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@  @@        @@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@        @@@@@@@@@@
-@@@@@@@@@@@@@@@@  @@  @@    @@@@@@@@@@
-@@@@@@@@@@  @@@@  @@  @@    @@@@@@@@@@
-@@@@@@@@@@        @@        @@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@        @@        @@@@@@@@@@
-@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
-@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
-@@@@@@@@@@        @@  @  @  @@@@@@@@@@
-@@@@@@@@@@        @@        @@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.12.4
-                                      
-2020-03-11 18:57:44.607  INFO 8168 --- [http-nio-8080-exec-1] c.h.bysj.service.impl.LeaveServiceImpl   : 当前请假教师为：张
-2020-03-11 18:57:44.608  INFO 8168 --- [http-nio-8080-exec-1] c.h.bysj.service.impl.LeaveServiceImpl   : 请假时间小于三天
-2020-03-11 18:57:44.626  INFO 8168 --- [http-nio-8080-exec-1] c.h.bysj.service.impl.LeaveServiceImpl   : 审批教师为：舒新峰
-2020-03-11 18:57:44.730  INFO 8168 --- [http-nio-8080-exec-1] c.h.bysj.service.impl.LeaveServiceImpl   : 插入结果为：1

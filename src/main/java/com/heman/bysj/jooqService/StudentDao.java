@@ -8,7 +8,12 @@ public interface StudentDao {
 
     //获取学生列表
     List<StudentRecord> listTest();
-
     //根据ID获取学生信息
     StudentRecord selectById(int id);
+    //插入学生信息
+    int insertStudent(StudentRecord studentRecord);
+    //修改学生信息
+    int updateStudent(StudentRecord studentRecord);
+    //通过ID删除学生信息
+    int deleteById(int id);
 }

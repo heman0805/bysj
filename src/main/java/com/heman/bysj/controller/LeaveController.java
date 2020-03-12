@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.sql.Timestamp;
 
 @RestController
-public class StudentLeaveController {
+public class LeaveController {
     @Autowired
     private LeaveService leaveService;
 

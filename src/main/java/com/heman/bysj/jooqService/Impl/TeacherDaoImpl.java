@@ -41,4 +41,29 @@ public class TeacherDaoImpl implements TeacherDao {
                 .where(TEACHER.TID.eq(id))
                 .fetchOne();
     }
+
+    @Override
+    public int insertTeacher(TeacherRecord teacherRecord) {
+        return dslContext.insertInto(TEACHER)
+                .set(teacherRecord)
+                .execute();
+    }
+
+    @Override
+    public int updateTeacher(TeacherRecord teacherRecord) {
+        return dslContext.update(TEACHER)
+                .set(teacherRecord)
+                .where(TEACHER.TID.eq(teacherRecord.getTid()))
+                .execute();
+    }
+
+
+    @Override
+    public int deleteById(int id) {
+        return dslContext.deleteFrom(TEACHER)
+                .where(TEACHER.TID.eq(id))
+                .execute();
+    }
+
+
 }

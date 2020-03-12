@@ -7,4 +7,10 @@ public interface TeacherDao {
     TeacherRecord selectByProfessionAndPosition(String profession,  String position);
     //通过ID进行查询
     TeacherRecord selectById(int id);
+    //插入教师信息
+    int insertTeacher(TeacherRecord teacherRecord);
+    //修改教师信息
+    int updateTeacher(TeacherRecord teacherRecord);
+    //通过ID删除教师信息
+    int deleteById(int id);
 }
