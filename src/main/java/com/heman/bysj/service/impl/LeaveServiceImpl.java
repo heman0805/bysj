@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class LeaveServiceImpl implements LeaveService {
@@ -27,6 +29,7 @@ public class LeaveServiceImpl implements LeaveService {
     private Long THREE_DAYS = 3*24*60*60*1000l;
 
     /**
+     * 请假Service
      * 1、根据参数（param）判断请假人为 学生/教师
      * 2、若请假不超过3天，直接由 辅导员/系主任 审批
      * 3、若请假超过3天，则由 书记/院长 审批
@@ -89,4 +92,36 @@ public class LeaveServiceImpl implements LeaveService {
     }
 
 
+    /**
+     * 请假审批Service
+     * @param tid
+     * @return
+     */
+    @Override
+    public List<LeaveRecord> leaveList(int tid) {
+        return leaveDao.selectListByTid(tid);
+
+    }
+
+    /**
+     * 通过lid查询请假信息
+     * @param lid
+     * @return
+     */
+    @Override
+    public LeaveRecord selectLeaveByLid(int lid) {
+        return leaveDao.selectByLid(lid);
+    }
+
+    /**
+     * 请假审批
+     * @param lid
+     * @param result
+     * @param remark
+     * @return
+     */
+    @Override
+    public int updateLeaveByLid(int lid, int result, String remark) {
+        return leaveDao.updateResultAndRemark(lid,result,remark);
+    }
 }

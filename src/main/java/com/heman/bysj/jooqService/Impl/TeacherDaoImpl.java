@@ -15,7 +15,6 @@ import static com.heman.bysj.jooq.tables.Teacher.TEACHER;
 public class TeacherDaoImpl implements TeacherDao {
     @Autowired
     private DSLContext dslContext;
-
     /**
      * 通过专业及职位查询教师信息
      * @param profession
@@ -29,7 +28,6 @@ public class TeacherDaoImpl implements TeacherDao {
                 .and(TEACHER.POSITION.eq(position))
                 .fetchOne();
     }
-
     /**
      * 通过ID查询教师信息
      * @param id
@@ -48,7 +46,6 @@ public class TeacherDaoImpl implements TeacherDao {
                 .set(teacherRecord)
                 .execute();
     }
-
     @Override
     public int updateTeacher(TeacherRecord teacherRecord) {
         return dslContext.update(TEACHER)
@@ -56,8 +53,6 @@ public class TeacherDaoImpl implements TeacherDao {
                 .where(TEACHER.TID.eq(teacherRecord.getTid()))
                 .execute();
     }
-
-
     @Override
     public int deleteById(int id) {
         return dslContext.deleteFrom(TEACHER)

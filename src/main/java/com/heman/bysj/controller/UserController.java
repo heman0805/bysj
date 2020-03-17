@@ -28,7 +28,7 @@ public class UserController {
         teacherRecord.setCollege("计算机学院");
         teacherRecord.setProfession("软件工程");
         teacherRecord.setPosition("教师");
-        String param = "student";
+        String param = "teacher";
 
         StudentRecord studentRecord = new StudentRecord();
         if(param.equals("student")){
