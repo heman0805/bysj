@@ -4,7 +4,9 @@
 package com.heman.bysj.jooq;
 
 
+import com.heman.bysj.jooq.tables.Changemajors;
 import com.heman.bysj.jooq.tables.Leave;
+import com.heman.bysj.jooq.tables.Majorapproval;
 import com.heman.bysj.jooq.tables.Student;
 import com.heman.bysj.jooq.tables.Teacher;
 
@@ -32,9 +34,13 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
+    public static final Index CHANGEMAJORS_PRIMARY = Indexes0.CHANGEMAJORS_PRIMARY;
+    public static final Index CHANGEMAJORS_SID = Indexes0.CHANGEMAJORS_SID;
     public static final Index LEAVE_NID_KEY = Indexes0.LEAVE_NID_KEY;
     public static final Index LEAVE_PRIMARY = Indexes0.LEAVE_PRIMARY;
     public static final Index LEAVE_TID_KEY = Indexes0.LEAVE_TID_KEY;
+    public static final Index MAJORAPPROVAL_APPROVECID_FOREIGNKEY = Indexes0.MAJORAPPROVAL_APPROVECID_FOREIGNKEY;
+    public static final Index MAJORAPPROVAL_PRIMARY = Indexes0.MAJORAPPROVAL_PRIMARY;
     public static final Index STUDENT_PRIMARY = Indexes0.STUDENT_PRIMARY;
     public static final Index STUDENT_STUDENT_TID_FORIENGINKEY = Indexes0.STUDENT_STUDENT_TID_FORIENGINKEY;
     public static final Index STUDENT_SUSERNAME_UNIQUE = Indexes0.STUDENT_SUSERNAME_UNIQUE;
@@ -47,9 +53,13 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     private static class Indexes0 {
+        public static Index CHANGEMAJORS_PRIMARY = Internal.createIndex("PRIMARY", Changemajors.CHANGEMAJORS, new OrderField[] { Changemajors.CHANGEMAJORS.CID }, true);
+        public static Index CHANGEMAJORS_SID = Internal.createIndex("sid", Changemajors.CHANGEMAJORS, new OrderField[] { Changemajors.CHANGEMAJORS.SID }, true);
         public static Index LEAVE_NID_KEY = Internal.createIndex("nid_key", Leave.LEAVE, new OrderField[] { Leave.LEAVE.NID }, false);
         public static Index LEAVE_PRIMARY = Internal.createIndex("PRIMARY", Leave.LEAVE, new OrderField[] { Leave.LEAVE.LID }, true);
         public static Index LEAVE_TID_KEY = Internal.createIndex("tid_key", Leave.LEAVE, new OrderField[] { Leave.LEAVE.TID }, false);
+        public static Index MAJORAPPROVAL_APPROVECID_FOREIGNKEY = Internal.createIndex("approvecid_foreignkey", Majorapproval.MAJORAPPROVAL, new OrderField[] { Majorapproval.MAJORAPPROVAL.CID }, false);
+        public static Index MAJORAPPROVAL_PRIMARY = Internal.createIndex("PRIMARY", Majorapproval.MAJORAPPROVAL, new OrderField[] { Majorapproval.MAJORAPPROVAL.AID }, true);
         public static Index STUDENT_PRIMARY = Internal.createIndex("PRIMARY", Student.STUDENT, new OrderField[] { Student.STUDENT.SID }, true);
         public static Index STUDENT_STUDENT_TID_FORIENGINKEY = Internal.createIndex("student_tid_forienginkey", Student.STUDENT, new OrderField[] { Student.STUDENT.TID }, false);
         public static Index STUDENT_SUSERNAME_UNIQUE = Internal.createIndex("susername_unique", Student.STUDENT, new OrderField[] { Student.STUDENT.USERNAME }, true);

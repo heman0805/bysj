@@ -4,7 +4,9 @@
 package com.heman.bysj.jooq;
 
 
+import com.heman.bysj.jooq.tables.Changemajors;
 import com.heman.bysj.jooq.tables.Leave;
+import com.heman.bysj.jooq.tables.Majorapproval;
 import com.heman.bysj.jooq.tables.Student;
 import com.heman.bysj.jooq.tables.Teacher;
 
@@ -25,9 +27,19 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
+     * The table <code>bysj.changemajors</code>.
+     */
+    public static final Changemajors CHANGEMAJORS = Changemajors.CHANGEMAJORS;
+
+    /**
      * The table <code>bysj.leave</code>.
      */
     public static final Leave LEAVE = Leave.LEAVE;
+
+    /**
+     * The table <code>bysj.majorapproval</code>.
+     */
+    public static final Majorapproval MAJORAPPROVAL = Majorapproval.MAJORAPPROVAL;
 
     /**
      * The table <code>bysj.student</code>.

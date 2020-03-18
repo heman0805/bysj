@@ -4,10 +4,14 @@
 package com.heman.bysj.jooq;
 
 
+import com.heman.bysj.jooq.tables.Changemajors;
 import com.heman.bysj.jooq.tables.Leave;
+import com.heman.bysj.jooq.tables.Majorapproval;
 import com.heman.bysj.jooq.tables.Student;
 import com.heman.bysj.jooq.tables.Teacher;
+import com.heman.bysj.jooq.tables.records.ChangemajorsRecord;
 import com.heman.bysj.jooq.tables.records.LeaveRecord;
+import com.heman.bysj.jooq.tables.records.MajorapprovalRecord;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
 import com.heman.bysj.jooq.tables.records.TeacherRecord;
 
@@ -37,6 +41,7 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
+    public static final Identity<ChangemajorsRecord, Integer> IDENTITY_CHANGEMAJORS = Identities0.IDENTITY_CHANGEMAJORS;
     public static final Identity<LeaveRecord, Integer> IDENTITY_LEAVE = Identities0.IDENTITY_LEAVE;
     public static final Identity<StudentRecord, Integer> IDENTITY_STUDENT = Identities0.IDENTITY_STUDENT;
     public static final Identity<TeacherRecord, Integer> IDENTITY_TEACHER = Identities0.IDENTITY_TEACHER;
@@ -45,7 +50,10 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<ChangemajorsRecord> KEY_CHANGEMAJORS_PRIMARY = UniqueKeys0.KEY_CHANGEMAJORS_PRIMARY;
+    public static final UniqueKey<ChangemajorsRecord> KEY_CHANGEMAJORS_SID = UniqueKeys0.KEY_CHANGEMAJORS_SID;
     public static final UniqueKey<LeaveRecord> KEY_LEAVE_PRIMARY = UniqueKeys0.KEY_LEAVE_PRIMARY;
+    public static final UniqueKey<MajorapprovalRecord> KEY_MAJORAPPROVAL_PRIMARY = UniqueKeys0.KEY_MAJORAPPROVAL_PRIMARY;
     public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = UniqueKeys0.KEY_STUDENT_PRIMARY;
     public static final UniqueKey<StudentRecord> KEY_STUDENT_SUSERNAME_UNIQUE = UniqueKeys0.KEY_STUDENT_SUSERNAME_UNIQUE;
     public static final UniqueKey<TeacherRecord> KEY_TEACHER_PRIMARY = UniqueKeys0.KEY_TEACHER_PRIMARY;
@@ -55,7 +63,9 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<ChangemajorsRecord, StudentRecord> CHANGESID_FOREIGNKEY = ForeignKeys0.CHANGESID_FOREIGNKEY;
     public static final ForeignKey<LeaveRecord, TeacherRecord> LEAVE_TID_FORIEGINKEY = ForeignKeys0.LEAVE_TID_FORIEGINKEY;
+    public static final ForeignKey<MajorapprovalRecord, ChangemajorsRecord> APPROVECID_FOREIGNKEY = ForeignKeys0.APPROVECID_FOREIGNKEY;
     public static final ForeignKey<StudentRecord, TeacherRecord> STUDENT_TID_FORIENGINKEY = ForeignKeys0.STUDENT_TID_FORIENGINKEY;
     public static final ForeignKey<TeacherRecord, TeacherRecord> TEACHER_SUPERIOR_KEY = ForeignKeys0.TEACHER_SUPERIOR_KEY;
 
@@ -64,13 +74,17 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class Identities0 {
+        public static Identity<ChangemajorsRecord, Integer> IDENTITY_CHANGEMAJORS = Internal.createIdentity(Changemajors.CHANGEMAJORS, Changemajors.CHANGEMAJORS.CID);
         public static Identity<LeaveRecord, Integer> IDENTITY_LEAVE = Internal.createIdentity(Leave.LEAVE, Leave.LEAVE.LID);
         public static Identity<StudentRecord, Integer> IDENTITY_STUDENT = Internal.createIdentity(Student.STUDENT, Student.STUDENT.SID);
         public static Identity<TeacherRecord, Integer> IDENTITY_TEACHER = Internal.createIdentity(Teacher.TEACHER, Teacher.TEACHER.TID);
     }
 
     private static class UniqueKeys0 {
+        public static final UniqueKey<ChangemajorsRecord> KEY_CHANGEMAJORS_PRIMARY = Internal.createUniqueKey(Changemajors.CHANGEMAJORS, "KEY_changemajors_PRIMARY", Changemajors.CHANGEMAJORS.CID);
+        public static final UniqueKey<ChangemajorsRecord> KEY_CHANGEMAJORS_SID = Internal.createUniqueKey(Changemajors.CHANGEMAJORS, "KEY_changemajors_sid", Changemajors.CHANGEMAJORS.SID);
         public static final UniqueKey<LeaveRecord> KEY_LEAVE_PRIMARY = Internal.createUniqueKey(Leave.LEAVE, "KEY_leave_PRIMARY", Leave.LEAVE.LID);
+        public static final UniqueKey<MajorapprovalRecord> KEY_MAJORAPPROVAL_PRIMARY = Internal.createUniqueKey(Majorapproval.MAJORAPPROVAL, "KEY_majorapproval_PRIMARY", Majorapproval.MAJORAPPROVAL.AID);
         public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = Internal.createUniqueKey(Student.STUDENT, "KEY_student_PRIMARY", Student.STUDENT.SID);
         public static final UniqueKey<StudentRecord> KEY_STUDENT_SUSERNAME_UNIQUE = Internal.createUniqueKey(Student.STUDENT, "KEY_student_susername_unique", Student.STUDENT.USERNAME);
         public static final UniqueKey<TeacherRecord> KEY_TEACHER_PRIMARY = Internal.createUniqueKey(Teacher.TEACHER, "KEY_teacher_PRIMARY", Teacher.TEACHER.TID);
@@ -78,7 +92,9 @@ public class Keys {
     }
 
     private static class ForeignKeys0 {
+        public static final ForeignKey<ChangemajorsRecord, StudentRecord> CHANGESID_FOREIGNKEY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_STUDENT_PRIMARY, Changemajors.CHANGEMAJORS, "changeSid_foreignkey", Changemajors.CHANGEMAJORS.SID);
         public static final ForeignKey<LeaveRecord, TeacherRecord> LEAVE_TID_FORIEGINKEY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_TEACHER_PRIMARY, Leave.LEAVE, "leave_tid_forieginkey", Leave.LEAVE.TID);
+        public static final ForeignKey<MajorapprovalRecord, ChangemajorsRecord> APPROVECID_FOREIGNKEY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_CHANGEMAJORS_PRIMARY, Majorapproval.MAJORAPPROVAL, "approvecid_foreignkey", Majorapproval.MAJORAPPROVAL.CID);
         public static final ForeignKey<StudentRecord, TeacherRecord> STUDENT_TID_FORIENGINKEY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_TEACHER_PRIMARY, Student.STUDENT, "student_tid_forienginkey", Student.STUDENT.TID);
         public static final ForeignKey<TeacherRecord, TeacherRecord> TEACHER_SUPERIOR_KEY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_TEACHER_PRIMARY, Teacher.TEACHER, "teacher_superior_key", Teacher.TEACHER.SUPERIOR);
     }

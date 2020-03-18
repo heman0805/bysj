@@ -4,7 +4,9 @@
 package com.heman.bysj.jooq;
 
 
+import com.heman.bysj.jooq.tables.Changemajors;
 import com.heman.bysj.jooq.tables.Leave;
+import com.heman.bysj.jooq.tables.Majorapproval;
 import com.heman.bysj.jooq.tables.Student;
 import com.heman.bysj.jooq.tables.Teacher;
 
@@ -32,7 +34,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Bysj extends SchemaImpl {
 
-    private static final long serialVersionUID = 1141920378;
+    private static final long serialVersionUID = 258301752;
 
     /**
      * The reference instance of <code>bysj</code>
@@ -40,9 +42,19 @@ public class Bysj extends SchemaImpl {
     public static final Bysj BYSJ = new Bysj();
 
     /**
+     * The table <code>bysj.changemajors</code>.
+     */
+    public final Changemajors CHANGEMAJORS = com.heman.bysj.jooq.tables.Changemajors.CHANGEMAJORS;
+
+    /**
      * The table <code>bysj.leave</code>.
      */
     public final Leave LEAVE = com.heman.bysj.jooq.tables.Leave.LEAVE;
+
+    /**
+     * The table <code>bysj.majorapproval</code>.
+     */
+    public final Majorapproval MAJORAPPROVAL = com.heman.bysj.jooq.tables.Majorapproval.MAJORAPPROVAL;
 
     /**
      * The table <code>bysj.student</code>.
@@ -76,7 +88,9 @@ public class Bysj extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
+            Changemajors.CHANGEMAJORS,
             Leave.LEAVE,
+            Majorapproval.MAJORAPPROVAL,
             Student.STUDENT,
             Teacher.TEACHER);
     }
