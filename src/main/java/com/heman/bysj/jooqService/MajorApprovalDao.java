@@ -4,7 +4,7 @@ import com.heman.bysj.jooq.tables.records.MajorapprovalRecord;
 
 import java.util.List;
 
-public interface MajorApproval {
+public interface MajorApprovalDao {
     int insert(MajorapprovalRecord majorapprovalRecord);
 
     int updateCurrentAcademicOfficeByCid(int cid,String caResult,String caReason);

@@ -1,7 +1,7 @@
 package com.heman.bysj.jooqService.Impl;
 
 import com.heman.bysj.jooq.tables.records.MajorapprovalRecord;
-import com.heman.bysj.jooqService.MajorApproval;
+import com.heman.bysj.jooqService.MajorApprovalDao;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class MajorApprovalImpl implements MajorApproval {
+public class MajorApprovalDaoImpl implements MajorApprovalDao {
 
     @Autowired
     private DSLContext dslContext;

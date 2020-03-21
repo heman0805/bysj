@@ -14,8 +14,8 @@ public class StudentServiceImpl implements StudentService {
     private StudentDao studentDao;
 
     @Override
-    public List<StudentRecord> listTest() {
-        return studentDao.listTest();
+    public List<StudentRecord> listTest(int limit,int offest) {
+        return studentDao.listTest( limit, offest);
     }
 
     @Override

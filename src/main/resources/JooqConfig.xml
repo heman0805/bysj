@@ -17,7 +17,7 @@
         </database>
         <generate>
             <!--是否生成dao和pojo-->
-            <daos>true</daos>
+            <daos>false</daos>
             <pojos>true</pojos>
             <!--是否把数据库时间类型映射到java 8时间类型-->
           <!--  <javaTimeTypes>true</javaTimeTypes>-->

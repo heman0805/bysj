@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ChangemajorsRecord extends UpdatableRecordImpl<ChangemajorsRecord> implements Record11<Integer, Integer, String, String, String, Double, String, String, Integer, String, String> {
 
-    private static final long serialVersionUID = -1821764193;
+    private static final long serialVersionUID = 565189161;
 
     /**
      * Setter for <code>bysj.changemajors.cid</code>. 转专业表主键ID
@@ -143,14 +143,14 @@ public class ChangemajorsRecord extends UpdatableRecordImpl<ChangemajorsRecord> 
     }
 
     /**
-     * Setter for <code>bysj.changemajors.result</code>. 转专业申请结果
+     * Setter for <code>bysj.changemajors.result</code>. 转专业申请结果(0:不通过 1:通过)
      */
     public void setResult(Integer value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>bysj.changemajors.result</code>. 转专业申请结果
+     * Getter for <code>bysj.changemajors.result</code>. 转专业申请结果(0:不通过 1:通过)
      */
     public Integer getResult() {
         return (Integer) get(8);

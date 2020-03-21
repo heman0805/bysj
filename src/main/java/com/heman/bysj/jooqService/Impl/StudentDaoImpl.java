@@ -16,15 +16,24 @@ public class StudentDaoImpl implements StudentDao {
     @Autowired
     private DSLContext dslContext ;
 
+    /**
+     *
+     * @param limit:一次取出的数据数目
+     * @param offest:偏移量（从第几条开始取）
+     * @return
+     */
     @Override
-    public List<StudentRecord> listTest() {
-        return dslContext.selectFrom(STUDENT).fetch();
+    public List<StudentRecord> listTest(int limit,int offest) {
+        return dslContext.selectFrom(STUDENT)
+                .limit(limit)
+                .offset(offest)
+                .fetch();
     }
 
     @Override
     public StudentRecord selectById(int id) {
         return dslContext.selectFrom(STUDENT)
-                .where(STUDENT.TID.eq(id))
+                .where(STUDENT.SID.eq(id))
                 .fetchOne();
     }
 
@@ -48,5 +57,13 @@ public class StudentDaoImpl implements StudentDao {
         return dslContext.deleteFrom(STUDENT)
                 .where(STUDENT.SID.eq(id))
                 .execute();
+    }
+
+    @Override
+    public int countStudent() {
+
+        return dslContext.selectCount()
+                .from(STUDENT)
+                .fetchOne(0,int.class);
     }
 }

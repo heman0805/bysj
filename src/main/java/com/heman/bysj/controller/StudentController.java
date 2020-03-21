@@ -18,7 +18,8 @@ public class StudentController {
     @RequestMapping(value="/api/test",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
     @ResponseBody
     public List<StudentRecord> test(){
-        List<StudentRecord> testList = studentService.listTest();
+        int limit=10, offest = 0;
+        List<StudentRecord> testList = studentService.listTest( limit, offest);
         return  testList;
     }
 }

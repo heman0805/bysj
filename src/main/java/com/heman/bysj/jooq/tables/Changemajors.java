@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Changemajors extends TableImpl<ChangemajorsRecord> {
 
-    private static final long serialVersionUID = -1803182138;
+    private static final long serialVersionUID = 690382268;
 
     /**
      * The reference instance of <code>bysj.changemajors</code>
@@ -98,9 +98,9 @@ public class Changemajors extends TableImpl<ChangemajorsRecord> {
     public final TableField<ChangemajorsRecord, String> STATE = createField(DSL.name("state"), org.jooq.impl.SQLDataType.VARCHAR(15).nullable(false), this, "申请状态（如：当前专业院长审批中）");
 
     /**
-     * The column <code>bysj.changemajors.result</code>. 转专业申请结果
+     * The column <code>bysj.changemajors.result</code>. 转专业申请结果(0:不通过 1:通过)
      */
-    public final TableField<ChangemajorsRecord, Integer> RESULT = createField(DSL.name("result"), org.jooq.impl.SQLDataType.INTEGER, this, "转专业申请结果");
+    public final TableField<ChangemajorsRecord, Integer> RESULT = createField(DSL.name("result"), org.jooq.impl.SQLDataType.INTEGER, this, "转专业申请结果(0:不通过 1:通过)");
 
     /**
      * The column <code>bysj.changemajors.post</code>. 申请过程中拒绝的环节（原专业院长）
