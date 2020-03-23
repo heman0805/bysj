@@ -1,5 +1,6 @@
 package com.heman.bysj.jooqService.Impl;
 
+import com.heman.bysj.jooq.tables.pojos.Student;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
 import com.heman.bysj.jooqService.StudentDao;
 import org.jooq.DSLContext;
@@ -65,5 +66,13 @@ public class StudentDaoImpl implements StudentDao {
         return dslContext.selectCount()
                 .from(STUDENT)
                 .fetchOne(0,int.class);
+    }
+
+    @Override
+    public StudentRecord getStudnetByUsername(String username, String password) {
+        return dslContext.selectFrom(STUDENT)
+                .where(STUDENT.USERNAME.eq(username))
+                .and(STUDENT.PASSWORD.eq(password))
+                .fetchOne();
     }
 }

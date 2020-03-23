@@ -1,5 +1,6 @@
 package com.heman.bysj.jooqService;
 
+import com.heman.bysj.jooq.tables.pojos.Student;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface StudentDao {
     int updateStudent(StudentRecord studentRecord);
     //通过ID删除学生信息
     int deleteById(int id);
+    //通过用户名密码获取学生信息
+    StudentRecord getStudnetByUsername(String username,String password);
 }

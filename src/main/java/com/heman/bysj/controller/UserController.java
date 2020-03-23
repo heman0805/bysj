@@ -1,16 +1,21 @@
 package com.heman.bysj.controller;
 
+import com.heman.bysj.annotation.UserLoginToken;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
 import com.heman.bysj.jooq.tables.records.TeacherRecord;
 import com.heman.bysj.jooqService.StudentDao;
+import com.heman.bysj.service.StudentService;
+import com.heman.bysj.service.TokenService;
 import com.heman.bysj.service.UserService;
 import com.heman.bysj.utils.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.web.bind.annotation.*;
 import com.heman.bysj.jooq.tables.pojos.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +27,40 @@ public class UserController {
     private UserService userService;
     @Autowired
     private StudentDao studentDao;
+    @Autowired
+    private TokenService tokenService;
+    @Autowired
+    private StudentService studentService;
+
+    /**
+     * 登录方法
+     * @param request
+     * @return ModelAndView
+     */
+    @RequestMapping("/login")
+    public String login(@RequestBody Student user)  {
+        System.out.println(user.getUsername()+" "+user.getPassword());
+
+        Student userForBase=studentService.getStudentByUsername(user.getUsername(), user.getPassword());
+
+        System.out.println("------------------------------"+userForBase);
+        if(userForBase==null){
+            String msg = "用户名或者密码错误";
+            return msg;
+        }
+        String token = tokenService.getToken(userForBase);
+        System.out.println(token);
+        return token;
+    }
+
+    /*测试token  不登录没有token*/
+    @UserLoginToken
+    @GetMapping("/getMessage")
+    public String getMessage(){
+        return "你已通过验证";
+    }
+
+
 
     @RequestMapping(value="/api/user/insert")
     @ResponseBody
@@ -94,9 +133,7 @@ public class UserController {
     @RequestMapping(value="/student/selectById/{sid}")
     @ResponseBody
     public Student studentSelect(@PathVariable("sid") int id){
-        StudentRecord studentRecord = userService.selectStudentById(id);
-        Student student = studentRecord.into(Student.class);
-        return student;
+        return userService.selectStudentById(id);
 
     }
     @RequestMapping(value="/student/studentDelete/{sid}")
