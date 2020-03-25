@@ -10,8 +10,14 @@ spring:
     password: 980805
     driver-class-name: com.mysql.jdbc.Driver
 
-#activiti:
- # db-history-used: true
+  activiti:
+  # 自动部署验证设置:true-开启（默认）、false-关闭
+    check-process-definitions: true
+  #配置项可以设置流程引擎启动和关闭时数据库执行的策略 建好后选择false
+    database-schema-update: false
+  #保存历史数据级别设置为full最高级别，便于历史数据的追溯
+    history-level: full
+
 #logging.level.com.heman.bysj.jooqService=debug
 logging:
   file:
