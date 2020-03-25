@@ -10,8 +10,11 @@ spring:
     password: 980805
     driver-class-name: com.mysql.jdbc.Driver
 
-
+#activiti:
+ # db-history-used: true
 #logging.level.com.heman.bysj.jooqService=debug
 logging:
   file:
     name: logs.log
+#jackson:
+# default-property-inclusion: always
