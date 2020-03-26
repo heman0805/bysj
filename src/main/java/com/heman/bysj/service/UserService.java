@@ -1,6 +1,7 @@
 package com.heman.bysj.service;
 
 import com.heman.bysj.jooq.tables.pojos.Student;
+import com.heman.bysj.jooq.tables.pojos.Teacher;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
 import com.heman.bysj.jooq.tables.records.TeacherRecord;
 
@@ -9,9 +10,11 @@ public interface UserService {
     int updateStudent(StudentRecord studentRecord);
     int deleteStudent(int id);
     Student selectStudentById(int id);
+    Student getStudentByUsername(String name,String password);
 
     int insertIntoTeacher(TeacherRecord teacherRecord);
     int updateTeacher(TeacherRecord teacherRecord);
     int deleteTeacher(int id);
     TeacherRecord selectTeacherById(int id);
+    Teacher getTeacherByUsername(String name, String password);
 }

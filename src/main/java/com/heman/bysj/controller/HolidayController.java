@@ -6,6 +6,7 @@ import org.jooq.JSON;
 import org.jooq.tools.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.codec.cbor.Jackson2CborEncoder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,11 +15,14 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
-public class LeaveController {
+public class HolidayController {
     @Autowired
     private LeaveService leaveService;
 
+/*
+    public void holiday(@RequestBody ){
 
+    }*/
     /**
      * 请假
      */

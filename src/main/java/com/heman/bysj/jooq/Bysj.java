@@ -4,7 +4,37 @@
 package com.heman.bysj.jooq;
 
 
+import com.heman.bysj.jooq.tables.ActEvtLog;
+import com.heman.bysj.jooq.tables.ActGeBytearray;
+import com.heman.bysj.jooq.tables.ActGeProperty;
+import com.heman.bysj.jooq.tables.ActHiActinst;
+import com.heman.bysj.jooq.tables.ActHiAttachment;
+import com.heman.bysj.jooq.tables.ActHiComment;
+import com.heman.bysj.jooq.tables.ActHiDetail;
+import com.heman.bysj.jooq.tables.ActHiIdentitylink;
+import com.heman.bysj.jooq.tables.ActHiProcinst;
+import com.heman.bysj.jooq.tables.ActHiTaskinst;
+import com.heman.bysj.jooq.tables.ActHiVarinst;
+import com.heman.bysj.jooq.tables.ActIdGroup;
+import com.heman.bysj.jooq.tables.ActIdInfo;
+import com.heman.bysj.jooq.tables.ActIdMembership;
+import com.heman.bysj.jooq.tables.ActIdUser;
+import com.heman.bysj.jooq.tables.ActProcdefInfo;
+import com.heman.bysj.jooq.tables.ActReDeployment;
+import com.heman.bysj.jooq.tables.ActReModel;
+import com.heman.bysj.jooq.tables.ActReProcdef;
+import com.heman.bysj.jooq.tables.ActRuDeadletterJob;
+import com.heman.bysj.jooq.tables.ActRuEventSubscr;
+import com.heman.bysj.jooq.tables.ActRuExecution;
+import com.heman.bysj.jooq.tables.ActRuIdentitylink;
+import com.heman.bysj.jooq.tables.ActRuJob;
+import com.heman.bysj.jooq.tables.ActRuSuspendedJob;
+import com.heman.bysj.jooq.tables.ActRuTask;
+import com.heman.bysj.jooq.tables.ActRuTimerJob;
+import com.heman.bysj.jooq.tables.ActRuVariable;
 import com.heman.bysj.jooq.tables.Changemajors;
+import com.heman.bysj.jooq.tables.Holiday;
+import com.heman.bysj.jooq.tables.HolidayCheck;
 import com.heman.bysj.jooq.tables.Leave;
 import com.heman.bysj.jooq.tables.Majorapproval;
 import com.heman.bysj.jooq.tables.Student;
@@ -34,7 +64,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Bysj extends SchemaImpl {
 
-    private static final long serialVersionUID = 258301752;
+    private static final long serialVersionUID = 1980279572;
 
     /**
      * The reference instance of <code>bysj</code>
@@ -42,9 +72,159 @@ public class Bysj extends SchemaImpl {
     public static final Bysj BYSJ = new Bysj();
 
     /**
+     * The table <code>bysj.act_evt_log</code>.
+     */
+    public final ActEvtLog ACT_EVT_LOG = com.heman.bysj.jooq.tables.ActEvtLog.ACT_EVT_LOG;
+
+    /**
+     * The table <code>bysj.act_ge_bytearray</code>.
+     */
+    public final ActGeBytearray ACT_GE_BYTEARRAY = com.heman.bysj.jooq.tables.ActGeBytearray.ACT_GE_BYTEARRAY;
+
+    /**
+     * The table <code>bysj.act_ge_property</code>.
+     */
+    public final ActGeProperty ACT_GE_PROPERTY = com.heman.bysj.jooq.tables.ActGeProperty.ACT_GE_PROPERTY;
+
+    /**
+     * The table <code>bysj.act_hi_actinst</code>.
+     */
+    public final ActHiActinst ACT_HI_ACTINST = com.heman.bysj.jooq.tables.ActHiActinst.ACT_HI_ACTINST;
+
+    /**
+     * The table <code>bysj.act_hi_attachment</code>.
+     */
+    public final ActHiAttachment ACT_HI_ATTACHMENT = com.heman.bysj.jooq.tables.ActHiAttachment.ACT_HI_ATTACHMENT;
+
+    /**
+     * The table <code>bysj.act_hi_comment</code>.
+     */
+    public final ActHiComment ACT_HI_COMMENT = com.heman.bysj.jooq.tables.ActHiComment.ACT_HI_COMMENT;
+
+    /**
+     * The table <code>bysj.act_hi_detail</code>.
+     */
+    public final ActHiDetail ACT_HI_DETAIL = com.heman.bysj.jooq.tables.ActHiDetail.ACT_HI_DETAIL;
+
+    /**
+     * The table <code>bysj.act_hi_identitylink</code>.
+     */
+    public final ActHiIdentitylink ACT_HI_IDENTITYLINK = com.heman.bysj.jooq.tables.ActHiIdentitylink.ACT_HI_IDENTITYLINK;
+
+    /**
+     * The table <code>bysj.act_hi_procinst</code>.
+     */
+    public final ActHiProcinst ACT_HI_PROCINST = com.heman.bysj.jooq.tables.ActHiProcinst.ACT_HI_PROCINST;
+
+    /**
+     * The table <code>bysj.act_hi_taskinst</code>.
+     */
+    public final ActHiTaskinst ACT_HI_TASKINST = com.heman.bysj.jooq.tables.ActHiTaskinst.ACT_HI_TASKINST;
+
+    /**
+     * The table <code>bysj.act_hi_varinst</code>.
+     */
+    public final ActHiVarinst ACT_HI_VARINST = com.heman.bysj.jooq.tables.ActHiVarinst.ACT_HI_VARINST;
+
+    /**
+     * The table <code>bysj.act_id_group</code>.
+     */
+    public final ActIdGroup ACT_ID_GROUP = com.heman.bysj.jooq.tables.ActIdGroup.ACT_ID_GROUP;
+
+    /**
+     * The table <code>bysj.act_id_info</code>.
+     */
+    public final ActIdInfo ACT_ID_INFO = com.heman.bysj.jooq.tables.ActIdInfo.ACT_ID_INFO;
+
+    /**
+     * The table <code>bysj.act_id_membership</code>.
+     */
+    public final ActIdMembership ACT_ID_MEMBERSHIP = com.heman.bysj.jooq.tables.ActIdMembership.ACT_ID_MEMBERSHIP;
+
+    /**
+     * The table <code>bysj.act_id_user</code>.
+     */
+    public final ActIdUser ACT_ID_USER = com.heman.bysj.jooq.tables.ActIdUser.ACT_ID_USER;
+
+    /**
+     * The table <code>bysj.act_procdef_info</code>.
+     */
+    public final ActProcdefInfo ACT_PROCDEF_INFO = com.heman.bysj.jooq.tables.ActProcdefInfo.ACT_PROCDEF_INFO;
+
+    /**
+     * The table <code>bysj.act_re_deployment</code>.
+     */
+    public final ActReDeployment ACT_RE_DEPLOYMENT = com.heman.bysj.jooq.tables.ActReDeployment.ACT_RE_DEPLOYMENT;
+
+    /**
+     * The table <code>bysj.act_re_model</code>.
+     */
+    public final ActReModel ACT_RE_MODEL = com.heman.bysj.jooq.tables.ActReModel.ACT_RE_MODEL;
+
+    /**
+     * The table <code>bysj.act_re_procdef</code>.
+     */
+    public final ActReProcdef ACT_RE_PROCDEF = com.heman.bysj.jooq.tables.ActReProcdef.ACT_RE_PROCDEF;
+
+    /**
+     * The table <code>bysj.act_ru_deadletter_job</code>.
+     */
+    public final ActRuDeadletterJob ACT_RU_DEADLETTER_JOB = com.heman.bysj.jooq.tables.ActRuDeadletterJob.ACT_RU_DEADLETTER_JOB;
+
+    /**
+     * The table <code>bysj.act_ru_event_subscr</code>.
+     */
+    public final ActRuEventSubscr ACT_RU_EVENT_SUBSCR = com.heman.bysj.jooq.tables.ActRuEventSubscr.ACT_RU_EVENT_SUBSCR;
+
+    /**
+     * The table <code>bysj.act_ru_execution</code>.
+     */
+    public final ActRuExecution ACT_RU_EXECUTION = com.heman.bysj.jooq.tables.ActRuExecution.ACT_RU_EXECUTION;
+
+    /**
+     * The table <code>bysj.act_ru_identitylink</code>.
+     */
+    public final ActRuIdentitylink ACT_RU_IDENTITYLINK = com.heman.bysj.jooq.tables.ActRuIdentitylink.ACT_RU_IDENTITYLINK;
+
+    /**
+     * The table <code>bysj.act_ru_job</code>.
+     */
+    public final ActRuJob ACT_RU_JOB = com.heman.bysj.jooq.tables.ActRuJob.ACT_RU_JOB;
+
+    /**
+     * The table <code>bysj.act_ru_suspended_job</code>.
+     */
+    public final ActRuSuspendedJob ACT_RU_SUSPENDED_JOB = com.heman.bysj.jooq.tables.ActRuSuspendedJob.ACT_RU_SUSPENDED_JOB;
+
+    /**
+     * The table <code>bysj.act_ru_task</code>.
+     */
+    public final ActRuTask ACT_RU_TASK = com.heman.bysj.jooq.tables.ActRuTask.ACT_RU_TASK;
+
+    /**
+     * The table <code>bysj.act_ru_timer_job</code>.
+     */
+    public final ActRuTimerJob ACT_RU_TIMER_JOB = com.heman.bysj.jooq.tables.ActRuTimerJob.ACT_RU_TIMER_JOB;
+
+    /**
+     * The table <code>bysj.act_ru_variable</code>.
+     */
+    public final ActRuVariable ACT_RU_VARIABLE = com.heman.bysj.jooq.tables.ActRuVariable.ACT_RU_VARIABLE;
+
+    /**
      * The table <code>bysj.changemajors</code>.
      */
     public final Changemajors CHANGEMAJORS = com.heman.bysj.jooq.tables.Changemajors.CHANGEMAJORS;
+
+    /**
+     * The table <code>bysj.holiday</code>.
+     */
+    public final Holiday HOLIDAY = com.heman.bysj.jooq.tables.Holiday.HOLIDAY;
+
+    /**
+     * The table <code>bysj.holiday_check</code>.
+     */
+    public final HolidayCheck HOLIDAY_CHECK = com.heman.bysj.jooq.tables.HolidayCheck.HOLIDAY_CHECK;
 
     /**
      * The table <code>bysj.leave</code>.
@@ -88,7 +268,37 @@ public class Bysj extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
+            ActEvtLog.ACT_EVT_LOG,
+            ActGeBytearray.ACT_GE_BYTEARRAY,
+            ActGeProperty.ACT_GE_PROPERTY,
+            ActHiActinst.ACT_HI_ACTINST,
+            ActHiAttachment.ACT_HI_ATTACHMENT,
+            ActHiComment.ACT_HI_COMMENT,
+            ActHiDetail.ACT_HI_DETAIL,
+            ActHiIdentitylink.ACT_HI_IDENTITYLINK,
+            ActHiProcinst.ACT_HI_PROCINST,
+            ActHiTaskinst.ACT_HI_TASKINST,
+            ActHiVarinst.ACT_HI_VARINST,
+            ActIdGroup.ACT_ID_GROUP,
+            ActIdInfo.ACT_ID_INFO,
+            ActIdMembership.ACT_ID_MEMBERSHIP,
+            ActIdUser.ACT_ID_USER,
+            ActProcdefInfo.ACT_PROCDEF_INFO,
+            ActReDeployment.ACT_RE_DEPLOYMENT,
+            ActReModel.ACT_RE_MODEL,
+            ActReProcdef.ACT_RE_PROCDEF,
+            ActRuDeadletterJob.ACT_RU_DEADLETTER_JOB,
+            ActRuEventSubscr.ACT_RU_EVENT_SUBSCR,
+            ActRuExecution.ACT_RU_EXECUTION,
+            ActRuIdentitylink.ACT_RU_IDENTITYLINK,
+            ActRuJob.ACT_RU_JOB,
+            ActRuSuspendedJob.ACT_RU_SUSPENDED_JOB,
+            ActRuTask.ACT_RU_TASK,
+            ActRuTimerJob.ACT_RU_TIMER_JOB,
+            ActRuVariable.ACT_RU_VARIABLE,
             Changemajors.CHANGEMAJORS,
+            Holiday.HOLIDAY,
+            HolidayCheck.HOLIDAY_CHECK,
             Leave.LEAVE,
             Majorapproval.MAJORAPPROVAL,
             Student.STUDENT,

@@ -1,5 +1,6 @@
 package com.heman.bysj.jooqService.Impl;
 
+import com.heman.bysj.jooq.tables.pojos.Teacher;
 import com.heman.bysj.jooq.tables.records.TeacherRecord;
 import com.heman.bysj.jooqService.TeacherDao;
 import org.jooq.DSLContext;
@@ -60,5 +61,11 @@ public class TeacherDaoImpl implements TeacherDao {
                 .execute();
     }
 
-
+    @Override
+    public TeacherRecord getTeacherByUsername(String userName, String password) {
+        return dslContext.selectFrom(TEACHER)
+                .where(TEACHER.USERNAME.eq(userName))
+                .and(TEACHER.PASSWORD.eq(password))
+                .fetchOne();
+    }
 }

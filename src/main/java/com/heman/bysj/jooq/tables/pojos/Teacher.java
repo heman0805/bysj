@@ -22,7 +22,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Teacher implements Serializable {
 
-    private static final long serialVersionUID = 2048076823;
+    private static final long serialVersionUID = 1082754439;
 
     private Integer tid;
     private String  name;
@@ -32,7 +32,8 @@ public class Teacher implements Serializable {
     private String  college;
     private String  profession;
     private String  position;
-    private Integer superior;
+    private String  role;
+    private String  group;
 
     public Teacher() {}
 
@@ -45,7 +46,8 @@ public class Teacher implements Serializable {
         this.college = value.college;
         this.profession = value.profession;
         this.position = value.position;
-        this.superior = value.superior;
+        this.role = value.role;
+        this.group = value.group;
     }
 
     public Teacher(
@@ -57,7 +59,8 @@ public class Teacher implements Serializable {
         String  college,
         String  profession,
         String  position,
-        Integer superior
+        String  role,
+        String  group
     ) {
         this.tid = tid;
         this.name = name;
@@ -67,7 +70,8 @@ public class Teacher implements Serializable {
         this.college = college;
         this.profession = profession;
         this.position = position;
-        this.superior = superior;
+        this.role = role;
+        this.group = group;
     }
 
     public Integer getTid() {
@@ -134,12 +138,20 @@ public class Teacher implements Serializable {
         this.position = position;
     }
 
-    public Integer getSuperior() {
-        return this.superior;
+    public String getRole() {
+        return this.role;
     }
 
-    public void setSuperior(Integer superior) {
-        this.superior = superior;
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getGroup() {
+        return this.group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     @Override
@@ -154,7 +166,8 @@ public class Teacher implements Serializable {
         sb.append(", ").append(college);
         sb.append(", ").append(profession);
         sb.append(", ").append(position);
-        sb.append(", ").append(superior);
+        sb.append(", ").append(role);
+        sb.append(", ").append(group);
 
         sb.append(")");
         return sb.toString();

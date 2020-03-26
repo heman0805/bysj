@@ -20,7 +20,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row9;
+import org.jooq.Row10;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Teacher extends TableImpl<TeacherRecord> {
 
-    private static final long serialVersionUID = 1846448052;
+    private static final long serialVersionUID = 845839638;
 
     /**
      * The reference instance of <code>bysj.teacher</code>
@@ -98,9 +98,14 @@ public class Teacher extends TableImpl<TeacherRecord> {
     public final TableField<TeacherRecord, String> POSITION = createField(DSL.name("position"), org.jooq.impl.SQLDataType.VARCHAR(5).nullable(false), this, "职位");
 
     /**
-     * The column <code>bysj.teacher.superior</code>. 上级领导
+     * The column <code>bysj.teacher.role</code>. 角色：教师
      */
-    public final TableField<TeacherRecord, Integer> SUPERIOR = createField(DSL.name("superior"), org.jooq.impl.SQLDataType.INTEGER, this, "上级领导");
+    public final TableField<TeacherRecord, String> ROLE = createField(DSL.name("role"), org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "角色：教师");
+
+    /**
+     * The column <code>bysj.teacher.group</code>. 所属组用户
+     */
+    public final TableField<TeacherRecord, String> GROUP = createField(DSL.name("group"), org.jooq.impl.SQLDataType.VARCHAR(30).nullable(false), this, "所属组用户");
 
     /**
      * Create a <code>bysj.teacher</code> table reference
@@ -142,7 +147,7 @@ public class Teacher extends TableImpl<TeacherRecord> {
 
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.TEACHER_PRIMARY, Indexes.TEACHER_TEACHER_SUPERIOR_KEY, Indexes.TEACHER_TUSERNAME_UNIQUE);
+        return Arrays.<Index>asList(Indexes.TEACHER_PRIMARY, Indexes.TEACHER_TUSERNAME_UNIQUE);
     }
 
     @Override
@@ -158,15 +163,6 @@ public class Teacher extends TableImpl<TeacherRecord> {
     @Override
     public List<UniqueKey<TeacherRecord>> getKeys() {
         return Arrays.<UniqueKey<TeacherRecord>>asList(Keys.KEY_TEACHER_PRIMARY, Keys.KEY_TEACHER_TUSERNAME_UNIQUE);
-    }
-
-    @Override
-    public List<ForeignKey<TeacherRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<TeacherRecord, ?>>asList(Keys.TEACHER_SUPERIOR_KEY);
-    }
-
-    public com.heman.bysj.jooq.tables.Teacher teacher() {
-        return new com.heman.bysj.jooq.tables.Teacher(this, Keys.TEACHER_SUPERIOR_KEY);
     }
 
     @Override
@@ -196,11 +192,11 @@ public class Teacher extends TableImpl<TeacherRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row9 type methods
+    // Row10 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row9<Integer, String, String, String, Integer, String, String, String, Integer> fieldsRow() {
-        return (Row9) super.fieldsRow();
+    public Row10<Integer, String, String, String, Integer, String, String, String, String, String> fieldsRow() {
+        return (Row10) super.fieldsRow();
     }
 }

@@ -22,7 +22,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student implements Serializable {
 
-    private static final long serialVersionUID = -9765789;
+    private static final long serialVersionUID = -181056306;
 
     private Integer sid;
     private String  name;
@@ -32,6 +32,8 @@ public class Student implements Serializable {
     private String  profession;
     private String  class_;
     private Integer tid;
+    private String  role;
+    private String  group;
 
     public Student() {}
 
@@ -44,6 +46,8 @@ public class Student implements Serializable {
         this.profession = value.profession;
         this.class_ = value.class_;
         this.tid = value.tid;
+        this.role = value.role;
+        this.group = value.group;
     }
 
     public Student(
@@ -54,7 +58,9 @@ public class Student implements Serializable {
         Integer grade,
         String  profession,
         String  class_,
-        Integer tid
+        Integer tid,
+        String  role,
+        String  group
     ) {
         this.sid = sid;
         this.name = name;
@@ -64,6 +70,8 @@ public class Student implements Serializable {
         this.profession = profession;
         this.class_ = class_;
         this.tid = tid;
+        this.role = role;
+        this.group = group;
     }
 
     public Integer getSid() {
@@ -130,6 +138,22 @@ public class Student implements Serializable {
         this.tid = tid;
     }
 
+    public String getRole() {
+        return this.role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getGroup() {
+        return this.group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Student (");
@@ -142,6 +166,8 @@ public class Student implements Serializable {
         sb.append(", ").append(profession);
         sb.append(", ").append(class_);
         sb.append(", ").append(tid);
+        sb.append(", ").append(role);
+        sb.append(", ").append(group);
 
         sb.append(")");
         return sb.toString();

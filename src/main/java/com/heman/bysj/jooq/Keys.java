@@ -4,12 +4,72 @@
 package com.heman.bysj.jooq;
 
 
+import com.heman.bysj.jooq.tables.ActEvtLog;
+import com.heman.bysj.jooq.tables.ActGeBytearray;
+import com.heman.bysj.jooq.tables.ActGeProperty;
+import com.heman.bysj.jooq.tables.ActHiActinst;
+import com.heman.bysj.jooq.tables.ActHiAttachment;
+import com.heman.bysj.jooq.tables.ActHiComment;
+import com.heman.bysj.jooq.tables.ActHiDetail;
+import com.heman.bysj.jooq.tables.ActHiIdentitylink;
+import com.heman.bysj.jooq.tables.ActHiProcinst;
+import com.heman.bysj.jooq.tables.ActHiTaskinst;
+import com.heman.bysj.jooq.tables.ActHiVarinst;
+import com.heman.bysj.jooq.tables.ActIdGroup;
+import com.heman.bysj.jooq.tables.ActIdInfo;
+import com.heman.bysj.jooq.tables.ActIdMembership;
+import com.heman.bysj.jooq.tables.ActIdUser;
+import com.heman.bysj.jooq.tables.ActProcdefInfo;
+import com.heman.bysj.jooq.tables.ActReDeployment;
+import com.heman.bysj.jooq.tables.ActReModel;
+import com.heman.bysj.jooq.tables.ActReProcdef;
+import com.heman.bysj.jooq.tables.ActRuDeadletterJob;
+import com.heman.bysj.jooq.tables.ActRuEventSubscr;
+import com.heman.bysj.jooq.tables.ActRuExecution;
+import com.heman.bysj.jooq.tables.ActRuIdentitylink;
+import com.heman.bysj.jooq.tables.ActRuJob;
+import com.heman.bysj.jooq.tables.ActRuSuspendedJob;
+import com.heman.bysj.jooq.tables.ActRuTask;
+import com.heman.bysj.jooq.tables.ActRuTimerJob;
+import com.heman.bysj.jooq.tables.ActRuVariable;
 import com.heman.bysj.jooq.tables.Changemajors;
+import com.heman.bysj.jooq.tables.Holiday;
+import com.heman.bysj.jooq.tables.HolidayCheck;
 import com.heman.bysj.jooq.tables.Leave;
 import com.heman.bysj.jooq.tables.Majorapproval;
 import com.heman.bysj.jooq.tables.Student;
 import com.heman.bysj.jooq.tables.Teacher;
+import com.heman.bysj.jooq.tables.records.ActEvtLogRecord;
+import com.heman.bysj.jooq.tables.records.ActGeBytearrayRecord;
+import com.heman.bysj.jooq.tables.records.ActGePropertyRecord;
+import com.heman.bysj.jooq.tables.records.ActHiActinstRecord;
+import com.heman.bysj.jooq.tables.records.ActHiAttachmentRecord;
+import com.heman.bysj.jooq.tables.records.ActHiCommentRecord;
+import com.heman.bysj.jooq.tables.records.ActHiDetailRecord;
+import com.heman.bysj.jooq.tables.records.ActHiIdentitylinkRecord;
+import com.heman.bysj.jooq.tables.records.ActHiProcinstRecord;
+import com.heman.bysj.jooq.tables.records.ActHiTaskinstRecord;
+import com.heman.bysj.jooq.tables.records.ActHiVarinstRecord;
+import com.heman.bysj.jooq.tables.records.ActIdGroupRecord;
+import com.heman.bysj.jooq.tables.records.ActIdInfoRecord;
+import com.heman.bysj.jooq.tables.records.ActIdMembershipRecord;
+import com.heman.bysj.jooq.tables.records.ActIdUserRecord;
+import com.heman.bysj.jooq.tables.records.ActProcdefInfoRecord;
+import com.heman.bysj.jooq.tables.records.ActReDeploymentRecord;
+import com.heman.bysj.jooq.tables.records.ActReModelRecord;
+import com.heman.bysj.jooq.tables.records.ActReProcdefRecord;
+import com.heman.bysj.jooq.tables.records.ActRuDeadletterJobRecord;
+import com.heman.bysj.jooq.tables.records.ActRuEventSubscrRecord;
+import com.heman.bysj.jooq.tables.records.ActRuExecutionRecord;
+import com.heman.bysj.jooq.tables.records.ActRuIdentitylinkRecord;
+import com.heman.bysj.jooq.tables.records.ActRuJobRecord;
+import com.heman.bysj.jooq.tables.records.ActRuSuspendedJobRecord;
+import com.heman.bysj.jooq.tables.records.ActRuTaskRecord;
+import com.heman.bysj.jooq.tables.records.ActRuTimerJobRecord;
+import com.heman.bysj.jooq.tables.records.ActRuVariableRecord;
 import com.heman.bysj.jooq.tables.records.ChangemajorsRecord;
+import com.heman.bysj.jooq.tables.records.HolidayCheckRecord;
+import com.heman.bysj.jooq.tables.records.HolidayRecord;
 import com.heman.bysj.jooq.tables.records.LeaveRecord;
 import com.heman.bysj.jooq.tables.records.MajorapprovalRecord;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
@@ -41,6 +101,7 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
+    public static final Identity<ActEvtLogRecord, Long> IDENTITY_ACT_EVT_LOG = Identities0.IDENTITY_ACT_EVT_LOG;
     public static final Identity<ChangemajorsRecord, Integer> IDENTITY_CHANGEMAJORS = Identities0.IDENTITY_CHANGEMAJORS;
     public static final Identity<LeaveRecord, Integer> IDENTITY_LEAVE = Identities0.IDENTITY_LEAVE;
     public static final Identity<StudentRecord, Integer> IDENTITY_STUDENT = Identities0.IDENTITY_STUDENT;
@@ -50,8 +111,41 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<ActEvtLogRecord> KEY_ACT_EVT_LOG_PRIMARY = UniqueKeys0.KEY_ACT_EVT_LOG_PRIMARY;
+    public static final UniqueKey<ActGeBytearrayRecord> KEY_ACT_GE_BYTEARRAY_PRIMARY = UniqueKeys0.KEY_ACT_GE_BYTEARRAY_PRIMARY;
+    public static final UniqueKey<ActGePropertyRecord> KEY_ACT_GE_PROPERTY_PRIMARY = UniqueKeys0.KEY_ACT_GE_PROPERTY_PRIMARY;
+    public static final UniqueKey<ActHiActinstRecord> KEY_ACT_HI_ACTINST_PRIMARY = UniqueKeys0.KEY_ACT_HI_ACTINST_PRIMARY;
+    public static final UniqueKey<ActHiAttachmentRecord> KEY_ACT_HI_ATTACHMENT_PRIMARY = UniqueKeys0.KEY_ACT_HI_ATTACHMENT_PRIMARY;
+    public static final UniqueKey<ActHiCommentRecord> KEY_ACT_HI_COMMENT_PRIMARY = UniqueKeys0.KEY_ACT_HI_COMMENT_PRIMARY;
+    public static final UniqueKey<ActHiDetailRecord> KEY_ACT_HI_DETAIL_PRIMARY = UniqueKeys0.KEY_ACT_HI_DETAIL_PRIMARY;
+    public static final UniqueKey<ActHiIdentitylinkRecord> KEY_ACT_HI_IDENTITYLINK_PRIMARY = UniqueKeys0.KEY_ACT_HI_IDENTITYLINK_PRIMARY;
+    public static final UniqueKey<ActHiProcinstRecord> KEY_ACT_HI_PROCINST_PRIMARY = UniqueKeys0.KEY_ACT_HI_PROCINST_PRIMARY;
+    public static final UniqueKey<ActHiProcinstRecord> KEY_ACT_HI_PROCINST_PROC_INST_ID_ = UniqueKeys0.KEY_ACT_HI_PROCINST_PROC_INST_ID_;
+    public static final UniqueKey<ActHiTaskinstRecord> KEY_ACT_HI_TASKINST_PRIMARY = UniqueKeys0.KEY_ACT_HI_TASKINST_PRIMARY;
+    public static final UniqueKey<ActHiVarinstRecord> KEY_ACT_HI_VARINST_PRIMARY = UniqueKeys0.KEY_ACT_HI_VARINST_PRIMARY;
+    public static final UniqueKey<ActIdGroupRecord> KEY_ACT_ID_GROUP_PRIMARY = UniqueKeys0.KEY_ACT_ID_GROUP_PRIMARY;
+    public static final UniqueKey<ActIdInfoRecord> KEY_ACT_ID_INFO_PRIMARY = UniqueKeys0.KEY_ACT_ID_INFO_PRIMARY;
+    public static final UniqueKey<ActIdMembershipRecord> KEY_ACT_ID_MEMBERSHIP_PRIMARY = UniqueKeys0.KEY_ACT_ID_MEMBERSHIP_PRIMARY;
+    public static final UniqueKey<ActIdUserRecord> KEY_ACT_ID_USER_PRIMARY = UniqueKeys0.KEY_ACT_ID_USER_PRIMARY;
+    public static final UniqueKey<ActProcdefInfoRecord> KEY_ACT_PROCDEF_INFO_PRIMARY = UniqueKeys0.KEY_ACT_PROCDEF_INFO_PRIMARY;
+    public static final UniqueKey<ActProcdefInfoRecord> KEY_ACT_PROCDEF_INFO_ACT_UNIQ_INFO_PROCDEF = UniqueKeys0.KEY_ACT_PROCDEF_INFO_ACT_UNIQ_INFO_PROCDEF;
+    public static final UniqueKey<ActReDeploymentRecord> KEY_ACT_RE_DEPLOYMENT_PRIMARY = UniqueKeys0.KEY_ACT_RE_DEPLOYMENT_PRIMARY;
+    public static final UniqueKey<ActReModelRecord> KEY_ACT_RE_MODEL_PRIMARY = UniqueKeys0.KEY_ACT_RE_MODEL_PRIMARY;
+    public static final UniqueKey<ActReProcdefRecord> KEY_ACT_RE_PROCDEF_PRIMARY = UniqueKeys0.KEY_ACT_RE_PROCDEF_PRIMARY;
+    public static final UniqueKey<ActReProcdefRecord> KEY_ACT_RE_PROCDEF_ACT_UNIQ_PROCDEF = UniqueKeys0.KEY_ACT_RE_PROCDEF_ACT_UNIQ_PROCDEF;
+    public static final UniqueKey<ActRuDeadletterJobRecord> KEY_ACT_RU_DEADLETTER_JOB_PRIMARY = UniqueKeys0.KEY_ACT_RU_DEADLETTER_JOB_PRIMARY;
+    public static final UniqueKey<ActRuEventSubscrRecord> KEY_ACT_RU_EVENT_SUBSCR_PRIMARY = UniqueKeys0.KEY_ACT_RU_EVENT_SUBSCR_PRIMARY;
+    public static final UniqueKey<ActRuExecutionRecord> KEY_ACT_RU_EXECUTION_PRIMARY = UniqueKeys0.KEY_ACT_RU_EXECUTION_PRIMARY;
+    public static final UniqueKey<ActRuIdentitylinkRecord> KEY_ACT_RU_IDENTITYLINK_PRIMARY = UniqueKeys0.KEY_ACT_RU_IDENTITYLINK_PRIMARY;
+    public static final UniqueKey<ActRuJobRecord> KEY_ACT_RU_JOB_PRIMARY = UniqueKeys0.KEY_ACT_RU_JOB_PRIMARY;
+    public static final UniqueKey<ActRuSuspendedJobRecord> KEY_ACT_RU_SUSPENDED_JOB_PRIMARY = UniqueKeys0.KEY_ACT_RU_SUSPENDED_JOB_PRIMARY;
+    public static final UniqueKey<ActRuTaskRecord> KEY_ACT_RU_TASK_PRIMARY = UniqueKeys0.KEY_ACT_RU_TASK_PRIMARY;
+    public static final UniqueKey<ActRuTimerJobRecord> KEY_ACT_RU_TIMER_JOB_PRIMARY = UniqueKeys0.KEY_ACT_RU_TIMER_JOB_PRIMARY;
+    public static final UniqueKey<ActRuVariableRecord> KEY_ACT_RU_VARIABLE_PRIMARY = UniqueKeys0.KEY_ACT_RU_VARIABLE_PRIMARY;
     public static final UniqueKey<ChangemajorsRecord> KEY_CHANGEMAJORS_PRIMARY = UniqueKeys0.KEY_CHANGEMAJORS_PRIMARY;
     public static final UniqueKey<ChangemajorsRecord> KEY_CHANGEMAJORS_SID = UniqueKeys0.KEY_CHANGEMAJORS_SID;
+    public static final UniqueKey<HolidayRecord> KEY_HOLIDAY_PRIMARY = UniqueKeys0.KEY_HOLIDAY_PRIMARY;
+    public static final UniqueKey<HolidayCheckRecord> KEY_HOLIDAY_CHECK_PRIMARY = UniqueKeys0.KEY_HOLIDAY_CHECK_PRIMARY;
     public static final UniqueKey<LeaveRecord> KEY_LEAVE_PRIMARY = UniqueKeys0.KEY_LEAVE_PRIMARY;
     public static final UniqueKey<MajorapprovalRecord> KEY_MAJORAPPROVAL_PRIMARY = UniqueKeys0.KEY_MAJORAPPROVAL_PRIMARY;
     public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = UniqueKeys0.KEY_STUDENT_PRIMARY;
@@ -63,17 +157,55 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<ActGeBytearrayRecord, ActReDeploymentRecord> ACT_FK_BYTEARR_DEPL = ForeignKeys0.ACT_FK_BYTEARR_DEPL;
+    public static final ForeignKey<ActIdMembershipRecord, ActIdUserRecord> ACT_FK_MEMB_USER = ForeignKeys0.ACT_FK_MEMB_USER;
+    public static final ForeignKey<ActIdMembershipRecord, ActIdGroupRecord> ACT_FK_MEMB_GROUP = ForeignKeys0.ACT_FK_MEMB_GROUP;
+    public static final ForeignKey<ActProcdefInfoRecord, ActReProcdefRecord> ACT_FK_INFO_PROCDEF = ForeignKeys0.ACT_FK_INFO_PROCDEF;
+    public static final ForeignKey<ActProcdefInfoRecord, ActGeBytearrayRecord> ACT_FK_INFO_JSON_BA = ForeignKeys0.ACT_FK_INFO_JSON_BA;
+    public static final ForeignKey<ActReModelRecord, ActReDeploymentRecord> ACT_FK_MODEL_DEPLOYMENT = ForeignKeys0.ACT_FK_MODEL_DEPLOYMENT;
+    public static final ForeignKey<ActReModelRecord, ActGeBytearrayRecord> ACT_FK_MODEL_SOURCE = ForeignKeys0.ACT_FK_MODEL_SOURCE;
+    public static final ForeignKey<ActReModelRecord, ActGeBytearrayRecord> ACT_FK_MODEL_SOURCE_EXTRA = ForeignKeys0.ACT_FK_MODEL_SOURCE_EXTRA;
+    public static final ForeignKey<ActRuDeadletterJobRecord, ActRuExecutionRecord> ACT_FK_DEADLETTER_JOB_EXECUTION = ForeignKeys0.ACT_FK_DEADLETTER_JOB_EXECUTION;
+    public static final ForeignKey<ActRuDeadletterJobRecord, ActRuExecutionRecord> ACT_FK_DEADLETTER_JOB_PROCESS_INSTANCE = ForeignKeys0.ACT_FK_DEADLETTER_JOB_PROCESS_INSTANCE;
+    public static final ForeignKey<ActRuDeadletterJobRecord, ActReProcdefRecord> ACT_FK_DEADLETTER_JOB_PROC_DEF = ForeignKeys0.ACT_FK_DEADLETTER_JOB_PROC_DEF;
+    public static final ForeignKey<ActRuDeadletterJobRecord, ActGeBytearrayRecord> ACT_FK_DEADLETTER_JOB_EXCEPTION = ForeignKeys0.ACT_FK_DEADLETTER_JOB_EXCEPTION;
+    public static final ForeignKey<ActRuEventSubscrRecord, ActRuExecutionRecord> ACT_FK_EVENT_EXEC = ForeignKeys0.ACT_FK_EVENT_EXEC;
+    public static final ForeignKey<ActRuExecutionRecord, ActRuExecutionRecord> ACT_FK_EXE_PROCINST = ForeignKeys0.ACT_FK_EXE_PROCINST;
+    public static final ForeignKey<ActRuExecutionRecord, ActRuExecutionRecord> ACT_FK_EXE_PARENT = ForeignKeys0.ACT_FK_EXE_PARENT;
+    public static final ForeignKey<ActRuExecutionRecord, ActReProcdefRecord> ACT_FK_EXE_PROCDEF = ForeignKeys0.ACT_FK_EXE_PROCDEF;
+    public static final ForeignKey<ActRuExecutionRecord, ActRuExecutionRecord> ACT_FK_EXE_SUPER = ForeignKeys0.ACT_FK_EXE_SUPER;
+    public static final ForeignKey<ActRuIdentitylinkRecord, ActRuTaskRecord> ACT_FK_TSKASS_TASK = ForeignKeys0.ACT_FK_TSKASS_TASK;
+    public static final ForeignKey<ActRuIdentitylinkRecord, ActRuExecutionRecord> ACT_FK_IDL_PROCINST = ForeignKeys0.ACT_FK_IDL_PROCINST;
+    public static final ForeignKey<ActRuIdentitylinkRecord, ActReProcdefRecord> ACT_FK_ATHRZ_PROCEDEF = ForeignKeys0.ACT_FK_ATHRZ_PROCEDEF;
+    public static final ForeignKey<ActRuJobRecord, ActRuExecutionRecord> ACT_FK_JOB_EXECUTION = ForeignKeys0.ACT_FK_JOB_EXECUTION;
+    public static final ForeignKey<ActRuJobRecord, ActRuExecutionRecord> ACT_FK_JOB_PROCESS_INSTANCE = ForeignKeys0.ACT_FK_JOB_PROCESS_INSTANCE;
+    public static final ForeignKey<ActRuJobRecord, ActReProcdefRecord> ACT_FK_JOB_PROC_DEF = ForeignKeys0.ACT_FK_JOB_PROC_DEF;
+    public static final ForeignKey<ActRuJobRecord, ActGeBytearrayRecord> ACT_FK_JOB_EXCEPTION = ForeignKeys0.ACT_FK_JOB_EXCEPTION;
+    public static final ForeignKey<ActRuSuspendedJobRecord, ActRuExecutionRecord> ACT_FK_SUSPENDED_JOB_EXECUTION = ForeignKeys0.ACT_FK_SUSPENDED_JOB_EXECUTION;
+    public static final ForeignKey<ActRuSuspendedJobRecord, ActRuExecutionRecord> ACT_FK_SUSPENDED_JOB_PROCESS_INSTANCE = ForeignKeys0.ACT_FK_SUSPENDED_JOB_PROCESS_INSTANCE;
+    public static final ForeignKey<ActRuSuspendedJobRecord, ActReProcdefRecord> ACT_FK_SUSPENDED_JOB_PROC_DEF = ForeignKeys0.ACT_FK_SUSPENDED_JOB_PROC_DEF;
+    public static final ForeignKey<ActRuSuspendedJobRecord, ActGeBytearrayRecord> ACT_FK_SUSPENDED_JOB_EXCEPTION = ForeignKeys0.ACT_FK_SUSPENDED_JOB_EXCEPTION;
+    public static final ForeignKey<ActRuTaskRecord, ActRuExecutionRecord> ACT_FK_TASK_EXE = ForeignKeys0.ACT_FK_TASK_EXE;
+    public static final ForeignKey<ActRuTaskRecord, ActRuExecutionRecord> ACT_FK_TASK_PROCINST = ForeignKeys0.ACT_FK_TASK_PROCINST;
+    public static final ForeignKey<ActRuTaskRecord, ActReProcdefRecord> ACT_FK_TASK_PROCDEF = ForeignKeys0.ACT_FK_TASK_PROCDEF;
+    public static final ForeignKey<ActRuTimerJobRecord, ActRuExecutionRecord> ACT_FK_TIMER_JOB_EXECUTION = ForeignKeys0.ACT_FK_TIMER_JOB_EXECUTION;
+    public static final ForeignKey<ActRuTimerJobRecord, ActRuExecutionRecord> ACT_FK_TIMER_JOB_PROCESS_INSTANCE = ForeignKeys0.ACT_FK_TIMER_JOB_PROCESS_INSTANCE;
+    public static final ForeignKey<ActRuTimerJobRecord, ActReProcdefRecord> ACT_FK_TIMER_JOB_PROC_DEF = ForeignKeys0.ACT_FK_TIMER_JOB_PROC_DEF;
+    public static final ForeignKey<ActRuTimerJobRecord, ActGeBytearrayRecord> ACT_FK_TIMER_JOB_EXCEPTION = ForeignKeys0.ACT_FK_TIMER_JOB_EXCEPTION;
+    public static final ForeignKey<ActRuVariableRecord, ActRuExecutionRecord> ACT_FK_VAR_EXE = ForeignKeys0.ACT_FK_VAR_EXE;
+    public static final ForeignKey<ActRuVariableRecord, ActRuExecutionRecord> ACT_FK_VAR_PROCINST = ForeignKeys0.ACT_FK_VAR_PROCINST;
+    public static final ForeignKey<ActRuVariableRecord, ActGeBytearrayRecord> ACT_FK_VAR_BYTEARRAY = ForeignKeys0.ACT_FK_VAR_BYTEARRAY;
     public static final ForeignKey<ChangemajorsRecord, StudentRecord> CHANGESID_FOREIGNKEY = ForeignKeys0.CHANGESID_FOREIGNKEY;
     public static final ForeignKey<LeaveRecord, TeacherRecord> LEAVE_TID_FORIEGINKEY = ForeignKeys0.LEAVE_TID_FORIEGINKEY;
     public static final ForeignKey<MajorapprovalRecord, ChangemajorsRecord> APPROVECID_FOREIGNKEY = ForeignKeys0.APPROVECID_FOREIGNKEY;
     public static final ForeignKey<StudentRecord, TeacherRecord> STUDENT_TID_FORIENGINKEY = ForeignKeys0.STUDENT_TID_FORIENGINKEY;
-    public static final ForeignKey<TeacherRecord, TeacherRecord> TEACHER_SUPERIOR_KEY = ForeignKeys0.TEACHER_SUPERIOR_KEY;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
 
     private static class Identities0 {
+        public static Identity<ActEvtLogRecord, Long> IDENTITY_ACT_EVT_LOG = Internal.createIdentity(ActEvtLog.ACT_EVT_LOG, ActEvtLog.ACT_EVT_LOG.LOG_NR_);
         public static Identity<ChangemajorsRecord, Integer> IDENTITY_CHANGEMAJORS = Internal.createIdentity(Changemajors.CHANGEMAJORS, Changemajors.CHANGEMAJORS.CID);
         public static Identity<LeaveRecord, Integer> IDENTITY_LEAVE = Internal.createIdentity(Leave.LEAVE, Leave.LEAVE.LID);
         public static Identity<StudentRecord, Integer> IDENTITY_STUDENT = Internal.createIdentity(Student.STUDENT, Student.STUDENT.SID);
@@ -81,8 +213,41 @@ public class Keys {
     }
 
     private static class UniqueKeys0 {
+        public static final UniqueKey<ActEvtLogRecord> KEY_ACT_EVT_LOG_PRIMARY = Internal.createUniqueKey(ActEvtLog.ACT_EVT_LOG, "KEY_act_evt_log_PRIMARY", ActEvtLog.ACT_EVT_LOG.LOG_NR_);
+        public static final UniqueKey<ActGeBytearrayRecord> KEY_ACT_GE_BYTEARRAY_PRIMARY = Internal.createUniqueKey(ActGeBytearray.ACT_GE_BYTEARRAY, "KEY_act_ge_bytearray_PRIMARY", ActGeBytearray.ACT_GE_BYTEARRAY.ID_);
+        public static final UniqueKey<ActGePropertyRecord> KEY_ACT_GE_PROPERTY_PRIMARY = Internal.createUniqueKey(ActGeProperty.ACT_GE_PROPERTY, "KEY_act_ge_property_PRIMARY", ActGeProperty.ACT_GE_PROPERTY.NAME_);
+        public static final UniqueKey<ActHiActinstRecord> KEY_ACT_HI_ACTINST_PRIMARY = Internal.createUniqueKey(ActHiActinst.ACT_HI_ACTINST, "KEY_act_hi_actinst_PRIMARY", ActHiActinst.ACT_HI_ACTINST.ID_);
+        public static final UniqueKey<ActHiAttachmentRecord> KEY_ACT_HI_ATTACHMENT_PRIMARY = Internal.createUniqueKey(ActHiAttachment.ACT_HI_ATTACHMENT, "KEY_act_hi_attachment_PRIMARY", ActHiAttachment.ACT_HI_ATTACHMENT.ID_);
+        public static final UniqueKey<ActHiCommentRecord> KEY_ACT_HI_COMMENT_PRIMARY = Internal.createUniqueKey(ActHiComment.ACT_HI_COMMENT, "KEY_act_hi_comment_PRIMARY", ActHiComment.ACT_HI_COMMENT.ID_);
+        public static final UniqueKey<ActHiDetailRecord> KEY_ACT_HI_DETAIL_PRIMARY = Internal.createUniqueKey(ActHiDetail.ACT_HI_DETAIL, "KEY_act_hi_detail_PRIMARY", ActHiDetail.ACT_HI_DETAIL.ID_);
+        public static final UniqueKey<ActHiIdentitylinkRecord> KEY_ACT_HI_IDENTITYLINK_PRIMARY = Internal.createUniqueKey(ActHiIdentitylink.ACT_HI_IDENTITYLINK, "KEY_act_hi_identitylink_PRIMARY", ActHiIdentitylink.ACT_HI_IDENTITYLINK.ID_);
+        public static final UniqueKey<ActHiProcinstRecord> KEY_ACT_HI_PROCINST_PRIMARY = Internal.createUniqueKey(ActHiProcinst.ACT_HI_PROCINST, "KEY_act_hi_procinst_PRIMARY", ActHiProcinst.ACT_HI_PROCINST.ID_);
+        public static final UniqueKey<ActHiProcinstRecord> KEY_ACT_HI_PROCINST_PROC_INST_ID_ = Internal.createUniqueKey(ActHiProcinst.ACT_HI_PROCINST, "KEY_act_hi_procinst_PROC_INST_ID_", ActHiProcinst.ACT_HI_PROCINST.PROC_INST_ID_);
+        public static final UniqueKey<ActHiTaskinstRecord> KEY_ACT_HI_TASKINST_PRIMARY = Internal.createUniqueKey(ActHiTaskinst.ACT_HI_TASKINST, "KEY_act_hi_taskinst_PRIMARY", ActHiTaskinst.ACT_HI_TASKINST.ID_);
+        public static final UniqueKey<ActHiVarinstRecord> KEY_ACT_HI_VARINST_PRIMARY = Internal.createUniqueKey(ActHiVarinst.ACT_HI_VARINST, "KEY_act_hi_varinst_PRIMARY", ActHiVarinst.ACT_HI_VARINST.ID_);
+        public static final UniqueKey<ActIdGroupRecord> KEY_ACT_ID_GROUP_PRIMARY = Internal.createUniqueKey(ActIdGroup.ACT_ID_GROUP, "KEY_act_id_group_PRIMARY", ActIdGroup.ACT_ID_GROUP.ID_);
+        public static final UniqueKey<ActIdInfoRecord> KEY_ACT_ID_INFO_PRIMARY = Internal.createUniqueKey(ActIdInfo.ACT_ID_INFO, "KEY_act_id_info_PRIMARY", ActIdInfo.ACT_ID_INFO.ID_);
+        public static final UniqueKey<ActIdMembershipRecord> KEY_ACT_ID_MEMBERSHIP_PRIMARY = Internal.createUniqueKey(ActIdMembership.ACT_ID_MEMBERSHIP, "KEY_act_id_membership_PRIMARY", ActIdMembership.ACT_ID_MEMBERSHIP.USER_ID_, ActIdMembership.ACT_ID_MEMBERSHIP.GROUP_ID_);
+        public static final UniqueKey<ActIdUserRecord> KEY_ACT_ID_USER_PRIMARY = Internal.createUniqueKey(ActIdUser.ACT_ID_USER, "KEY_act_id_user_PRIMARY", ActIdUser.ACT_ID_USER.ID_);
+        public static final UniqueKey<ActProcdefInfoRecord> KEY_ACT_PROCDEF_INFO_PRIMARY = Internal.createUniqueKey(ActProcdefInfo.ACT_PROCDEF_INFO, "KEY_act_procdef_info_PRIMARY", ActProcdefInfo.ACT_PROCDEF_INFO.ID_);
+        public static final UniqueKey<ActProcdefInfoRecord> KEY_ACT_PROCDEF_INFO_ACT_UNIQ_INFO_PROCDEF = Internal.createUniqueKey(ActProcdefInfo.ACT_PROCDEF_INFO, "KEY_act_procdef_info_ACT_UNIQ_INFO_PROCDEF", ActProcdefInfo.ACT_PROCDEF_INFO.PROC_DEF_ID_);
+        public static final UniqueKey<ActReDeploymentRecord> KEY_ACT_RE_DEPLOYMENT_PRIMARY = Internal.createUniqueKey(ActReDeployment.ACT_RE_DEPLOYMENT, "KEY_act_re_deployment_PRIMARY", ActReDeployment.ACT_RE_DEPLOYMENT.ID_);
+        public static final UniqueKey<ActReModelRecord> KEY_ACT_RE_MODEL_PRIMARY = Internal.createUniqueKey(ActReModel.ACT_RE_MODEL, "KEY_act_re_model_PRIMARY", ActReModel.ACT_RE_MODEL.ID_);
+        public static final UniqueKey<ActReProcdefRecord> KEY_ACT_RE_PROCDEF_PRIMARY = Internal.createUniqueKey(ActReProcdef.ACT_RE_PROCDEF, "KEY_act_re_procdef_PRIMARY", ActReProcdef.ACT_RE_PROCDEF.ID_);
+        public static final UniqueKey<ActReProcdefRecord> KEY_ACT_RE_PROCDEF_ACT_UNIQ_PROCDEF = Internal.createUniqueKey(ActReProcdef.ACT_RE_PROCDEF, "KEY_act_re_procdef_ACT_UNIQ_PROCDEF", ActReProcdef.ACT_RE_PROCDEF.KEY_, ActReProcdef.ACT_RE_PROCDEF.VERSION_, ActReProcdef.ACT_RE_PROCDEF.TENANT_ID_);
+        public static final UniqueKey<ActRuDeadletterJobRecord> KEY_ACT_RU_DEADLETTER_JOB_PRIMARY = Internal.createUniqueKey(ActRuDeadletterJob.ACT_RU_DEADLETTER_JOB, "KEY_act_ru_deadletter_job_PRIMARY", ActRuDeadletterJob.ACT_RU_DEADLETTER_JOB.ID_);
+        public static final UniqueKey<ActRuEventSubscrRecord> KEY_ACT_RU_EVENT_SUBSCR_PRIMARY = Internal.createUniqueKey(ActRuEventSubscr.ACT_RU_EVENT_SUBSCR, "KEY_act_ru_event_subscr_PRIMARY", ActRuEventSubscr.ACT_RU_EVENT_SUBSCR.ID_);
+        public static final UniqueKey<ActRuExecutionRecord> KEY_ACT_RU_EXECUTION_PRIMARY = Internal.createUniqueKey(ActRuExecution.ACT_RU_EXECUTION, "KEY_act_ru_execution_PRIMARY", ActRuExecution.ACT_RU_EXECUTION.ID_);
+        public static final UniqueKey<ActRuIdentitylinkRecord> KEY_ACT_RU_IDENTITYLINK_PRIMARY = Internal.createUniqueKey(ActRuIdentitylink.ACT_RU_IDENTITYLINK, "KEY_act_ru_identitylink_PRIMARY", ActRuIdentitylink.ACT_RU_IDENTITYLINK.ID_);
+        public static final UniqueKey<ActRuJobRecord> KEY_ACT_RU_JOB_PRIMARY = Internal.createUniqueKey(ActRuJob.ACT_RU_JOB, "KEY_act_ru_job_PRIMARY", ActRuJob.ACT_RU_JOB.ID_);
+        public static final UniqueKey<ActRuSuspendedJobRecord> KEY_ACT_RU_SUSPENDED_JOB_PRIMARY = Internal.createUniqueKey(ActRuSuspendedJob.ACT_RU_SUSPENDED_JOB, "KEY_act_ru_suspended_job_PRIMARY", ActRuSuspendedJob.ACT_RU_SUSPENDED_JOB.ID_);
+        public static final UniqueKey<ActRuTaskRecord> KEY_ACT_RU_TASK_PRIMARY = Internal.createUniqueKey(ActRuTask.ACT_RU_TASK, "KEY_act_ru_task_PRIMARY", ActRuTask.ACT_RU_TASK.ID_);
+        public static final UniqueKey<ActRuTimerJobRecord> KEY_ACT_RU_TIMER_JOB_PRIMARY = Internal.createUniqueKey(ActRuTimerJob.ACT_RU_TIMER_JOB, "KEY_act_ru_timer_job_PRIMARY", ActRuTimerJob.ACT_RU_TIMER_JOB.ID_);
+        public static final UniqueKey<ActRuVariableRecord> KEY_ACT_RU_VARIABLE_PRIMARY = Internal.createUniqueKey(ActRuVariable.ACT_RU_VARIABLE, "KEY_act_ru_variable_PRIMARY", ActRuVariable.ACT_RU_VARIABLE.ID_);
         public static final UniqueKey<ChangemajorsRecord> KEY_CHANGEMAJORS_PRIMARY = Internal.createUniqueKey(Changemajors.CHANGEMAJORS, "KEY_changemajors_PRIMARY", Changemajors.CHANGEMAJORS.CID);
         public static final UniqueKey<ChangemajorsRecord> KEY_CHANGEMAJORS_SID = Internal.createUniqueKey(Changemajors.CHANGEMAJORS, "KEY_changemajors_sid", Changemajors.CHANGEMAJORS.SID);
+        public static final UniqueKey<HolidayRecord> KEY_HOLIDAY_PRIMARY = Internal.createUniqueKey(Holiday.HOLIDAY, "KEY_holiday_PRIMARY", Holiday.HOLIDAY.FORMID);
+        public static final UniqueKey<HolidayCheckRecord> KEY_HOLIDAY_CHECK_PRIMARY = Internal.createUniqueKey(HolidayCheck.HOLIDAY_CHECK, "KEY_holiday_check_PRIMARY", HolidayCheck.HOLIDAY_CHECK.CHECKID);
         public static final UniqueKey<LeaveRecord> KEY_LEAVE_PRIMARY = Internal.createUniqueKey(Leave.LEAVE, "KEY_leave_PRIMARY", Leave.LEAVE.LID);
         public static final UniqueKey<MajorapprovalRecord> KEY_MAJORAPPROVAL_PRIMARY = Internal.createUniqueKey(Majorapproval.MAJORAPPROVAL, "KEY_majorapproval_PRIMARY", Majorapproval.MAJORAPPROVAL.AID);
         public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = Internal.createUniqueKey(Student.STUDENT, "KEY_student_PRIMARY", Student.STUDENT.SID);
@@ -92,10 +257,47 @@ public class Keys {
     }
 
     private static class ForeignKeys0 {
+        public static final ForeignKey<ActGeBytearrayRecord, ActReDeploymentRecord> ACT_FK_BYTEARR_DEPL = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RE_DEPLOYMENT_PRIMARY, ActGeBytearray.ACT_GE_BYTEARRAY, "ACT_FK_BYTEARR_DEPL", ActGeBytearray.ACT_GE_BYTEARRAY.DEPLOYMENT_ID_);
+        public static final ForeignKey<ActIdMembershipRecord, ActIdUserRecord> ACT_FK_MEMB_USER = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_ID_USER_PRIMARY, ActIdMembership.ACT_ID_MEMBERSHIP, "ACT_FK_MEMB_USER", ActIdMembership.ACT_ID_MEMBERSHIP.USER_ID_);
+        public static final ForeignKey<ActIdMembershipRecord, ActIdGroupRecord> ACT_FK_MEMB_GROUP = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_ID_GROUP_PRIMARY, ActIdMembership.ACT_ID_MEMBERSHIP, "ACT_FK_MEMB_GROUP", ActIdMembership.ACT_ID_MEMBERSHIP.GROUP_ID_);
+        public static final ForeignKey<ActProcdefInfoRecord, ActReProcdefRecord> ACT_FK_INFO_PROCDEF = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RE_PROCDEF_PRIMARY, ActProcdefInfo.ACT_PROCDEF_INFO, "ACT_FK_INFO_PROCDEF", ActProcdefInfo.ACT_PROCDEF_INFO.PROC_DEF_ID_);
+        public static final ForeignKey<ActProcdefInfoRecord, ActGeBytearrayRecord> ACT_FK_INFO_JSON_BA = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_GE_BYTEARRAY_PRIMARY, ActProcdefInfo.ACT_PROCDEF_INFO, "ACT_FK_INFO_JSON_BA", ActProcdefInfo.ACT_PROCDEF_INFO.INFO_JSON_ID_);
+        public static final ForeignKey<ActReModelRecord, ActReDeploymentRecord> ACT_FK_MODEL_DEPLOYMENT = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RE_DEPLOYMENT_PRIMARY, ActReModel.ACT_RE_MODEL, "ACT_FK_MODEL_DEPLOYMENT", ActReModel.ACT_RE_MODEL.DEPLOYMENT_ID_);
+        public static final ForeignKey<ActReModelRecord, ActGeBytearrayRecord> ACT_FK_MODEL_SOURCE = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_GE_BYTEARRAY_PRIMARY, ActReModel.ACT_RE_MODEL, "ACT_FK_MODEL_SOURCE", ActReModel.ACT_RE_MODEL.EDITOR_SOURCE_VALUE_ID_);
+        public static final ForeignKey<ActReModelRecord, ActGeBytearrayRecord> ACT_FK_MODEL_SOURCE_EXTRA = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_GE_BYTEARRAY_PRIMARY, ActReModel.ACT_RE_MODEL, "ACT_FK_MODEL_SOURCE_EXTRA", ActReModel.ACT_RE_MODEL.EDITOR_SOURCE_EXTRA_VALUE_ID_);
+        public static final ForeignKey<ActRuDeadletterJobRecord, ActRuExecutionRecord> ACT_FK_DEADLETTER_JOB_EXECUTION = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuDeadletterJob.ACT_RU_DEADLETTER_JOB, "ACT_FK_DEADLETTER_JOB_EXECUTION", ActRuDeadletterJob.ACT_RU_DEADLETTER_JOB.EXECUTION_ID_);
+        public static final ForeignKey<ActRuDeadletterJobRecord, ActRuExecutionRecord> ACT_FK_DEADLETTER_JOB_PROCESS_INSTANCE = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuDeadletterJob.ACT_RU_DEADLETTER_JOB, "ACT_FK_DEADLETTER_JOB_PROCESS_INSTANCE", ActRuDeadletterJob.ACT_RU_DEADLETTER_JOB.PROCESS_INSTANCE_ID_);
+        public static final ForeignKey<ActRuDeadletterJobRecord, ActReProcdefRecord> ACT_FK_DEADLETTER_JOB_PROC_DEF = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RE_PROCDEF_PRIMARY, ActRuDeadletterJob.ACT_RU_DEADLETTER_JOB, "ACT_FK_DEADLETTER_JOB_PROC_DEF", ActRuDeadletterJob.ACT_RU_DEADLETTER_JOB.PROC_DEF_ID_);
+        public static final ForeignKey<ActRuDeadletterJobRecord, ActGeBytearrayRecord> ACT_FK_DEADLETTER_JOB_EXCEPTION = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_GE_BYTEARRAY_PRIMARY, ActRuDeadletterJob.ACT_RU_DEADLETTER_JOB, "ACT_FK_DEADLETTER_JOB_EXCEPTION", ActRuDeadletterJob.ACT_RU_DEADLETTER_JOB.EXCEPTION_STACK_ID_);
+        public static final ForeignKey<ActRuEventSubscrRecord, ActRuExecutionRecord> ACT_FK_EVENT_EXEC = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuEventSubscr.ACT_RU_EVENT_SUBSCR, "ACT_FK_EVENT_EXEC", ActRuEventSubscr.ACT_RU_EVENT_SUBSCR.EXECUTION_ID_);
+        public static final ForeignKey<ActRuExecutionRecord, ActRuExecutionRecord> ACT_FK_EXE_PROCINST = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuExecution.ACT_RU_EXECUTION, "ACT_FK_EXE_PROCINST", ActRuExecution.ACT_RU_EXECUTION.PROC_INST_ID_);
+        public static final ForeignKey<ActRuExecutionRecord, ActRuExecutionRecord> ACT_FK_EXE_PARENT = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuExecution.ACT_RU_EXECUTION, "ACT_FK_EXE_PARENT", ActRuExecution.ACT_RU_EXECUTION.PARENT_ID_);
+        public static final ForeignKey<ActRuExecutionRecord, ActReProcdefRecord> ACT_FK_EXE_PROCDEF = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RE_PROCDEF_PRIMARY, ActRuExecution.ACT_RU_EXECUTION, "ACT_FK_EXE_PROCDEF", ActRuExecution.ACT_RU_EXECUTION.PROC_DEF_ID_);
+        public static final ForeignKey<ActRuExecutionRecord, ActRuExecutionRecord> ACT_FK_EXE_SUPER = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuExecution.ACT_RU_EXECUTION, "ACT_FK_EXE_SUPER", ActRuExecution.ACT_RU_EXECUTION.SUPER_EXEC_);
+        public static final ForeignKey<ActRuIdentitylinkRecord, ActRuTaskRecord> ACT_FK_TSKASS_TASK = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_TASK_PRIMARY, ActRuIdentitylink.ACT_RU_IDENTITYLINK, "ACT_FK_TSKASS_TASK", ActRuIdentitylink.ACT_RU_IDENTITYLINK.TASK_ID_);
+        public static final ForeignKey<ActRuIdentitylinkRecord, ActRuExecutionRecord> ACT_FK_IDL_PROCINST = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuIdentitylink.ACT_RU_IDENTITYLINK, "ACT_FK_IDL_PROCINST", ActRuIdentitylink.ACT_RU_IDENTITYLINK.PROC_INST_ID_);
+        public static final ForeignKey<ActRuIdentitylinkRecord, ActReProcdefRecord> ACT_FK_ATHRZ_PROCEDEF = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RE_PROCDEF_PRIMARY, ActRuIdentitylink.ACT_RU_IDENTITYLINK, "ACT_FK_ATHRZ_PROCEDEF", ActRuIdentitylink.ACT_RU_IDENTITYLINK.PROC_DEF_ID_);
+        public static final ForeignKey<ActRuJobRecord, ActRuExecutionRecord> ACT_FK_JOB_EXECUTION = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuJob.ACT_RU_JOB, "ACT_FK_JOB_EXECUTION", ActRuJob.ACT_RU_JOB.EXECUTION_ID_);
+        public static final ForeignKey<ActRuJobRecord, ActRuExecutionRecord> ACT_FK_JOB_PROCESS_INSTANCE = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuJob.ACT_RU_JOB, "ACT_FK_JOB_PROCESS_INSTANCE", ActRuJob.ACT_RU_JOB.PROCESS_INSTANCE_ID_);
+        public static final ForeignKey<ActRuJobRecord, ActReProcdefRecord> ACT_FK_JOB_PROC_DEF = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RE_PROCDEF_PRIMARY, ActRuJob.ACT_RU_JOB, "ACT_FK_JOB_PROC_DEF", ActRuJob.ACT_RU_JOB.PROC_DEF_ID_);
+        public static final ForeignKey<ActRuJobRecord, ActGeBytearrayRecord> ACT_FK_JOB_EXCEPTION = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_GE_BYTEARRAY_PRIMARY, ActRuJob.ACT_RU_JOB, "ACT_FK_JOB_EXCEPTION", ActRuJob.ACT_RU_JOB.EXCEPTION_STACK_ID_);
+        public static final ForeignKey<ActRuSuspendedJobRecord, ActRuExecutionRecord> ACT_FK_SUSPENDED_JOB_EXECUTION = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuSuspendedJob.ACT_RU_SUSPENDED_JOB, "ACT_FK_SUSPENDED_JOB_EXECUTION", ActRuSuspendedJob.ACT_RU_SUSPENDED_JOB.EXECUTION_ID_);
+        public static final ForeignKey<ActRuSuspendedJobRecord, ActRuExecutionRecord> ACT_FK_SUSPENDED_JOB_PROCESS_INSTANCE = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuSuspendedJob.ACT_RU_SUSPENDED_JOB, "ACT_FK_SUSPENDED_JOB_PROCESS_INSTANCE", ActRuSuspendedJob.ACT_RU_SUSPENDED_JOB.PROCESS_INSTANCE_ID_);
+        public static final ForeignKey<ActRuSuspendedJobRecord, ActReProcdefRecord> ACT_FK_SUSPENDED_JOB_PROC_DEF = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RE_PROCDEF_PRIMARY, ActRuSuspendedJob.ACT_RU_SUSPENDED_JOB, "ACT_FK_SUSPENDED_JOB_PROC_DEF", ActRuSuspendedJob.ACT_RU_SUSPENDED_JOB.PROC_DEF_ID_);
+        public static final ForeignKey<ActRuSuspendedJobRecord, ActGeBytearrayRecord> ACT_FK_SUSPENDED_JOB_EXCEPTION = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_GE_BYTEARRAY_PRIMARY, ActRuSuspendedJob.ACT_RU_SUSPENDED_JOB, "ACT_FK_SUSPENDED_JOB_EXCEPTION", ActRuSuspendedJob.ACT_RU_SUSPENDED_JOB.EXCEPTION_STACK_ID_);
+        public static final ForeignKey<ActRuTaskRecord, ActRuExecutionRecord> ACT_FK_TASK_EXE = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuTask.ACT_RU_TASK, "ACT_FK_TASK_EXE", ActRuTask.ACT_RU_TASK.EXECUTION_ID_);
+        public static final ForeignKey<ActRuTaskRecord, ActRuExecutionRecord> ACT_FK_TASK_PROCINST = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuTask.ACT_RU_TASK, "ACT_FK_TASK_PROCINST", ActRuTask.ACT_RU_TASK.PROC_INST_ID_);
+        public static final ForeignKey<ActRuTaskRecord, ActReProcdefRecord> ACT_FK_TASK_PROCDEF = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RE_PROCDEF_PRIMARY, ActRuTask.ACT_RU_TASK, "ACT_FK_TASK_PROCDEF", ActRuTask.ACT_RU_TASK.PROC_DEF_ID_);
+        public static final ForeignKey<ActRuTimerJobRecord, ActRuExecutionRecord> ACT_FK_TIMER_JOB_EXECUTION = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuTimerJob.ACT_RU_TIMER_JOB, "ACT_FK_TIMER_JOB_EXECUTION", ActRuTimerJob.ACT_RU_TIMER_JOB.EXECUTION_ID_);
+        public static final ForeignKey<ActRuTimerJobRecord, ActRuExecutionRecord> ACT_FK_TIMER_JOB_PROCESS_INSTANCE = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuTimerJob.ACT_RU_TIMER_JOB, "ACT_FK_TIMER_JOB_PROCESS_INSTANCE", ActRuTimerJob.ACT_RU_TIMER_JOB.PROCESS_INSTANCE_ID_);
+        public static final ForeignKey<ActRuTimerJobRecord, ActReProcdefRecord> ACT_FK_TIMER_JOB_PROC_DEF = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RE_PROCDEF_PRIMARY, ActRuTimerJob.ACT_RU_TIMER_JOB, "ACT_FK_TIMER_JOB_PROC_DEF", ActRuTimerJob.ACT_RU_TIMER_JOB.PROC_DEF_ID_);
+        public static final ForeignKey<ActRuTimerJobRecord, ActGeBytearrayRecord> ACT_FK_TIMER_JOB_EXCEPTION = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_GE_BYTEARRAY_PRIMARY, ActRuTimerJob.ACT_RU_TIMER_JOB, "ACT_FK_TIMER_JOB_EXCEPTION", ActRuTimerJob.ACT_RU_TIMER_JOB.EXCEPTION_STACK_ID_);
+        public static final ForeignKey<ActRuVariableRecord, ActRuExecutionRecord> ACT_FK_VAR_EXE = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuVariable.ACT_RU_VARIABLE, "ACT_FK_VAR_EXE", ActRuVariable.ACT_RU_VARIABLE.EXECUTION_ID_);
+        public static final ForeignKey<ActRuVariableRecord, ActRuExecutionRecord> ACT_FK_VAR_PROCINST = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuVariable.ACT_RU_VARIABLE, "ACT_FK_VAR_PROCINST", ActRuVariable.ACT_RU_VARIABLE.PROC_INST_ID_);
+        public static final ForeignKey<ActRuVariableRecord, ActGeBytearrayRecord> ACT_FK_VAR_BYTEARRAY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_GE_BYTEARRAY_PRIMARY, ActRuVariable.ACT_RU_VARIABLE, "ACT_FK_VAR_BYTEARRAY", ActRuVariable.ACT_RU_VARIABLE.BYTEARRAY_ID_);
         public static final ForeignKey<ChangemajorsRecord, StudentRecord> CHANGESID_FOREIGNKEY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_STUDENT_PRIMARY, Changemajors.CHANGEMAJORS, "changeSid_foreignkey", Changemajors.CHANGEMAJORS.SID);
         public static final ForeignKey<LeaveRecord, TeacherRecord> LEAVE_TID_FORIEGINKEY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_TEACHER_PRIMARY, Leave.LEAVE, "leave_tid_forieginkey", Leave.LEAVE.TID);
         public static final ForeignKey<MajorapprovalRecord, ChangemajorsRecord> APPROVECID_FOREIGNKEY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_CHANGEMAJORS_PRIMARY, Majorapproval.MAJORAPPROVAL, "approvecid_foreignkey", Majorapproval.MAJORAPPROVAL.CID);
         public static final ForeignKey<StudentRecord, TeacherRecord> STUDENT_TID_FORIENGINKEY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_TEACHER_PRIMARY, Student.STUDENT, "student_tid_forienginkey", Student.STUDENT.TID);
-        public static final ForeignKey<TeacherRecord, TeacherRecord> TEACHER_SUPERIOR_KEY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_TEACHER_PRIMARY, Teacher.TEACHER, "teacher_superior_key", Teacher.TEACHER.SUPERIOR);
     }
 }

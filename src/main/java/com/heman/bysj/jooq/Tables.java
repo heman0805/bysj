@@ -4,7 +4,37 @@
 package com.heman.bysj.jooq;
 
 
+import com.heman.bysj.jooq.tables.ActEvtLog;
+import com.heman.bysj.jooq.tables.ActGeBytearray;
+import com.heman.bysj.jooq.tables.ActGeProperty;
+import com.heman.bysj.jooq.tables.ActHiActinst;
+import com.heman.bysj.jooq.tables.ActHiAttachment;
+import com.heman.bysj.jooq.tables.ActHiComment;
+import com.heman.bysj.jooq.tables.ActHiDetail;
+import com.heman.bysj.jooq.tables.ActHiIdentitylink;
+import com.heman.bysj.jooq.tables.ActHiProcinst;
+import com.heman.bysj.jooq.tables.ActHiTaskinst;
+import com.heman.bysj.jooq.tables.ActHiVarinst;
+import com.heman.bysj.jooq.tables.ActIdGroup;
+import com.heman.bysj.jooq.tables.ActIdInfo;
+import com.heman.bysj.jooq.tables.ActIdMembership;
+import com.heman.bysj.jooq.tables.ActIdUser;
+import com.heman.bysj.jooq.tables.ActProcdefInfo;
+import com.heman.bysj.jooq.tables.ActReDeployment;
+import com.heman.bysj.jooq.tables.ActReModel;
+import com.heman.bysj.jooq.tables.ActReProcdef;
+import com.heman.bysj.jooq.tables.ActRuDeadletterJob;
+import com.heman.bysj.jooq.tables.ActRuEventSubscr;
+import com.heman.bysj.jooq.tables.ActRuExecution;
+import com.heman.bysj.jooq.tables.ActRuIdentitylink;
+import com.heman.bysj.jooq.tables.ActRuJob;
+import com.heman.bysj.jooq.tables.ActRuSuspendedJob;
+import com.heman.bysj.jooq.tables.ActRuTask;
+import com.heman.bysj.jooq.tables.ActRuTimerJob;
+import com.heman.bysj.jooq.tables.ActRuVariable;
 import com.heman.bysj.jooq.tables.Changemajors;
+import com.heman.bysj.jooq.tables.Holiday;
+import com.heman.bysj.jooq.tables.HolidayCheck;
 import com.heman.bysj.jooq.tables.Leave;
 import com.heman.bysj.jooq.tables.Majorapproval;
 import com.heman.bysj.jooq.tables.Student;
@@ -27,9 +57,159 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
+     * The table <code>bysj.act_evt_log</code>.
+     */
+    public static final ActEvtLog ACT_EVT_LOG = ActEvtLog.ACT_EVT_LOG;
+
+    /**
+     * The table <code>bysj.act_ge_bytearray</code>.
+     */
+    public static final ActGeBytearray ACT_GE_BYTEARRAY = ActGeBytearray.ACT_GE_BYTEARRAY;
+
+    /**
+     * The table <code>bysj.act_ge_property</code>.
+     */
+    public static final ActGeProperty ACT_GE_PROPERTY = ActGeProperty.ACT_GE_PROPERTY;
+
+    /**
+     * The table <code>bysj.act_hi_actinst</code>.
+     */
+    public static final ActHiActinst ACT_HI_ACTINST = ActHiActinst.ACT_HI_ACTINST;
+
+    /**
+     * The table <code>bysj.act_hi_attachment</code>.
+     */
+    public static final ActHiAttachment ACT_HI_ATTACHMENT = ActHiAttachment.ACT_HI_ATTACHMENT;
+
+    /**
+     * The table <code>bysj.act_hi_comment</code>.
+     */
+    public static final ActHiComment ACT_HI_COMMENT = ActHiComment.ACT_HI_COMMENT;
+
+    /**
+     * The table <code>bysj.act_hi_detail</code>.
+     */
+    public static final ActHiDetail ACT_HI_DETAIL = ActHiDetail.ACT_HI_DETAIL;
+
+    /**
+     * The table <code>bysj.act_hi_identitylink</code>.
+     */
+    public static final ActHiIdentitylink ACT_HI_IDENTITYLINK = ActHiIdentitylink.ACT_HI_IDENTITYLINK;
+
+    /**
+     * The table <code>bysj.act_hi_procinst</code>.
+     */
+    public static final ActHiProcinst ACT_HI_PROCINST = ActHiProcinst.ACT_HI_PROCINST;
+
+    /**
+     * The table <code>bysj.act_hi_taskinst</code>.
+     */
+    public static final ActHiTaskinst ACT_HI_TASKINST = ActHiTaskinst.ACT_HI_TASKINST;
+
+    /**
+     * The table <code>bysj.act_hi_varinst</code>.
+     */
+    public static final ActHiVarinst ACT_HI_VARINST = ActHiVarinst.ACT_HI_VARINST;
+
+    /**
+     * The table <code>bysj.act_id_group</code>.
+     */
+    public static final ActIdGroup ACT_ID_GROUP = ActIdGroup.ACT_ID_GROUP;
+
+    /**
+     * The table <code>bysj.act_id_info</code>.
+     */
+    public static final ActIdInfo ACT_ID_INFO = ActIdInfo.ACT_ID_INFO;
+
+    /**
+     * The table <code>bysj.act_id_membership</code>.
+     */
+    public static final ActIdMembership ACT_ID_MEMBERSHIP = ActIdMembership.ACT_ID_MEMBERSHIP;
+
+    /**
+     * The table <code>bysj.act_id_user</code>.
+     */
+    public static final ActIdUser ACT_ID_USER = ActIdUser.ACT_ID_USER;
+
+    /**
+     * The table <code>bysj.act_procdef_info</code>.
+     */
+    public static final ActProcdefInfo ACT_PROCDEF_INFO = ActProcdefInfo.ACT_PROCDEF_INFO;
+
+    /**
+     * The table <code>bysj.act_re_deployment</code>.
+     */
+    public static final ActReDeployment ACT_RE_DEPLOYMENT = ActReDeployment.ACT_RE_DEPLOYMENT;
+
+    /**
+     * The table <code>bysj.act_re_model</code>.
+     */
+    public static final ActReModel ACT_RE_MODEL = ActReModel.ACT_RE_MODEL;
+
+    /**
+     * The table <code>bysj.act_re_procdef</code>.
+     */
+    public static final ActReProcdef ACT_RE_PROCDEF = ActReProcdef.ACT_RE_PROCDEF;
+
+    /**
+     * The table <code>bysj.act_ru_deadletter_job</code>.
+     */
+    public static final ActRuDeadletterJob ACT_RU_DEADLETTER_JOB = ActRuDeadletterJob.ACT_RU_DEADLETTER_JOB;
+
+    /**
+     * The table <code>bysj.act_ru_event_subscr</code>.
+     */
+    public static final ActRuEventSubscr ACT_RU_EVENT_SUBSCR = ActRuEventSubscr.ACT_RU_EVENT_SUBSCR;
+
+    /**
+     * The table <code>bysj.act_ru_execution</code>.
+     */
+    public static final ActRuExecution ACT_RU_EXECUTION = ActRuExecution.ACT_RU_EXECUTION;
+
+    /**
+     * The table <code>bysj.act_ru_identitylink</code>.
+     */
+    public static final ActRuIdentitylink ACT_RU_IDENTITYLINK = ActRuIdentitylink.ACT_RU_IDENTITYLINK;
+
+    /**
+     * The table <code>bysj.act_ru_job</code>.
+     */
+    public static final ActRuJob ACT_RU_JOB = ActRuJob.ACT_RU_JOB;
+
+    /**
+     * The table <code>bysj.act_ru_suspended_job</code>.
+     */
+    public static final ActRuSuspendedJob ACT_RU_SUSPENDED_JOB = ActRuSuspendedJob.ACT_RU_SUSPENDED_JOB;
+
+    /**
+     * The table <code>bysj.act_ru_task</code>.
+     */
+    public static final ActRuTask ACT_RU_TASK = ActRuTask.ACT_RU_TASK;
+
+    /**
+     * The table <code>bysj.act_ru_timer_job</code>.
+     */
+    public static final ActRuTimerJob ACT_RU_TIMER_JOB = ActRuTimerJob.ACT_RU_TIMER_JOB;
+
+    /**
+     * The table <code>bysj.act_ru_variable</code>.
+     */
+    public static final ActRuVariable ACT_RU_VARIABLE = ActRuVariable.ACT_RU_VARIABLE;
+
+    /**
      * The table <code>bysj.changemajors</code>.
      */
     public static final Changemajors CHANGEMAJORS = Changemajors.CHANGEMAJORS;
+
+    /**
+     * The table <code>bysj.holiday</code>.
+     */
+    public static final Holiday HOLIDAY = Holiday.HOLIDAY;
+
+    /**
+     * The table <code>bysj.holiday_check</code>.
+     */
+    public static final HolidayCheck HOLIDAY_CHECK = HolidayCheck.HOLIDAY_CHECK;
 
     /**
      * The table <code>bysj.leave</code>.

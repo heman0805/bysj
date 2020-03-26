@@ -1,6 +1,7 @@
 package com.heman.bysj.service.impl;
 
 import com.heman.bysj.jooq.tables.pojos.Student;
+import com.heman.bysj.jooq.tables.pojos.Teacher;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
 import com.heman.bysj.jooq.tables.records.TeacherRecord;
 import com.heman.bysj.jooqService.StudentDao;
@@ -54,5 +55,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public TeacherRecord selectTeacherById(int id) {
         return teacherDao.selectById(id);
+    }
+
+    @Override
+    public Student getStudentByUsername(String name, String password) {
+        StudentRecord studentRecord = studentDao.getStudnetByUsername(name,password);
+        if(studentRecord!=null)
+            return studentRecord.into(Student.class);
+        else
+            return null;
+        //return studentDao.getStudnetByUsername(name,password).into(Student.class);
+    }
+
+    @Override
+    public Teacher getTeacherByUsername(String name, String password) {
+        TeacherRecord teacherRecord = teacherDao.getTeacherByUsername(name,password);
+        if(teacherRecord!=null)
+            return teacherRecord.into(Teacher.class);
+        else
+            return null;
+        //return teacherDao.getTeacherByUsername(name,password).into(Teacher.class);
     }
 }

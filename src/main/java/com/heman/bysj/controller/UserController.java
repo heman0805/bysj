@@ -1,6 +1,8 @@
 package com.heman.bysj.controller;
 
 import com.heman.bysj.annotation.UserLoginToken;
+import com.heman.bysj.enums.User;
+import com.heman.bysj.enums.UserRole;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
 import com.heman.bysj.jooq.tables.records.TeacherRecord;
 import com.heman.bysj.jooqService.StudentDao;
@@ -10,14 +12,12 @@ import com.heman.bysj.service.UserService;
 import com.heman.bysj.utils.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.web.bind.annotation.*;
 import com.heman.bysj.jooq.tables.pojos.*;
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -32,26 +32,54 @@ public class UserController {
     @Autowired
     private StudentService studentService;
 
+
     /**
-     * 登录方法
-     * @param request
-     * @return ModelAndView
+     * 用户登录方法
+     * @param user
+     * @return
      */
     @RequestMapping("/login")
-    public String login(@RequestBody Student user)  {
-        System.out.println(user.getUsername()+" "+user.getPassword());
+    public Map<String,Object> login(@RequestBody User user)  {
+        Map<String,Object> map = new HashMap<>();
+        String msg = "";
+        System.out.println(user.getUsername()+" "+user.getPassword()+" "+user.getRole());
+        if(user.getRole().equals(UserRole.STUDENT)) {
+            Student student = userService.getStudentByUsername(user.getUsername(),user.getPassword());
+            if(student==null){
+                 msg= "用户名或者密码错误";
+                 map.put("msg",msg);
+                return map;
+            }
+            String token = tokenService.getToken(student);
+            System.out.println(token);
 
-        Student userForBase=studentService.getStudentByUsername(user.getUsername(), user.getPassword());
-
-        System.out.println("------------------------------"+userForBase);
-        if(userForBase==null){
-            String msg = "用户名或者密码错误";
-            return msg;
+            map.put("msg",msg);
+            map.put("token",token);
+            map.put("user",student);
+            return map;
         }
-        String token = tokenService.getToken(userForBase);
-        System.out.println(token);
-        return token;
+        else if(user.getRole().equals(UserRole.TEACHER)){
+            Teacher teacher = userService.getTeacherByUsername(user.getUsername(),user.getPassword());
+            if(teacher==null){
+                msg = "用户名或者密码错误";
+                map.put("msg",msg);
+                return map;
+            }
+            String token = tokenService.getToken(teacher);
+            System.out.println(token);
+
+            map.put("msg",msg);
+            map.put("token",token);
+            map.put("user",teacher);
+            return map;
+        }else{
+            msg = "角色不能为空";
+            map.put("msg",msg);
+            return map;
+        }
+
     }
+
 
     /*测试token  不登录没有token*/
     @UserLoginToken
@@ -59,7 +87,6 @@ public class UserController {
     public String getMessage(){
         return "你已通过验证";
     }
-
 
 
     @RequestMapping(value="/api/user/insert")

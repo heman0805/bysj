@@ -20,7 +20,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row8;
+import org.jooq.Row10;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student extends TableImpl<StudentRecord> {
 
-    private static final long serialVersionUID = -67485849;
+    private static final long serialVersionUID = 871834436;
 
     /**
      * The reference instance of <code>bysj.student</code>
@@ -96,6 +96,16 @@ public class Student extends TableImpl<StudentRecord> {
      * The column <code>bysj.student.tid</code>. 辅导教师
      */
     public final TableField<StudentRecord, Integer> TID = createField(DSL.name("tid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "辅导教师");
+
+    /**
+     * The column <code>bysj.student.role</code>. 角色：学生
+     */
+    public final TableField<StudentRecord, String> ROLE = createField(DSL.name("role"), org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "角色：学生");
+
+    /**
+     * The column <code>bysj.student.group</code>. 所属组用户：Group_Student
+     */
+    public final TableField<StudentRecord, String> GROUP = createField(DSL.name("group"), org.jooq.impl.SQLDataType.VARCHAR(30).nullable(false), this, "所属组用户：Group_Student");
 
     /**
      * Create a <code>bysj.student</code> table reference
@@ -191,11 +201,11 @@ public class Student extends TableImpl<StudentRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row8 type methods
+    // Row10 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<Integer, String, String, String, Integer, String, String, Integer> fieldsRow() {
-        return (Row8) super.fieldsRow();
+    public Row10<Integer, String, String, String, Integer, String, String, Integer, String, String> fieldsRow() {
+        return (Row10) super.fieldsRow();
     }
 }

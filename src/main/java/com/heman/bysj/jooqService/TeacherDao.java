@@ -1,5 +1,6 @@
 package com.heman.bysj.jooqService;
 
+import com.heman.bysj.jooq.tables.pojos.Teacher;
 import com.heman.bysj.jooq.tables.records.TeacherRecord;
 
 public interface TeacherDao {
@@ -13,4 +14,6 @@ public interface TeacherDao {
     int updateTeacher(TeacherRecord teacherRecord);
     //通过ID删除教师信息
     int deleteById(int id);
+
+    TeacherRecord getTeacherByUsername(String userName,String password);
 }

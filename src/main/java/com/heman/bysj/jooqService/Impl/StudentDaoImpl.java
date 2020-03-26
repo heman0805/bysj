@@ -73,6 +73,6 @@ public class StudentDaoImpl implements StudentDao {
         return dslContext.selectFrom(STUDENT)
                 .where(STUDENT.USERNAME.eq(username))
                 .and(STUDENT.PASSWORD.eq(password))
-                .fetchOne();
+                .fetchOne();//返回一个结果或null
     }
 }
