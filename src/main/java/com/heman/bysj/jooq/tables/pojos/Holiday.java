@@ -23,18 +23,18 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Holiday implements Serializable {
 
-    private static final long serialVersionUID = -538717760;
+    private static final long serialVersionUID = -1725950530;
 
     private String    formid;
     private String    processinstanceid;
     private Integer   userid;
     private String    role;
-    private Byte      days;
+    private Integer   days;
     private Timestamp begintime;
     private Timestamp endtime;
-    private Byte      vacationtype;
+    private String    vacationtype;
     private String    reason;
-    private Byte      processstatus;
+    private Integer   processstatus;
     private Timestamp createtime;
     private Timestamp updatetime;
 
@@ -60,12 +60,12 @@ public class Holiday implements Serializable {
         String    processinstanceid,
         Integer   userid,
         String    role,
-        Byte      days,
+        Integer   days,
         Timestamp begintime,
         Timestamp endtime,
-        Byte      vacationtype,
+        String    vacationtype,
         String    reason,
-        Byte      processstatus,
+        Integer   processstatus,
         Timestamp createtime,
         Timestamp updatetime
     ) {
@@ -115,11 +115,11 @@ public class Holiday implements Serializable {
         this.role = role;
     }
 
-    public Byte getDays() {
+    public Integer getDays() {
         return this.days;
     }
 
-    public void setDays(Byte days) {
+    public void setDays(Integer days) {
         this.days = days;
     }
 
@@ -139,11 +139,11 @@ public class Holiday implements Serializable {
         this.endtime = endtime;
     }
 
-    public Byte getVacationtype() {
+    public String getVacationtype() {
         return this.vacationtype;
     }
 
-    public void setVacationtype(Byte vacationtype) {
+    public void setVacationtype(String vacationtype) {
         this.vacationtype = vacationtype;
     }
 
@@ -155,11 +155,11 @@ public class Holiday implements Serializable {
         this.reason = reason;
     }
 
-    public Byte getProcessstatus() {
+    public Integer getProcessstatus() {
         return this.processstatus;
     }
 
-    public void setProcessstatus(Byte processstatus) {
+    public void setProcessstatus(Integer processstatus) {
         this.processstatus = processstatus;
     }
 

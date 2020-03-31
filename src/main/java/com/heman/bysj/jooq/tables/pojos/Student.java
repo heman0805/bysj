@@ -22,7 +22,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student implements Serializable {
 
-    private static final long serialVersionUID = -181056306;
+    private static final long serialVersionUID = -709474045;
 
     private Integer sid;
     private String  name;
@@ -30,6 +30,7 @@ public class Student implements Serializable {
     private String  password;
     private Integer grade;
     private String  profession;
+    private String  college;
     private String  class_;
     private Integer tid;
     private String  role;
@@ -44,6 +45,7 @@ public class Student implements Serializable {
         this.password = value.password;
         this.grade = value.grade;
         this.profession = value.profession;
+        this.college = value.college;
         this.class_ = value.class_;
         this.tid = value.tid;
         this.role = value.role;
@@ -57,6 +59,7 @@ public class Student implements Serializable {
         String  password,
         Integer grade,
         String  profession,
+        String  college,
         String  class_,
         Integer tid,
         String  role,
@@ -68,6 +71,7 @@ public class Student implements Serializable {
         this.password = password;
         this.grade = grade;
         this.profession = profession;
+        this.college = college;
         this.class_ = class_;
         this.tid = tid;
         this.role = role;
@@ -122,6 +126,14 @@ public class Student implements Serializable {
         this.profession = profession;
     }
 
+    public String getCollege() {
+        return this.college;
+    }
+
+    public void setCollege(String college) {
+        this.college = college;
+    }
+
     public String getClass_() {
         return this.class_;
     }
@@ -164,6 +176,7 @@ public class Student implements Serializable {
         sb.append(", ").append(password);
         sb.append(", ").append(grade);
         sb.append(", ").append(profession);
+        sb.append(", ").append(college);
         sb.append(", ").append(class_);
         sb.append(", ").append(tid);
         sb.append(", ").append(role);

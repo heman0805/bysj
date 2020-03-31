@@ -1,7 +1,7 @@
 package com.heman.bysj.controller;
 
 import com.heman.bysj.annotation.UserLoginToken;
-import com.heman.bysj.enums.User;
+import com.heman.bysj.entity.User;
 import com.heman.bysj.enums.UserRole;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
 import com.heman.bysj.jooq.tables.records.TeacherRecord;
@@ -52,7 +52,7 @@ public class UserController {
             }
             String token = tokenService.getToken(student);
             System.out.println(token);
-
+            log.info("学生登陆成功：登录用户:{}",student.getName());
             map.put("msg",msg);
             map.put("token",token);
             map.put("user",student);
@@ -67,7 +67,7 @@ public class UserController {
             }
             String token = tokenService.getToken(teacher);
             System.out.println(token);
-
+            log.info("教师登录成功:{}",teacher.getName());
             map.put("msg",msg);
             map.put("token",token);
             map.put("user",teacher);

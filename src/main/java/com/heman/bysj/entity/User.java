@@ -1,4 +1,4 @@
-package com.heman.bysj.enums;
+package com.heman.bysj.entity;
 
 
 public class User {

@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Teacher extends TableImpl<TeacherRecord> {
 
-    private static final long serialVersionUID = 845839638;
+    private static final long serialVersionUID = -807758824;
 
     /**
      * The reference instance of <code>bysj.teacher</code>
@@ -85,12 +85,12 @@ public class Teacher extends TableImpl<TeacherRecord> {
     /**
      * The column <code>bysj.teacher.college</code>. 学院名称
      */
-    public final TableField<TeacherRecord, String> COLLEGE = createField(DSL.name("college"), org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "学院名称");
+    public final TableField<TeacherRecord, String> COLLEGE = createField(DSL.name("college"), org.jooq.impl.SQLDataType.VARCHAR(10), this, "学院名称");
 
     /**
      * The column <code>bysj.teacher.profession</code>. 专业
      */
-    public final TableField<TeacherRecord, String> PROFESSION = createField(DSL.name("profession"), org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "专业");
+    public final TableField<TeacherRecord, String> PROFESSION = createField(DSL.name("profession"), org.jooq.impl.SQLDataType.VARCHAR(10), this, "专业");
 
     /**
      * The column <code>bysj.teacher.position</code>. 职位

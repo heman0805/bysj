@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class HolidayCheck extends TableImpl<HolidayCheckRecord> {
 
-    private static final long serialVersionUID = -1737302645;
+    private static final long serialVersionUID = -870627887;
 
     /**
      * The reference instance of <code>bysj.holiday_check</code>
@@ -60,7 +60,7 @@ public class HolidayCheck extends TableImpl<HolidayCheckRecord> {
     /**
      * The column <code>bysj.holiday_check.checkId</code>. 审批ID
      */
-    public final TableField<HolidayCheckRecord, String> CHECKID = createField(DSL.name("checkId"), org.jooq.impl.SQLDataType.VARCHAR(32).nullable(false), this, "审批ID");
+    public final TableField<HolidayCheckRecord, String> CHECKID = createField(DSL.name("checkId"), org.jooq.impl.SQLDataType.VARCHAR(64).nullable(false), this, "审批ID");
 
     /**
      * The column <code>bysj.holiday_check.processInstanceId</code>. activiti流程实例ID
@@ -85,7 +85,7 @@ public class HolidayCheck extends TableImpl<HolidayCheckRecord> {
     /**
      * The column <code>bysj.holiday_check.checkResult</code>. 审批结果：0 不通过，1 通过
      */
-    public final TableField<HolidayCheckRecord, Byte> CHECKRESULT = createField(DSL.name("checkResult"), org.jooq.impl.SQLDataType.TINYINT.nullable(false), this, "审批结果：0 不通过，1 通过");
+    public final TableField<HolidayCheckRecord, Integer> CHECKRESULT = createField(DSL.name("checkResult"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "审批结果：0 不通过，1 通过");
 
     /**
      * The column <code>bysj.holiday_check.opinion</code>. 审批意见
@@ -181,7 +181,7 @@ public class HolidayCheck extends TableImpl<HolidayCheckRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<String, String, String, Integer, String, Byte, String, Timestamp> fieldsRow() {
+    public Row8<String, String, String, Integer, String, Integer, String, Timestamp> fieldsRow() {
         return (Row8) super.fieldsRow();
     }
 }

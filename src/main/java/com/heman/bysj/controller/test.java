@@ -3,7 +3,7 @@ package com.heman.bysj.controller;
 import org.activiti.engine.*;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 @RestController
 public class test {
@@ -33,7 +34,7 @@ public class test {
     private HistoryService historyService;
 
 
-    /**
+    /*
      * 启动流程实例
      */
     @RequestMapping(value="/startTask")
@@ -43,7 +44,7 @@ public class test {
         map.put("num",2);
         map.put("holidayName","赫嫚");
 
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("holiday2",map);
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("holiday",map);
         System.out.println("流程部署ID"+processInstance.getDeploymentId());//null
         System.out.println("流程定义ID"+processInstance.getProcessDefinitionId());//holiday:1:4
         System.out.println("流程实例ID"+processInstance.getId());//2501
@@ -57,7 +58,7 @@ public class test {
     public  void query() {
         //3.查询当前用户的任务
         List<Task> taskList = taskService.createTaskQuery()
-                .processDefinitionKey("holiday2")
+                .processDefinitionKey("holiday")
                 .taskAssignee("赫嫚")
                 .list();
 
@@ -76,14 +77,14 @@ public class test {
     public  void queryTask() {
         //3.查询当前用户的任务
         List<Task> taskList = taskService.createTaskQuery()
-                .processDefinitionKey("holiday2")
+                .processDefinitionKey("holiday")
                 .taskCandidateGroup("Group_Instructor")
                 .list();
 
 
         //4.处理任务,结合当前用户任务列表的查询操作的话,任务ID:task.getId()
         for (Task task:taskList) {
-            /*taskService.complete(task.getId());*/
+            taskService.complete(task.getId());
             taskService.claim(task.getId(),"张三");
             //5.输出任务的id
             System.out.println("任务ID"+task.getId());
@@ -92,14 +93,14 @@ public class test {
         }
 
     }
-    /**
+    /*
      * 查询business
      */
     public void findBusinessKey(){
 //1,使用任务ID，查询对象task
 
     List<Task> taskList = taskService.createTaskQuery()
-            .processDefinitionKey("holiday2")
+            .processDefinitionKey("holiday")
             .taskCandidateGroup("Group_Instructor")
             .list();
     //2.使用任务ID，获取实例ID
@@ -119,9 +120,9 @@ public class test {
         taskService.claim(task.getId(),"张三");
     }
 
-  /*  //5.获取Business_key对应的主键ＩＤ
+    //5.获取Business_key对应的主键ＩＤ
 
-    String id = "";
+       /* String id = "";
 
         if(StringUtils.isNotBlank(business_key)) {
 
@@ -131,5 +132,22 @@ public class test {
 
         }*/
 
+    }
+    /**查询流程状态（判断流程正在执行，还是结束）*/
+    public void isProcessEnd(){
+        String processInstanceId = "1401";
+        //去正在执行的任务表查询
+        ProcessInstance pi = processEngine.getRuntimeService()//表示正在执行的流程实例和执行对象
+                .createProcessInstanceQuery()//创建流程实例查询
+                .processInstanceId(processInstanceId)//使用流程实例ID查询
+                .singleResult();
+        if(pi==null){
+            System.out.println("该流程实例走完");
+        }
+        else{
+            System.out.println("该流程实例还没走完");
+        }
+//      输出：
+//      该流程实例还没走完
     }
 }

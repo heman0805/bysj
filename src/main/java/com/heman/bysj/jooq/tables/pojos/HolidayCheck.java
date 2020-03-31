@@ -23,14 +23,14 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class HolidayCheck implements Serializable {
 
-    private static final long serialVersionUID = -917649320;
+    private static final long serialVersionUID = -1813684232;
 
     private String    checkid;
     private String    processinstanceid;
     private String    taskid;
     private Integer   userid;
     private String    role;
-    private Byte      checkresult;
+    private Integer   checkresult;
     private String    opinion;
     private Timestamp checktime;
 
@@ -53,7 +53,7 @@ public class HolidayCheck implements Serializable {
         String    taskid,
         Integer   userid,
         String    role,
-        Byte      checkresult,
+        Integer   checkresult,
         String    opinion,
         Timestamp checktime
     ) {
@@ -107,11 +107,11 @@ public class HolidayCheck implements Serializable {
         this.role = role;
     }
 
-    public Byte getCheckresult() {
+    public Integer getCheckresult() {
         return this.checkresult;
     }
 
-    public void setCheckresult(Byte checkresult) {
+    public void setCheckresult(Integer checkresult) {
         this.checkresult = checkresult;
     }
 

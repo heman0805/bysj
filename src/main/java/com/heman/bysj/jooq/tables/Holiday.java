@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Holiday extends TableImpl<HolidayRecord> {
 
-    private static final long serialVersionUID = -1783891468;
+    private static final long serialVersionUID = 823755909;
 
     /**
      * The reference instance of <code>bysj.holiday</code>
@@ -60,7 +60,7 @@ public class Holiday extends TableImpl<HolidayRecord> {
     /**
      * The column <code>bysj.holiday.formId</code>. 表单ID
      */
-    public final TableField<HolidayRecord, String> FORMID = createField(DSL.name("formId"), org.jooq.impl.SQLDataType.VARCHAR(32).nullable(false), this, "表单ID");
+    public final TableField<HolidayRecord, String> FORMID = createField(DSL.name("formId"), org.jooq.impl.SQLDataType.VARCHAR(64).nullable(false), this, "表单ID");
 
     /**
      * The column <code>bysj.holiday.processInstanceId</code>. activiti流程实例ID
@@ -80,7 +80,7 @@ public class Holiday extends TableImpl<HolidayRecord> {
     /**
      * The column <code>bysj.holiday.days</code>. 请假天数
      */
-    public final TableField<HolidayRecord, Byte> DAYS = createField(DSL.name("days"), org.jooq.impl.SQLDataType.TINYINT.nullable(false), this, "请假天数");
+    public final TableField<HolidayRecord, Integer> DAYS = createField(DSL.name("days"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "请假天数");
 
     /**
      * The column <code>bysj.holiday.beginTime</code>. 开始时间
@@ -93,9 +93,9 @@ public class Holiday extends TableImpl<HolidayRecord> {
     public final TableField<HolidayRecord, Timestamp> ENDTIME = createField(DSL.name("endTime"), org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0000-00-00 00:00:00", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "结束日期");
 
     /**
-     * The column <code>bysj.holiday.vacationType</code>. 请假类型：0 病假，1 事假
+     * The column <code>bysj.holiday.vacationType</code>. 请假类型： 病假， 事假
      */
-    public final TableField<HolidayRecord, Byte> VACATIONTYPE = createField(DSL.name("vacationType"), org.jooq.impl.SQLDataType.TINYINT.nullable(false), this, "请假类型：0 病假，1 事假");
+    public final TableField<HolidayRecord, String> VACATIONTYPE = createField(DSL.name("vacationType"), org.jooq.impl.SQLDataType.VARCHAR(3).nullable(false), this, "请假类型： 病假， 事假");
 
     /**
      * The column <code>bysj.holiday.reason</code>. 请假事由
@@ -105,7 +105,7 @@ public class Holiday extends TableImpl<HolidayRecord> {
     /**
      * The column <code>bysj.holiday.processStatus</code>. 流程状态：0 申请，1 审批中，2 已完成
      */
-    public final TableField<HolidayRecord, Byte> PROCESSSTATUS = createField(DSL.name("processStatus"), org.jooq.impl.SQLDataType.TINYINT.nullable(false), this, "流程状态：0 申请，1 审批中，2 已完成");
+    public final TableField<HolidayRecord, Integer> PROCESSSTATUS = createField(DSL.name("processStatus"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "流程状态：0 申请，1 审批中，2 已完成");
 
     /**
      * The column <code>bysj.holiday.createTime</code>. 创建时间
@@ -201,7 +201,7 @@ public class Holiday extends TableImpl<HolidayRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row12<String, String, Integer, String, Byte, Timestamp, Timestamp, Byte, String, Byte, Timestamp, Timestamp> fieldsRow() {
+    public Row12<String, String, Integer, String, Integer, Timestamp, Timestamp, String, String, Integer, Timestamp, Timestamp> fieldsRow() {
         return (Row12) super.fieldsRow();
     }
 }
