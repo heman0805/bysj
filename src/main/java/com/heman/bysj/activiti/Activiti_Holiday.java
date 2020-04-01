@@ -210,4 +210,19 @@ public class Activiti_Holiday {
         System.out.println("查询待办任务列表为："+taskList);
         return taskList;
     }
+
+    /**
+     * 通过processDefinitionKey及processInstanceID查找任务并完成任务
+     * @param processDefinitionKey
+     * @param processInstanceId
+     * @return
+     */
+    public String teacherCompleteTask(String processDefinitionKey,String processInstanceId){
+         Task task = taskService.createTaskQuery()
+                 .processDefinitionKey(processDefinitionKey)
+                 .processInstanceId(processInstanceId)
+                 .singleResult();
+        taskService.complete(task.getId());
+        return task.getId();
+    }
 }

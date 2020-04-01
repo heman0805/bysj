@@ -3,6 +3,7 @@ package com.heman.bysj.utils;
 import com.heman.bysj.entity.HolidayProgress;
 import com.heman.bysj.entity.HolidayTask;
 import com.heman.bysj.enums.UserRole;
+import com.heman.bysj.jooq.tables.pojos.HolidayCheck;
 import com.heman.bysj.jooq.tables.pojos.Holiday;
 import com.heman.bysj.jooq.tables.pojos.Student;
 import com.heman.bysj.jooq.tables.pojos.Teacher;
@@ -118,7 +119,7 @@ public class Convert {
         }
         return holidayProgress;
     }
-    public static HolidayTask HolidayToHolidayTask(Holiday holiday,String taskId,String userName,String college,String profession){
+    public static HolidayTask HolidayToHolidayTask(Holiday holiday,String taskId,String userName,String college,String profession,String class_,int grade,int userId,String role){
         HolidayTask holidayTask = new HolidayTask();
         holidayTask.setBeginTime(new Date(holiday.getBegintime().getTime()));
         holidayTask.setEndTime(new Date(holiday.getEndtime().getTime()));
@@ -131,7 +132,22 @@ public class Convert {
         holidayTask.setUserName(userName);
         holidayTask.setCollege(college);
         holidayTask.setProfession(profession);
+        holidayTask.setClass_(class_);
+        holidayTask.setGrade(grade);
+        holidayTask.setUserId(userId);
+        holidayTask.setRole(role);
         return holidayTask;
+    }
+    public static HolidayCheck formToHolidayCheck(Map<String,Object> form){
+        HolidayCheck holidayCheck = new HolidayCheck();
+        holidayCheck.setCheckid(UUID.randomUUID().toString());
+        holidayCheck.setCheckresult(form.get("checkResult").toString());
+        holidayCheck.setChecktime(new Timestamp(System.currentTimeMillis()));
+        holidayCheck.setOpinion(form.get("opinion").toString());
+        holidayCheck.setProcessinstanceid(form.get("processInstanceId").toString());
+        holidayCheck.setRole(form.get("role").toString());
+        holidayCheck.setUserid((int)form.get("userId"));
+        return holidayCheck;
     }
 
 }

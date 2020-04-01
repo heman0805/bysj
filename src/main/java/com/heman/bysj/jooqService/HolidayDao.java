@@ -11,4 +11,5 @@ public interface HolidayDao {
     HolidayRecord selectByFormId(String id);
     HolidayRecord selectByProcessInstanceId(String processInstanceId);
     int insert(Holiday holiday);
+    void complete(String processInstanceId,int processStatus);
 }

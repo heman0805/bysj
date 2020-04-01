@@ -42,4 +42,12 @@ public class HolidayDaoImpl implements HolidayDao {
                 .set(holidayRecord)
                 .execute();
     }
+
+    @Override
+    public void complete(String processInstanceId,int processStatus) {
+        dslContext.update(HOLIDAY)
+                .set(HOLIDAY.PROCESSSTATUS,processStatus)
+                .where(HOLIDAY.PROCESSINSTANCEID.eq(processInstanceId))
+                .execute();
+    }
 }

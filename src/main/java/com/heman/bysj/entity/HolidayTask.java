@@ -2,9 +2,14 @@ package com.heman.bysj.entity;
 
 import java.util.Date;
 
+/**
+ * 教师查询待审批任务实体类
+ */
 public class HolidayTask {
     private String processInstanceId;
     private String taskId;
+    private int userId;
+    private String role;
     private String userName;
     private int days;
     private Date beginTime;
@@ -14,7 +19,32 @@ public class HolidayTask {
     private String reason;
     private String college;//学院
     private String profession;//专业
+    private String class_;
     private int grade;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getClass_() {
+        return class_;
+    }
+
+    public void setClass_(String class_) {
+        this.class_ = class_;
+    }
 
     public String getCollege() {
         return college;

@@ -3,7 +3,9 @@ package com.heman.bysj.controller;
 import com.heman.bysj.activiti.Activiti_Holiday;
 import com.heman.bysj.entity.HolidayProgress;
 import com.heman.bysj.entity.HolidayTask;
+import com.heman.bysj.enums.UserRole;
 import com.heman.bysj.jooq.tables.pojos.Holiday;
+import com.heman.bysj.jooq.tables.pojos.HolidayCheck;
 import com.heman.bysj.jooq.tables.pojos.Student;
 import com.heman.bysj.jooq.tables.pojos.Teacher;
 import com.heman.bysj.jooq.tables.records.LeaveRecord;
@@ -109,11 +111,7 @@ public class HolidayController {
     @RequestMapping(value="/user/holiday/teacherSearch/{tid}")
     @ResponseBody
     public Map<String,Object> teacherSearchList(@PathVariable("tid") int tid){
-        /*Teacher teacher = new Teacher();
-        teacher.setTid(Integer.parseInt(tid));
-        teacher.setCollege(college);
-        teacher.setProfession(profession);
-        teacher.setGroup(group);*/
+
         Teacher teacher = userService.selectTeacherById(tid).into(Teacher.class);
         System.out.println("登录教师ID："+tid+"，登录教师所在学院："+teacher.getCollege()+"，登录教师所在专业："+teacher.getProfession()+"，登录教师所在分组："+teacher.getGroup());
         Map<String,Object> map = new HashMap<>();
@@ -121,6 +119,62 @@ public class HolidayController {
         map.put("holidayTasks",holidayTasks);
         return map;
     }
+
+    /**
+     * 通过processInstanceID查找Holiday信息
+     * @return
+     */
+    @RequestMapping(value="/user/holiday/holidayTask/{processInstanceId}")
+    @ResponseBody
+    public HolidayTask selectHolidayByProcessId(@PathVariable("processInstanceId") String processInstanceId){
+        Holiday holiday = holidayService.selectHolidayByProcessInstanceId(processInstanceId);
+        HolidayTask holidayTask = new HolidayTask();
+        if(holiday.getRole().equals(UserRole.STUDENT)){
+            Student student = userService.selectStudentById(holiday.getUserid());
+            holidayTask = Convert.HolidayToHolidayTask(holiday,null,student.getUsername(),student.getCollege(),student.getProfession(),student.getClass_(),student.getGrade(),student.getSid(),student.getRole());
+        }else{
+            Teacher teacher = userService.selectTeacherById(holiday.getUserid()).into(Teacher.class);
+            holidayTask = Convert.HolidayToHolidayTask(holiday,null,teacher.getUsername(),teacher.getCollege(),teacher.getProfession(),null,teacher.getGrade(),teacher.getTid(),teacher.getRole());
+        }
+
+        return holidayTask;
+    }
+
+    /**
+     * 教师审批
+     * 1、获得审批表单
+     * 2、进行封装
+     * 3、通过processInstanceID获得对应任务进行审批
+     * 4、获得任务ID，封装至holidayCheck
+     * 5、插入holidayCheck表
+     */
+    @RequestMapping(value="/user/holiday/holidayCheck",method = RequestMethod.POST)
+    @ResponseBody
+    public String holiday_check(@RequestBody Map<String,Map> params){
+        System.out.println("收到的请假单审批结果："+params.get("data").toString());
+        HolidayCheck holidayCheck = Convert.formToHolidayCheck(params.get("data"));
+        System.out.println("转换后的请假单审批结果"+holidayCheck);
+        holidayService.holiday_Check(holidayCheck);
+        String msg = "审批完成";
+        return msg;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /**
@@ -138,6 +192,7 @@ public class HolidayController {
        return  json.put("list",list);
 
     }
+
     /**
      * 通过lid查找具体请假信息
      */

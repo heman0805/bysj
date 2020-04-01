@@ -2,6 +2,9 @@ package com.heman.bysj.entity;
 
 import java.util.Date;
 
+/**
+ * 请假进度实体类
+ */
 public class HolidayProgress {
     private Date beginTime;
     private Date endTime;

@@ -6,16 +6,11 @@ import com.heman.bysj.enums.Role;
 import com.heman.bysj.enums.TeacherPosition;
 import com.heman.bysj.enums.UserRole;
 import com.heman.bysj.jooq.tables.pojos.Holiday;
+import com.heman.bysj.jooq.tables.pojos.HolidayCheck;
 import com.heman.bysj.jooq.tables.pojos.Student;
 import com.heman.bysj.jooq.tables.pojos.Teacher;
-import com.heman.bysj.jooq.tables.records.HolidayRecord;
-import com.heman.bysj.jooq.tables.records.LeaveRecord;
-import com.heman.bysj.jooq.tables.records.StudentRecord;
-import com.heman.bysj.jooq.tables.records.TeacherRecord;
-import com.heman.bysj.jooqService.HolidayDao;
-import com.heman.bysj.jooqService.LeaveDao;
-import com.heman.bysj.jooqService.StudentDao;
-import com.heman.bysj.jooqService.TeacherDao;
+import com.heman.bysj.jooq.tables.records.*;
+import com.heman.bysj.jooqService.*;
 import com.heman.bysj.service.HolidayService;
 import com.heman.bysj.service.LeaveService;
 import com.heman.bysj.utils.Convert;
@@ -43,6 +38,9 @@ public class HolidayServiceImpl implements HolidayService {
     private StudentDao studentDao;
     @Autowired
     private TeacherDao teacherDao;
+    @Autowired
+    private HolidayCheckDao holidayCheckDao;
+
     @Override
     public boolean startHoliday(Holiday holiday) {
         //1、启动请假流程实例
@@ -114,13 +112,33 @@ public class HolidayServiceImpl implements HolidayService {
             HolidayTask holidayTask = new HolidayTask();
            if(holiday.getRole().equals(UserRole.STUDENT)){//请假人为学生
                Student student = studentDao.selectById(holiday.getUserid()).into(Student.class);
-               holidayTask = Convert.HolidayToHolidayTask(holiday,task.getId(),student.getName(),student.getCollege(),student.getProfession());
+               holidayTask = Convert.HolidayToHolidayTask(holiday,task.getId(),student.getName(),student.getCollege(),student.getProfession(),student.getClass_(),student.getGrade(),student.getSid(),student.getRole());
            }else{
                Teacher teacher1 = teacherDao.selectById(holiday.getUserid()).into(Teacher.class);
-               holidayTask = Convert.HolidayToHolidayTask(holiday,task.getId(),teacher1.getName(),teacher1.getCollege(),teacher1.getProfession());
+               holidayTask = Convert.HolidayToHolidayTask(holiday,task.getId(),teacher1.getName(),teacher1.getCollege(),teacher1.getProfession(),null,teacher1.getGrade(),teacher1.getTid(),teacher1.getRole());
            }
             holidayTasks.add(holidayTask);
         }
         return holidayTasks;
+    }
+
+    /**
+     * 教师审批
+     * 3、通过processInstanceID获得对应任务进行审批
+     * 4、获得任务ID，封装至holidayCheck
+     * 5、插入holidayCheck表
+     */
+    @Override
+    public void holiday_Check(HolidayCheck holidayCheck) {
+        //完成任务并获得任务ID
+        String taskId = activiti_holiday.teacherCompleteTask("holidayProcess",holidayCheck.getProcessinstanceid());
+        //封装任务ID
+        holidayCheck.setTaskid(taskId);
+        //插入holidayTask表
+        HolidayCheckRecord holidayCheckRecord = new HolidayCheckRecord();
+        holidayCheckRecord.from(holidayCheck);
+        holidayCheckDao.insert(holidayCheckRecord);
+        //修改Holiday表,设置审批状态为已完成
+        holidayDao.complete(holidayCheck.getProcessinstanceid(),2);
     }
 }
