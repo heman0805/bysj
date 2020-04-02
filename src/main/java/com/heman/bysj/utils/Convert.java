@@ -143,7 +143,9 @@ public class Convert {
         holidayCheck.setCheckid(UUID.randomUUID().toString());
         holidayCheck.setCheckresult(form.get("checkResult").toString());
         holidayCheck.setChecktime(new Timestamp(System.currentTimeMillis()));
-        holidayCheck.setOpinion(form.get("opinion").toString());
+        if(form.get("opinion")==null)
+            holidayCheck.setOpinion(null);
+        else holidayCheck.setOpinion(form.get("opinion").toString());
         holidayCheck.setProcessinstanceid(form.get("processInstanceId").toString());
         holidayCheck.setRole(form.get("role").toString());
         holidayCheck.setUserid((int)form.get("userId"));
