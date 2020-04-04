@@ -8,6 +8,7 @@ import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import static com.heman.bysj.jooq.tables.Holiday.HOLIDAY;
@@ -47,7 +48,18 @@ public class HolidayDaoImpl implements HolidayDao {
     public void complete(String processInstanceId,int processStatus) {
         dslContext.update(HOLIDAY)
                 .set(HOLIDAY.PROCESSSTATUS,processStatus)
+                .set(HOLIDAY.UPDATETIME,new Timestamp(System.currentTimeMillis()))
                 .where(HOLIDAY.PROCESSINSTANCEID.eq(processInstanceId))
                 .execute();
+    }
+
+    @Override
+    public List<HolidayRecord> selectByUserIdAndRoleAndProcessStatus(int userId, String role) {
+         List<HolidayRecord> list = dslContext.selectFrom(HOLIDAY)
+                .where(HOLIDAY.USERID.eq(userId))
+                .and(HOLIDAY.ROLE.eq(role))
+                 .and(HOLIDAY.PROCESSSTATUS.eq(2))//请假状态为已完成
+                .fetch();
+         return list;
     }
 }

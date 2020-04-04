@@ -21,4 +21,11 @@ public class HolidayCheckDaoImpl implements HolidayCheckDao {
                 .set(holidayCheck)
                 .execute();
     }
+
+    @Override
+    public HolidayCheckRecord selectByProcessInstanceId(String processInstanceId) {
+        return dslContext.selectFrom(HOLIDAY_CHECK)
+                .where(HOLIDAY_CHECK.PROCESSINSTANCEID.eq(processInstanceId))
+                .fetchOne();
+    }
 }

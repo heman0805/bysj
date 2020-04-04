@@ -5,4 +5,5 @@ import com.heman.bysj.jooq.tables.records.HolidayCheckRecord;
 
 public interface HolidayCheckDao {
     void insert(HolidayCheckRecord holidayCheck);
+    HolidayCheckRecord selectByProcessInstanceId(String processInstanceId);
 }

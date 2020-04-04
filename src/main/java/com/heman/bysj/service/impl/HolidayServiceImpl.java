@@ -1,6 +1,7 @@
 package com.heman.bysj.service.impl;
 
 import com.heman.bysj.activiti.Activiti_Holiday;
+import com.heman.bysj.entity.HolidayHistory;
 import com.heman.bysj.entity.HolidayTask;
 import com.heman.bysj.enums.Role;
 import com.heman.bysj.enums.TeacherPosition;
@@ -140,5 +141,37 @@ public class HolidayServiceImpl implements HolidayService {
         holidayCheckDao.insert(holidayCheckRecord);
         //修改Holiday表,设置审批状态为已完成
         holidayDao.complete(holidayCheck.getProcessinstanceid(),2);
+    }
+
+    /**
+     * 查询个人请假历史记录
+     * 1、封装用户名及角色
+     * 2、根据用户名及角色查询holiday表获得相关请假数据及processInstanceID
+     * 3、根据processInstanceID查询check表 获得请假结果
+     * 4、返回结果
+     * @param userId , role
+     * @return
+     */
+    @Override
+    public List<HolidayHistory> holidayHistory(int userId, String role) {
+        List<HolidayRecord> holidayRecords = holidayDao.selectByUserIdAndRoleAndProcessStatus(userId,role);
+        if(holidayRecords.size()==0){
+            log.info("该用户无请假记录，用户ID：{}，角色：{}",userId,role);
+            return null;
+        }
+        List<HolidayHistory> list = new ArrayList<>();
+        for (HolidayRecord holiday:holidayRecords) {
+            HolidayCheck holidayCheck = holidayCheckDao.selectByProcessInstanceId(holiday.getProcessinstanceid()).into(HolidayCheck.class);
+            HolidayHistory holidayHistory = new HolidayHistory();
+            holidayHistory.setBeginTime(holiday.getBegintime());
+            holidayHistory.setEndTime(holiday.getEndtime());
+            holidayHistory.setDays(holiday.getDays());
+            holidayHistory.setVacationType(holiday.getVacationtype());
+            holidayHistory.setReason(holiday.getReason());
+            holidayHistory.setCheckResult(holidayCheck.getCheckresult());
+            holidayHistory.setOpinion(holidayCheck.getOpinion());
+            list.add(holidayHistory);
+        }
+        return list;
     }
 }

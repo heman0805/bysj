@@ -1,6 +1,7 @@
 package com.heman.bysj.controller;
 
 import com.heman.bysj.activiti.Activiti_Holiday;
+import com.heman.bysj.entity.HolidayHistory;
 import com.heman.bysj.entity.HolidayProgress;
 import com.heman.bysj.entity.HolidayTask;
 import com.heman.bysj.enums.UserRole;
@@ -157,6 +158,21 @@ public class HolidayController {
         holidayService.holiday_Check(holidayCheck);
         String msg = "审批完成";
         return msg;
+    }
+
+    /**
+     * 查询个人请假历史记录
+     * 1、封装用户名及角色
+     * 2、根据用户名及角色查询holiday表获得相关请假数据及processInstanceID
+     * 3、根据processInstanceID查询check表 获得请假结果
+     * 4、返回结果
+     * @return
+     */
+    @RequestMapping(value="/user/holiday/holidayHistory/{userId}/{role}")
+    @ResponseBody
+    public List<HolidayHistory> holidayHistory(@PathVariable("userId") int userId,@PathVariable("role") String role ){
+        List<HolidayHistory> holidayHistorys = holidayService.holidayHistory(userId,role);
+        return holidayHistorys;
     }
 
 
