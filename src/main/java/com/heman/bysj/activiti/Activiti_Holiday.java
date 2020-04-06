@@ -174,9 +174,9 @@ public class Activiti_Holiday {
             }
             else if(holidayRecord.getRole().equals(UserRole.STUDENT)){
                 StudentRecord student = studentDao.selectById(holidayRecord.getUserid());
-                //小于3天，辅导员审批，申请人为学生，判断与当前用户所在专业是否一致
+                //小于3天，辅导员审批，申请人为学生，判断与当前用户所在专业是否一致,学生所对应的额辅导员为该审批人
                 if(holidayRecord.getDays()<=3){
-                    if(student.getProfession().equals(teacher.getProfession())&&teacher.getGroup().equals(UserGroup.GROUP_INSTRUCTOR)){
+                    if(student.getTid().equals(teacher.getTid())&&student.getProfession().equals(teacher.getProfession())&&teacher.getGroup().equals(UserGroup.GROUP_INSTRUCTOR)){
                         taskService.claim(task.getId(),teacher.getUsername());
                         log.info("任务拾取成功，任务ID：{},userId:{}",task.getId(),teacher.getTid());
                     }

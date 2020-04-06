@@ -13,4 +13,5 @@ public interface HolidayDao {
     int insert(Holiday holiday);
     void complete(String processInstanceId,int processStatus);
     List<HolidayRecord> selectByUserIdAndRoleAndProcessStatus(int userId,String role);
+    List<HolidayRecord> selectByUidAndRole(int id,String role);
 }

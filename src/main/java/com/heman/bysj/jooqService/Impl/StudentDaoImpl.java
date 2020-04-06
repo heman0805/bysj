@@ -4,6 +4,9 @@ import com.heman.bysj.jooq.tables.pojos.Student;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
 import com.heman.bysj.jooqService.StudentDao;
 import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Record1;
+import org.jooq.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,5 +77,28 @@ public class StudentDaoImpl implements StudentDao {
                 .where(STUDENT.USERNAME.eq(username))
                 .and(STUDENT.PASSWORD.eq(password))
                 .fetchOne();//返回一个结果或null
+    }
+
+    @Override
+    public Result<Record1<Integer>> selectIdsByClass(String class_) {
+        Result<Record1<Integer>> s =  dslContext.select(STUDENT.SID)
+                .from(STUDENT)
+                .where(STUDENT.CLASS_.eq(class_))
+                .fetch();
+        return s;
+    }
+
+    @Override
+    public List<StudentRecord> selectByClass(String class_) {
+        return dslContext.selectFrom(STUDENT)
+                .where(STUDENT.CLASS_.eq(class_))
+                .fetch();
+    }
+
+    @Override
+    public List<StudentRecord> selectByProfession(String profession) {
+        return dslContext.selectFrom(STUDENT)
+                .where(STUDENT.PROFESSION.eq(profession))
+                .fetch();
     }
 }

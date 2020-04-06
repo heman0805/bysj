@@ -62,4 +62,12 @@ public class HolidayDaoImpl implements HolidayDao {
                 .fetch();
          return list;
     }
+
+    @Override
+    public List<HolidayRecord> selectByUidAndRole(int id,String role) {
+        return dslContext.selectFrom(HOLIDAY)
+                .where(HOLIDAY.USERID.eq(id))
+                .and(HOLIDAY.ROLE.eq(role))
+                .fetch();
+    }
 }

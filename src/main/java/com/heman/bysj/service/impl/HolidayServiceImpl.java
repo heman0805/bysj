@@ -1,6 +1,7 @@
 package com.heman.bysj.service.impl;
 
 import com.heman.bysj.activiti.Activiti_Holiday;
+import com.heman.bysj.entity.HolidayByClass;
 import com.heman.bysj.entity.HolidayHistory;
 import com.heman.bysj.entity.HolidayTask;
 import com.heman.bysj.enums.Role;
@@ -19,13 +20,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.task.Task;
+import org.jooq.Record1;
+import org.jooq.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -41,6 +41,8 @@ public class HolidayServiceImpl implements HolidayService {
     private TeacherDao teacherDao;
     @Autowired
     private HolidayCheckDao holidayCheckDao;
+    @Autowired
+    private ClassesDao classesDao;
 
     @Override
     public boolean startHoliday(Holiday holiday) {
@@ -173,5 +175,115 @@ public class HolidayServiceImpl implements HolidayService {
             list.add(holidayHistory);
         }
         return list;
+    }
+
+    /**
+     * 查询班级列表
+     * @param profession
+     * @return
+     */
+    @Override
+    public List<String> selectClassByProfession(String profession) {
+        List<ClassesRecord> classesRecords = classesDao.selectClassByProfession(profession);
+        if(classesRecords.size()==0){
+            log.info("无该专业：{}",profession);
+            return null;
+        }
+        List<String> classes = new ArrayList<>();
+        for (ClassesRecord class_:classesRecords) {
+            classes.add(class_.getClass_());
+        }
+        return classes;
+    }
+
+    /**
+     * 查询专业列表
+     * @param college
+     * @return
+     */
+    @Override
+    public List<String> selectProfessionByCollege(String college) {
+        Result<Record1<String>> classesRecords = classesDao.selectProfessionByCollege(college);
+        if(classesRecords.size()==0){
+            log.info("无该学院：{}",college);
+            return null;
+        }
+        List<String> classes = new ArrayList<>();
+        for (Record1<String> class_:classesRecords) {
+            classes.add(class_.get("profession").toString());
+        }
+        return classes;
+    }
+
+    /**
+     * 通过班级查询请假列表
+     * 1、通过班级查询sid
+     * 2、根据学生ID查找holiday_check表
+     * 3、进行数据封装
+     * @param
+     * @return
+     */
+    @Override
+    public List<HolidayByClass> selectHolidayByClass(String param,String clpro) {
+        List<HolidayByClass> holidayByClasses = new ArrayList<>();
+        List<StudentRecord> studentRecords = new ArrayList<>();
+        if(param.equals("class"))
+            studentRecords = studentDao.selectByClass(clpro);
+        else if(param.equals("profession"))
+            studentRecords = studentDao.selectByProfession(clpro);
+        for (StudentRecord studentRecord:studentRecords) {
+                //System.out.println("根据班级查询学生ID列表"+o);
+                //根据学生ID查找holiday_check表拿到审批通过的processInstanceId
+                //通过processInstanceId拿到请假信息
+
+                //每个学生的请假记录
+                List<HolidayRecord> holidays = holidayDao.selectByUidAndRole(studentRecord.getSid(),UserRole.STUDENT);
+                if(holidays.size()==0||holidays==null){
+                    continue;
+                }
+                for (HolidayRecord holidayRecord:holidays) {//处理每条请假记录
+                    HolidayByClass holiday = new HolidayByClass();
+                    holiday.setBeginTime(holidayRecord.getBegintime());
+                    holiday.setEndTime(holidayRecord.getEndtime());
+                    holiday.setClass_(studentRecord.getClass_());
+                    holiday.setDays(holidayRecord.getDays());
+                    holiday.setName(studentRecord.getName());
+                    holiday.setReason(holidayRecord.getReason());
+                    holiday.setVacationType(holidayRecord.getVacationtype());
+                    holidayByClasses.add(holiday);
+                }
+        }
+
+        return holidayByClasses;
+    }
+
+    @Override
+    public List<HolidayByClass> searchTeacherHoliday(String param,String colpro) {
+        List<HolidayByClass> holidayByClasses = new ArrayList<>();
+        List<TeacherRecord> teacherRecords = new ArrayList<>();
+        if(param.equals("college"))
+            teacherRecords = teacherDao.selectByCollege(colpro);
+        else if(param.equals("profession"))
+            teacherRecords = teacherDao.selectByProfession(colpro);
+        for (TeacherRecord teacherRecord:teacherRecords) {
+            //每个教师的请假记录
+            List<HolidayRecord> holidays = holidayDao.selectByUidAndRole(teacherRecord.getTid(),UserRole.TEACHER);
+            if(holidays.size()==0||holidays==null){
+                continue;
+            }
+            for (HolidayRecord holidayRecord:holidays) {//处理每条请假记录
+                HolidayByClass holiday = new HolidayByClass();
+                holiday.setProfession(teacherRecord.getProfession());
+                holiday.setBeginTime(holidayRecord.getBegintime());
+                holiday.setEndTime(holidayRecord.getEndtime());
+                holiday.setDays(holidayRecord.getDays());
+                holiday.setName(teacherRecord.getName());
+                holiday.setReason(holidayRecord.getReason());
+                holiday.setVacationType(holidayRecord.getVacationtype());
+                holidayByClasses.add(holiday);
+            }
+        }
+
+        return holidayByClasses;
     }
 }

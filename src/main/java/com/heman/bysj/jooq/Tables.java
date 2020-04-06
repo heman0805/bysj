@@ -33,6 +33,7 @@ import com.heman.bysj.jooq.tables.ActRuTask;
 import com.heman.bysj.jooq.tables.ActRuTimerJob;
 import com.heman.bysj.jooq.tables.ActRuVariable;
 import com.heman.bysj.jooq.tables.Changemajors;
+import com.heman.bysj.jooq.tables.Classes;
 import com.heman.bysj.jooq.tables.Holiday;
 import com.heman.bysj.jooq.tables.HolidayCheck;
 import com.heman.bysj.jooq.tables.Leave;
@@ -200,6 +201,11 @@ public class Tables {
      * The table <code>bysj.changemajors</code>.
      */
     public static final Changemajors CHANGEMAJORS = Changemajors.CHANGEMAJORS;
+
+    /**
+     * The table <code>bysj.classes</code>.
+     */
+    public static final Classes CLASSES = Classes.CLASSES;
 
     /**
      * The table <code>bysj.holiday</code>.

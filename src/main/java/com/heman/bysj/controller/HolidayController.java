@@ -1,6 +1,7 @@
 package com.heman.bysj.controller;
 
 import com.heman.bysj.activiti.Activiti_Holiday;
+import com.heman.bysj.entity.HolidayByClass;
 import com.heman.bysj.entity.HolidayHistory;
 import com.heman.bysj.entity.HolidayProgress;
 import com.heman.bysj.entity.HolidayTask;
@@ -68,10 +69,6 @@ public class HolidayController {
         }
         map.put("msg",msg);
         return map;
-       /* //启动请假流程实例
-        activiti_holiday.startInstance(holiday);
-        //完成请假单填写
-        activiti_holiday.completeWrite(holiday);*/
     }
     /**
      * 个人查询正在执行的请假进度
@@ -175,10 +172,61 @@ public class HolidayController {
         return holidayHistorys;
     }
 
+    /**
+     * 通过专业获得班级名列表
+     * @param profession
+     * @return
+     */
+    @RequestMapping(value="/user/holiday/classes/{profession}")
+    @ResponseBody
+    public List<String> selectClassByProfession(@PathVariable("profession") String profession ){
+        List<String> classes = holidayService.selectClassByProfession(profession);
+        if(classes==null){
+        }
+        return classes;
+    }
 
+    /**
+     * 通过学院获得专业名列表
+     * @param college
+     * @return
+     */
+    @RequestMapping(value="/user/holiday/profession/{college}")
+    @ResponseBody
+    public List<String> selectProfessionByCollege(@PathVariable("college") String college ){
+        List<String> classes = holidayService.selectProfessionByCollege(college);
+        if(classes==null){
+        }
+        return classes;
+    }
 
+    /**
+     * 通过班级查询请假列表
+     * 1、通过班级查询sid
+     * 2、根据学生ID查找holiday_check表
+     * 3、进行数据封装
+     * @param class_
+     * @return
+     */
+    @RequestMapping(value="/user/holiday/searchHoliday/{param}/{class}")
+    @ResponseBody
+    public List<HolidayByClass> selectHolidayByClass(@PathVariable("param") String param,@PathVariable("class") String class_ ){
+        List<HolidayByClass> result = holidayService.selectHolidayByClass(param,class_);
+        return result;
+    }
 
-
+    /**
+     * 查找教师请假信息
+     * @param
+     * @return
+     */
+    @RequestMapping(value="/user/holiday/searchTeacherHoliday/{param}/{profession}")
+    @ResponseBody
+    public List<HolidayByClass> searchTeacherHoliday(@PathVariable("param") String param,@PathVariable("profession") String colpro ){
+//        List<HolidayByClass> result = holidayService.selectHolidayByClass(class_);
+        List<HolidayByClass> result = holidayService.searchTeacherHoliday(param,colpro);
+        return result;
+    }
 
 
 
@@ -234,7 +282,6 @@ public class HolidayController {
         String remark = "同意请假申请";
         int re = leaveService.updateLeaveByLid(lid,result,remark);
         System.out.print(re);
-
 
     }
 }

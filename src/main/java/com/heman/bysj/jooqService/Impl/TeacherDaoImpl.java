@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static com.heman.bysj.jooq.tables.Teacher.TEACHER;
 
 @Service
@@ -67,5 +69,19 @@ public class TeacherDaoImpl implements TeacherDao {
                 .where(TEACHER.USERNAME.eq(userName))
                 .and(TEACHER.PASSWORD.eq(password))
                 .fetchOne();
+    }
+
+    @Override
+    public List<TeacherRecord> selectByCollege(String college) {
+        return dslContext.selectFrom(TEACHER)
+                .where(TEACHER.COLLEGE.eq(college))
+                .fetch();
+    }
+
+    @Override
+    public List<TeacherRecord> selectByProfession(String profession) {
+        return dslContext.selectFrom(TEACHER)
+                .where(TEACHER.PROFESSION.eq(profession))
+                .fetch();
     }
 }

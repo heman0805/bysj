@@ -5,6 +5,15 @@ public class User {
     private String username;
     private String password;
     private String role;
+    private String group;
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
 
     public String getUsername() {
         return username;

@@ -79,6 +79,31 @@ public class UserController {
         }
 
     }
+    /**
+     * 审批人员登录方法
+     * @param user
+     * @return
+     */
+    @RequestMapping("/adminLogin")
+    public Map<String,Object> adminLogin(@RequestBody User user)  {
+        Map<String,Object> map = new HashMap<>();
+        String msg = "";
+        System.out.println(user.getUsername()+" "+user.getPassword()+" "+user.getRole());
+        Teacher teacher = userService.getTeacherByUsername(user.getUsername(),user.getPassword());
+            if(teacher==null){
+                msg = "用户名或者密码错误";
+                map.put("msg",msg);
+                return map;
+            }
+            String token = tokenService.getToken(teacher);
+            System.out.println(token);
+            log.info("审批人员登录成功:{}",teacher.getName());
+            map.put("msg",msg);
+            map.put("token",token);
+            map.put("user",teacher);
+            return map;
+
+    }
 
 
     /*测试token  不登录没有token*/

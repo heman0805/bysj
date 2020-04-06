@@ -33,6 +33,7 @@ import com.heman.bysj.jooq.tables.ActRuTask;
 import com.heman.bysj.jooq.tables.ActRuTimerJob;
 import com.heman.bysj.jooq.tables.ActRuVariable;
 import com.heman.bysj.jooq.tables.Changemajors;
+import com.heman.bysj.jooq.tables.Classes;
 import com.heman.bysj.jooq.tables.Holiday;
 import com.heman.bysj.jooq.tables.HolidayCheck;
 import com.heman.bysj.jooq.tables.Leave;
@@ -159,6 +160,7 @@ public class Indexes {
     public static final Index ACT_RU_VARIABLE_PRIMARY = Indexes0.ACT_RU_VARIABLE_PRIMARY;
     public static final Index CHANGEMAJORS_PRIMARY = Indexes0.CHANGEMAJORS_PRIMARY;
     public static final Index CHANGEMAJORS_SID = Indexes0.CHANGEMAJORS_SID;
+    public static final Index CLASSES_PRIMARY = Indexes0.CLASSES_PRIMARY;
     public static final Index HOLIDAY_PRIMARY = Indexes0.HOLIDAY_PRIMARY;
     public static final Index HOLIDAY_CHECK_PRIMARY = Indexes0.HOLIDAY_CHECK_PRIMARY;
     public static final Index LEAVE_NID_KEY = Indexes0.LEAVE_NID_KEY;
@@ -272,6 +274,7 @@ public class Indexes {
         public static Index ACT_RU_VARIABLE_PRIMARY = Internal.createIndex("PRIMARY", ActRuVariable.ACT_RU_VARIABLE, new OrderField[] { ActRuVariable.ACT_RU_VARIABLE.ID_ }, true);
         public static Index CHANGEMAJORS_PRIMARY = Internal.createIndex("PRIMARY", Changemajors.CHANGEMAJORS, new OrderField[] { Changemajors.CHANGEMAJORS.CID }, true);
         public static Index CHANGEMAJORS_SID = Internal.createIndex("sid", Changemajors.CHANGEMAJORS, new OrderField[] { Changemajors.CHANGEMAJORS.SID }, true);
+        public static Index CLASSES_PRIMARY = Internal.createIndex("PRIMARY", Classes.CLASSES, new OrderField[] { Classes.CLASSES.ID }, true);
         public static Index HOLIDAY_PRIMARY = Internal.createIndex("PRIMARY", Holiday.HOLIDAY, new OrderField[] { Holiday.HOLIDAY.FORMID }, true);
         public static Index HOLIDAY_CHECK_PRIMARY = Internal.createIndex("PRIMARY", HolidayCheck.HOLIDAY_CHECK, new OrderField[] { HolidayCheck.HOLIDAY_CHECK.CHECKID }, true);
         public static Index LEAVE_NID_KEY = Internal.createIndex("nid_key", Leave.LEAVE, new OrderField[] { Leave.LEAVE.NID }, false);

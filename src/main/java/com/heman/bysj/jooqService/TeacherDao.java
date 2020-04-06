@@ -3,6 +3,8 @@ package com.heman.bysj.jooqService;
 import com.heman.bysj.jooq.tables.pojos.Teacher;
 import com.heman.bysj.jooq.tables.records.TeacherRecord;
 
+import java.util.List;
+
 public interface TeacherDao {
     //通过专业及职位进行查询
     TeacherRecord selectByProfessionAndPosition(String profession,  String position);
@@ -16,4 +18,8 @@ public interface TeacherDao {
     int deleteById(int id);
 
     TeacherRecord getTeacherByUsername(String userName,String password);
+
+    List<TeacherRecord> selectByCollege(String college);
+
+    List<TeacherRecord> selectByProfession(String profession);
 }

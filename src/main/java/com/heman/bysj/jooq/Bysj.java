@@ -33,6 +33,7 @@ import com.heman.bysj.jooq.tables.ActRuTask;
 import com.heman.bysj.jooq.tables.ActRuTimerJob;
 import com.heman.bysj.jooq.tables.ActRuVariable;
 import com.heman.bysj.jooq.tables.Changemajors;
+import com.heman.bysj.jooq.tables.Classes;
 import com.heman.bysj.jooq.tables.Holiday;
 import com.heman.bysj.jooq.tables.HolidayCheck;
 import com.heman.bysj.jooq.tables.Leave;
@@ -64,7 +65,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Bysj extends SchemaImpl {
 
-    private static final long serialVersionUID = 1980279572;
+    private static final long serialVersionUID = 1691108455;
 
     /**
      * The reference instance of <code>bysj</code>
@@ -217,6 +218,11 @@ public class Bysj extends SchemaImpl {
     public final Changemajors CHANGEMAJORS = com.heman.bysj.jooq.tables.Changemajors.CHANGEMAJORS;
 
     /**
+     * The table <code>bysj.classes</code>.
+     */
+    public final Classes CLASSES = com.heman.bysj.jooq.tables.Classes.CLASSES;
+
+    /**
      * The table <code>bysj.holiday</code>.
      */
     public final Holiday HOLIDAY = com.heman.bysj.jooq.tables.Holiday.HOLIDAY;
@@ -297,6 +303,7 @@ public class Bysj extends SchemaImpl {
             ActRuTimerJob.ACT_RU_TIMER_JOB,
             ActRuVariable.ACT_RU_VARIABLE,
             Changemajors.CHANGEMAJORS,
+            Classes.CLASSES,
             Holiday.HOLIDAY,
             HolidayCheck.HOLIDAY_CHECK,
             Leave.LEAVE,

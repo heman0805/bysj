@@ -1,5 +1,6 @@
 package com.heman.bysj.service;
 
+import com.heman.bysj.entity.HolidayByClass;
 import com.heman.bysj.entity.HolidayHistory;
 import com.heman.bysj.entity.HolidayTask;
 import com.heman.bysj.jooq.tables.pojos.Holiday;
@@ -18,4 +19,8 @@ public interface HolidayService {
     List<HolidayTask> teacherSeacherTaskList(Teacher teacher);
     void holiday_Check(HolidayCheck holidayCheck);
     List<HolidayHistory> holidayHistory(int userId,String role);
+    List<String> selectClassByProfession(String profession);
+    List<String> selectProfessionByCollege(String college);
+    List<HolidayByClass> selectHolidayByClass(String param,String class_);
+    List<HolidayByClass> searchTeacherHoliday(String param,String colpro);
 }
