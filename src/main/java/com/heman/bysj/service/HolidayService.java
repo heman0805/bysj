@@ -21,6 +21,6 @@ public interface HolidayService {
     List<HolidayHistory> holidayHistory(int userId,String role);
     List<String> selectClassByProfession(String profession);
     List<String> selectProfessionByCollege(String college);
-    List<HolidayByClass> selectHolidayByClass(String param,String class_);
+    List<HolidayByClass> selectHolidayByClass(int tid,String param,String class_);
     List<HolidayByClass> searchTeacherHoliday(String param,String colpro);
 }

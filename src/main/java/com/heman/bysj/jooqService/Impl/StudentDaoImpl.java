@@ -101,4 +101,11 @@ public class StudentDaoImpl implements StudentDao {
                 .where(STUDENT.PROFESSION.eq(profession))
                 .fetch();
     }
+
+    @Override
+    public List<StudentRecord> selectByCollege(String college) {
+        return dslContext.selectFrom(STUDENT)
+                .where(STUDENT.COLLEGE.eq(college))
+                .fetch();
+    }
 }

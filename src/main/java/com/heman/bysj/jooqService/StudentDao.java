@@ -26,4 +26,5 @@ public interface StudentDao {
     Result<Record1<Integer>> selectIdsByClass(String class_);
     List<StudentRecord> selectByClass(String class_);
     List<StudentRecord> selectByProfession(String profession);
+    List<StudentRecord> selectByCollege(String college);
 }

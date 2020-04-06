@@ -129,10 +129,10 @@ public class HolidayController {
         HolidayTask holidayTask = new HolidayTask();
         if(holiday.getRole().equals(UserRole.STUDENT)){
             Student student = userService.selectStudentById(holiday.getUserid());
-            holidayTask = Convert.HolidayToHolidayTask(holiday,null,student.getUsername(),student.getCollege(),student.getProfession(),student.getClass_(),student.getGrade(),student.getSid(),student.getRole());
+            holidayTask = Convert.HolidayToHolidayTask(holiday,null,student.getName(),student.getCollege(),student.getProfession(),student.getClass_(),student.getGrade(),student.getSid(),student.getRole());
         }else{
             Teacher teacher = userService.selectTeacherById(holiday.getUserid()).into(Teacher.class);
-            holidayTask = Convert.HolidayToHolidayTask(holiday,null,teacher.getUsername(),teacher.getCollege(),teacher.getProfession(),null,teacher.getGrade(),teacher.getTid(),teacher.getRole());
+            holidayTask = Convert.HolidayToHolidayTask(holiday,null,teacher.getName(),teacher.getCollege(),teacher.getProfession(),null,teacher.getGrade(),teacher.getTid(),teacher.getRole());
         }
 
         return holidayTask;
@@ -201,17 +201,17 @@ public class HolidayController {
     }
 
     /**
-     * 通过班级查询请假列表
+     * 通过班级/专业查询请假列表
      * 1、通过班级查询sid
      * 2、根据学生ID查找holiday_check表
      * 3、进行数据封装
      * @param class_
      * @return
      */
-    @RequestMapping(value="/user/holiday/searchHoliday/{param}/{class}")
+    @RequestMapping(value="/user/holiday/searchHoliday/{tid}/{param}/{class}")
     @ResponseBody
-    public List<HolidayByClass> selectHolidayByClass(@PathVariable("param") String param,@PathVariable("class") String class_ ){
-        List<HolidayByClass> result = holidayService.selectHolidayByClass(param,class_);
+    public List<HolidayByClass> selectHolidayByClass(@PathVariable("tid") int tid,@PathVariable("param") String param,@PathVariable("class") String class_ ){
+        List<HolidayByClass> result = holidayService.selectHolidayByClass( tid,param,class_);
         return result;
     }
 

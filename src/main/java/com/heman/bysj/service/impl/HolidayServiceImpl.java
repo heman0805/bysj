@@ -224,33 +224,44 @@ public class HolidayServiceImpl implements HolidayService {
      * @return
      */
     @Override
-    public List<HolidayByClass> selectHolidayByClass(String param,String clpro) {
+    public List<HolidayByClass> selectHolidayByClass(int tid,String param,String clpro) {
         List<HolidayByClass> holidayByClasses = new ArrayList<>();
         List<StudentRecord> studentRecords = new ArrayList<>();
+        TeacherRecord teacherRecord = teacherDao.selectById(tid);
         if(param.equals("class"))
             studentRecords = studentDao.selectByClass(clpro);
         else if(param.equals("profession"))
             studentRecords = studentDao.selectByProfession(clpro);
-        for (StudentRecord studentRecord:studentRecords) {
-                //System.out.println("根据班级查询学生ID列表"+o);
-                //根据学生ID查找holiday_check表拿到审批通过的processInstanceId
-                //通过processInstanceId拿到请假信息
+        else if(param.equals("college"))
+            studentRecords = studentDao.selectByCollege(clpro);
+        for (StudentRecord studentRecord:studentRecords) {//循环每条学生信息
+                if(teacherRecord.getGrade()==null||(teacherRecord.getGrade()!=null&&teacherRecord.getGrade().equals(studentRecord.getGrade()))) {
+                    //每个学生的请假记录
+                    List<HolidayRecord> holidays = holidayDao.selectByUidAndRole(studentRecord.getSid(), UserRole.STUDENT);
+                    if (holidays.size() == 0 || holidays == null) {
+                        continue;
+                    }
+                    for (HolidayRecord holidayRecord : holidays) {//处理每条请假记录
+                        //通过请假记录查询请假结果表，
+                        HolidayCheckRecord holidayCheckRecord = holidayCheckDao.selectByProcessInstanceId(holidayRecord.getProcessinstanceid());
+                        HolidayByClass holiday = new HolidayByClass();
 
-                //每个学生的请假记录
-                List<HolidayRecord> holidays = holidayDao.selectByUidAndRole(studentRecord.getSid(),UserRole.STUDENT);
-                if(holidays.size()==0||holidays==null){
-                    continue;
-                }
-                for (HolidayRecord holidayRecord:holidays) {//处理每条请假记录
-                    HolidayByClass holiday = new HolidayByClass();
-                    holiday.setBeginTime(holidayRecord.getBegintime());
-                    holiday.setEndTime(holidayRecord.getEndtime());
-                    holiday.setClass_(studentRecord.getClass_());
-                    holiday.setDays(holidayRecord.getDays());
-                    holiday.setName(studentRecord.getName());
-                    holiday.setReason(holidayRecord.getReason());
-                    holiday.setVacationType(holidayRecord.getVacationtype());
-                    holidayByClasses.add(holiday);
+                        System.out.println("查询的审批结果："+holidayCheckRecord);
+                        if(holidayCheckRecord==null){
+                            holiday.setCheckResult("审批中");
+                        }else{
+                            holiday.setCheckResult(holidayCheckRecord.getCheckresult());
+                            holiday.setOpinion(holidayCheckRecord.getOpinion());
+                        }
+                        holiday.setBeginTime(holidayRecord.getBegintime());
+                        holiday.setEndTime(holidayRecord.getEndtime());
+                        holiday.setClass_(studentRecord.getClass_());
+                        holiday.setDays(holidayRecord.getDays());
+                        holiday.setName(studentRecord.getName());
+                        holiday.setReason(holidayRecord.getReason());
+                        holiday.setVacationType(holidayRecord.getVacationtype());
+                        holidayByClasses.add(holiday);
+                    }
                 }
         }
 
@@ -272,7 +283,14 @@ public class HolidayServiceImpl implements HolidayService {
                 continue;
             }
             for (HolidayRecord holidayRecord:holidays) {//处理每条请假记录
+                HolidayCheckRecord holidayCheckRecord = holidayCheckDao.selectByProcessInstanceId(holidayRecord.getProcessinstanceid());
                 HolidayByClass holiday = new HolidayByClass();
+                if(holidayCheckRecord==null){
+                    holiday.setCheckResult("审批中");
+                }else{
+                    holiday.setCheckResult(holidayCheckRecord.getCheckresult());
+                    holiday.setOpinion(holidayCheckRecord.getOpinion());
+                }
                 holiday.setProfession(teacherRecord.getProfession());
                 holiday.setBeginTime(holidayRecord.getBegintime());
                 holiday.setEndTime(holidayRecord.getEndtime());

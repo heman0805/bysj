@@ -11,6 +11,24 @@ public class HolidayByClass {
     private int days;
     private String vacationType;
     private String reason;
+    private String checkResult;
+    private String opinion;
+
+    public String getCheckResult() {
+        return checkResult;
+    }
+
+    public void setCheckResult(String checkResult) {
+        this.checkResult = checkResult;
+    }
+
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion;
+    }
 
     public String getProfession() {
         return profession;

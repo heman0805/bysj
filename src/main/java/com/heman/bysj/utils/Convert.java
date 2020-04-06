@@ -129,7 +129,7 @@ public class Convert {
         holidayTask.setReason(holiday.getReason());
         holidayTask.setVacationType(holiday.getVacationtype());
         holidayTask.setTaskId(taskId);
-        holidayTask.setUserName(userName);
+        holidayTask.setName(userName);
         holidayTask.setCollege(college);
         holidayTask.setProfession(profession);
         holidayTask.setClass_(class_);

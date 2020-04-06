@@ -11,6 +11,7 @@ public class HolidayTask {
     private int userId;
     private String role;
     private String userName;
+    private String name;
     private int days;
     private Date beginTime;
     private Date endTime;
@@ -21,6 +22,14 @@ public class HolidayTask {
     private String profession;//专业
     private String class_;
     private int grade;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getUserId() {
         return userId;
