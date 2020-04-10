@@ -20,7 +20,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row4;
+import org.jooq.Row5;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Classes extends TableImpl<ClassesRecord> {
 
-    private static final long serialVersionUID = 1599964569;
+    private static final long serialVersionUID = -2125443464;
 
     /**
      * The reference instance of <code>bysj.classes</code>
@@ -76,6 +76,11 @@ public class Classes extends TableImpl<ClassesRecord> {
      * The column <code>bysj.classes.class_</code>.
      */
     public final TableField<ClassesRecord, String> CLASS_ = createField(DSL.name("class_"), org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
+
+    /**
+     * The column <code>bysj.classes.grade</code>.
+     */
+    public final TableField<ClassesRecord, Integer> GRADE = createField(DSL.name("grade"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * Create a <code>bysj.classes</code> table reference
@@ -162,11 +167,11 @@ public class Classes extends TableImpl<ClassesRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row5 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Integer, String, String, String> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row5<Integer, String, String, String, Integer> fieldsRow() {
+        return (Row5) super.fieldsRow();
     }
 }

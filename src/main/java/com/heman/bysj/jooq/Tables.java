@@ -34,10 +34,9 @@ import com.heman.bysj.jooq.tables.ActRuTimerJob;
 import com.heman.bysj.jooq.tables.ActRuVariable;
 import com.heman.bysj.jooq.tables.Changemajors;
 import com.heman.bysj.jooq.tables.Classes;
+import com.heman.bysj.jooq.tables.Examine;
 import com.heman.bysj.jooq.tables.Holiday;
 import com.heman.bysj.jooq.tables.HolidayCheck;
-import com.heman.bysj.jooq.tables.Leave;
-import com.heman.bysj.jooq.tables.Majorapproval;
 import com.heman.bysj.jooq.tables.Student;
 import com.heman.bysj.jooq.tables.Teacher;
 
@@ -208,6 +207,11 @@ public class Tables {
     public static final Classes CLASSES = Classes.CLASSES;
 
     /**
+     * The table <code>bysj.examine</code>.
+     */
+    public static final Examine EXAMINE = Examine.EXAMINE;
+
+    /**
      * The table <code>bysj.holiday</code>.
      */
     public static final Holiday HOLIDAY = Holiday.HOLIDAY;
@@ -216,16 +220,6 @@ public class Tables {
      * The table <code>bysj.holiday_check</code>.
      */
     public static final HolidayCheck HOLIDAY_CHECK = HolidayCheck.HOLIDAY_CHECK;
-
-    /**
-     * The table <code>bysj.leave</code>.
-     */
-    public static final Leave LEAVE = Leave.LEAVE;
-
-    /**
-     * The table <code>bysj.majorapproval</code>.
-     */
-    public static final Majorapproval MAJORAPPROVAL = Majorapproval.MAJORAPPROVAL;
 
     /**
      * The table <code>bysj.student</code>.

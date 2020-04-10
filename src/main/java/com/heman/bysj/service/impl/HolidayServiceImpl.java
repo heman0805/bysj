@@ -4,17 +4,14 @@ import com.heman.bysj.activiti.Activiti_Holiday;
 import com.heman.bysj.entity.HolidayByClass;
 import com.heman.bysj.entity.HolidayHistory;
 import com.heman.bysj.entity.HolidayTask;
-import com.heman.bysj.enums.Role;
-import com.heman.bysj.enums.TeacherPosition;
 import com.heman.bysj.enums.UserRole;
+import com.heman.bysj.jooq.tables.pojos.Examine;
 import com.heman.bysj.jooq.tables.pojos.Holiday;
-import com.heman.bysj.jooq.tables.pojos.HolidayCheck;
 import com.heman.bysj.jooq.tables.pojos.Student;
 import com.heman.bysj.jooq.tables.pojos.Teacher;
 import com.heman.bysj.jooq.tables.records.*;
 import com.heman.bysj.jooqService.*;
 import com.heman.bysj.service.HolidayService;
-import com.heman.bysj.service.LeaveService;
 import com.heman.bysj.utils.Convert;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.history.HistoricProcessInstance;
@@ -40,7 +37,7 @@ public class HolidayServiceImpl implements HolidayService {
     @Autowired
     private TeacherDao teacherDao;
     @Autowired
-    private HolidayCheckDao holidayCheckDao;
+    private ExamineDao examineDao;
     @Autowired
     private ClassesDao classesDao;
 
@@ -118,7 +115,18 @@ public class HolidayServiceImpl implements HolidayService {
                holidayTask = Convert.HolidayToHolidayTask(holiday,task.getId(),student.getName(),student.getCollege(),student.getProfession(),student.getClass_(),student.getGrade(),student.getSid(),student.getRole());
            }else{
                Teacher teacher1 = teacherDao.selectById(holiday.getUserid()).into(Teacher.class);
-               holidayTask = Convert.HolidayToHolidayTask(holiday,task.getId(),teacher1.getName(),teacher1.getCollege(),teacher1.getProfession(),null,teacher1.getGrade(),teacher1.getTid(),teacher1.getRole());
+               System.out.println("查询到的教师信息："+teacher1);
+               System.out.println("查询到的任务信息:"+task);
+               holidayTask = Convert.HolidayToHolidayTask
+                       (holiday,
+                               task.getId(),
+                               teacher1.getName(),
+                               teacher1.getCollege(),
+                               teacher1.getProfession(),
+                               null,
+                               0,
+                               teacher1.getTid(),
+                               teacher1.getRole());
            }
             holidayTasks.add(holidayTask);
         }
@@ -128,19 +136,19 @@ public class HolidayServiceImpl implements HolidayService {
     /**
      * 教师审批
      * 3、通过processInstanceID获得对应任务进行审批
-     * 4、获得任务ID，封装至holidayCheck
-     * 5、插入holidayCheck表
+     * 4、获得任务ID，封装至Examine
+     * 5、封装至Examine
      */
     @Override
-    public void holiday_Check(HolidayCheck holidayCheck) {
+    public void holiday_Check(Examine holidayCheck) {
         //完成任务并获得任务ID
         String taskId = activiti_holiday.teacherCompleteTask("holidayProcess",holidayCheck.getProcessinstanceid());
         //封装任务ID
         holidayCheck.setTaskid(taskId);
-        //插入holidayTask表
-        HolidayCheckRecord holidayCheckRecord = new HolidayCheckRecord();
+        //ExaminRecord
+        ExamineRecord holidayCheckRecord = new ExamineRecord();
         holidayCheckRecord.from(holidayCheck);
-        holidayCheckDao.insert(holidayCheckRecord);
+        examineDao.insert(holidayCheckRecord);
         //修改Holiday表,设置审批状态为已完成
         holidayDao.complete(holidayCheck.getProcessinstanceid(),2);
     }
@@ -163,7 +171,7 @@ public class HolidayServiceImpl implements HolidayService {
         }
         List<HolidayHistory> list = new ArrayList<>();
         for (HolidayRecord holiday:holidayRecords) {
-            HolidayCheck holidayCheck = holidayCheckDao.selectByProcessInstanceId(holiday.getProcessinstanceid()).into(HolidayCheck.class);
+            Examine holidayCheck = examineDao.selectByProcessInstanceId(holiday.getProcessinstanceid()).into(Examine.class);
             HolidayHistory holidayHistory = new HolidayHistory();
             holidayHistory.setBeginTime(holiday.getBegintime());
             holidayHistory.setEndTime(holiday.getEndtime());
@@ -243,7 +251,7 @@ public class HolidayServiceImpl implements HolidayService {
                     }
                     for (HolidayRecord holidayRecord : holidays) {//处理每条请假记录
                         //通过请假记录查询请假结果表，
-                        HolidayCheckRecord holidayCheckRecord = holidayCheckDao.selectByProcessInstanceId(holidayRecord.getProcessinstanceid());
+                        ExamineRecord holidayCheckRecord = examineDao.selectByProcessInstanceId(holidayRecord.getProcessinstanceid());
                         HolidayByClass holiday = new HolidayByClass();
 
                         System.out.println("查询的审批结果："+holidayCheckRecord);
@@ -283,7 +291,7 @@ public class HolidayServiceImpl implements HolidayService {
                 continue;
             }
             for (HolidayRecord holidayRecord:holidays) {//处理每条请假记录
-                HolidayCheckRecord holidayCheckRecord = holidayCheckDao.selectByProcessInstanceId(holidayRecord.getProcessinstanceid());
+                ExamineRecord holidayCheckRecord = examineDao.selectByProcessInstanceId(holidayRecord.getProcessinstanceid());
                 HolidayByClass holiday = new HolidayByClass();
                 if(holidayCheckRecord==null){
                     holiday.setCheckResult("审批中");

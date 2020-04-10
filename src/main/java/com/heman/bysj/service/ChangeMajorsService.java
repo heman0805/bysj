@@ -1,10 +1,16 @@
 package com.heman.bysj.service;
 
-import com.heman.bysj.jooq.tables.records.ChangemajorsRecord;
+import com.heman.bysj.entity.MajorTask;
+import com.heman.bysj.jooq.tables.pojos.Changemajors;
+import com.heman.bysj.jooq.tables.pojos.Examine;
+import com.heman.bysj.jooq.tables.pojos.Teacher;
+
+import java.util.List;
+import java.util.Map;
 
 public interface ChangeMajorsService {
-    int insert(ChangemajorsRecord changemajorsRecord);
-    int updateState(int cid,String state);
-    int updateResult(int cid,int result,String post,String refuseReason);
-    ChangemajorsRecord selectBySid(int sid);
+    boolean startMajor(Changemajors changemajors);
+    List<MajorTask> searchTasks(int id);
+    Changemajors selectHolidayByProcessInstanceId(String processInstanceId);
+    void major_Check(Examine examine);
 }

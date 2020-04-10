@@ -34,10 +34,9 @@ import com.heman.bysj.jooq.tables.ActRuTimerJob;
 import com.heman.bysj.jooq.tables.ActRuVariable;
 import com.heman.bysj.jooq.tables.Changemajors;
 import com.heman.bysj.jooq.tables.Classes;
+import com.heman.bysj.jooq.tables.Examine;
 import com.heman.bysj.jooq.tables.Holiday;
 import com.heman.bysj.jooq.tables.HolidayCheck;
-import com.heman.bysj.jooq.tables.Leave;
-import com.heman.bysj.jooq.tables.Majorapproval;
 import com.heman.bysj.jooq.tables.Student;
 import com.heman.bysj.jooq.tables.Teacher;
 
@@ -65,7 +64,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Bysj extends SchemaImpl {
 
-    private static final long serialVersionUID = 1691108455;
+    private static final long serialVersionUID = 1731616744;
 
     /**
      * The reference instance of <code>bysj</code>
@@ -223,6 +222,11 @@ public class Bysj extends SchemaImpl {
     public final Classes CLASSES = com.heman.bysj.jooq.tables.Classes.CLASSES;
 
     /**
+     * The table <code>bysj.examine</code>.
+     */
+    public final Examine EXAMINE = com.heman.bysj.jooq.tables.Examine.EXAMINE;
+
+    /**
      * The table <code>bysj.holiday</code>.
      */
     public final Holiday HOLIDAY = com.heman.bysj.jooq.tables.Holiday.HOLIDAY;
@@ -231,16 +235,6 @@ public class Bysj extends SchemaImpl {
      * The table <code>bysj.holiday_check</code>.
      */
     public final HolidayCheck HOLIDAY_CHECK = com.heman.bysj.jooq.tables.HolidayCheck.HOLIDAY_CHECK;
-
-    /**
-     * The table <code>bysj.leave</code>.
-     */
-    public final Leave LEAVE = com.heman.bysj.jooq.tables.Leave.LEAVE;
-
-    /**
-     * The table <code>bysj.majorapproval</code>.
-     */
-    public final Majorapproval MAJORAPPROVAL = com.heman.bysj.jooq.tables.Majorapproval.MAJORAPPROVAL;
 
     /**
      * The table <code>bysj.student</code>.
@@ -304,10 +298,9 @@ public class Bysj extends SchemaImpl {
             ActRuVariable.ACT_RU_VARIABLE,
             Changemajors.CHANGEMAJORS,
             Classes.CLASSES,
+            Examine.EXAMINE,
             Holiday.HOLIDAY,
             HolidayCheck.HOLIDAY_CHECK,
-            Leave.LEAVE,
-            Majorapproval.MAJORAPPROVAL,
             Student.STUDENT,
             Teacher.TEACHER);
     }

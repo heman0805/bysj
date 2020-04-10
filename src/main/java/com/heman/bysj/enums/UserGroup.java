@@ -15,9 +15,9 @@ public class UserGroup {
     public final static String GROUP_SCIANDTECH = "Group_SciAndTech";
     //财务处
     public final static String GROUP_FINANCE = "Group_Finance";
-    //学院教务处
+    //学院教务办
     public final static String GROUP_ACADEMICAFFAIRS = "Group_AcademicAffairs";
-    //学校教务处
+    //学校教务办
     public final static String GROUP_ADMINISTRATIONOFFICE = "Group_AdministrationOffice";
     //教师
     public final static String GROUP_TEACHER = "Group_Teacher";

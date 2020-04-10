@@ -1,33 +1,27 @@
 package com.heman.bysj.controller;
 
-import com.heman.bysj.activiti.Activiti_Holiday;
 import com.heman.bysj.entity.HolidayByClass;
 import com.heman.bysj.entity.HolidayHistory;
 import com.heman.bysj.entity.HolidayProgress;
 import com.heman.bysj.entity.HolidayTask;
 import com.heman.bysj.enums.UserRole;
+import com.heman.bysj.jooq.tables.pojos.Examine;
 import com.heman.bysj.jooq.tables.pojos.Holiday;
-import com.heman.bysj.jooq.tables.pojos.HolidayCheck;
 import com.heman.bysj.jooq.tables.pojos.Student;
 import com.heman.bysj.jooq.tables.pojos.Teacher;
-import com.heman.bysj.jooq.tables.records.LeaveRecord;
-import com.heman.bysj.jooqService.TeacherDao;
 import com.heman.bysj.service.HolidayService;
-import com.heman.bysj.service.LeaveService;
 import com.heman.bysj.service.UserService;
 import com.heman.bysj.utils.Convert;
-import org.jooq.tools.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.util.*;
 
 @RestController
 public class HolidayController {
 
-    @Autowired
-    private LeaveService leaveService;
+    /*@Autowired
+    private LeaveService leaveService;*/
     @Autowired
     private HolidayService holidayService;
     @Autowired
@@ -132,7 +126,7 @@ public class HolidayController {
             holidayTask = Convert.HolidayToHolidayTask(holiday,null,student.getName(),student.getCollege(),student.getProfession(),student.getClass_(),student.getGrade(),student.getSid(),student.getRole());
         }else{
             Teacher teacher = userService.selectTeacherById(holiday.getUserid()).into(Teacher.class);
-            holidayTask = Convert.HolidayToHolidayTask(holiday,null,teacher.getName(),teacher.getCollege(),teacher.getProfession(),null,teacher.getGrade(),teacher.getTid(),teacher.getRole());
+            holidayTask = Convert.HolidayToHolidayTask(holiday,null,teacher.getName(),teacher.getCollege(),teacher.getProfession(),null,0,teacher.getTid(),teacher.getRole());
         }
 
         return holidayTask;
@@ -150,7 +144,7 @@ public class HolidayController {
     @ResponseBody
     public String holiday_check(@RequestBody Map<String,Map> params){
         System.out.println("收到的请假单审批结果："+params.get("data").toString());
-        HolidayCheck holidayCheck = Convert.formToHolidayCheck(params.get("data"));
+        Examine holidayCheck = Convert.formToHolidayCheck(params.get("data"));
         System.out.println("转换后的请假单审批结果"+holidayCheck);
         holidayService.holiday_Check(holidayCheck);
         String msg = "审批完成";
@@ -244,7 +238,7 @@ public class HolidayController {
     /**
      * 通过tid查找请假列表
      */
-    @RequestMapping(value="/api/leave/findLeaveList")
+    /*@RequestMapping(value="/api/leave/findLeaveList")
     @ResponseBody
     public Object leaveList(@RequestBody Map<String,Map> params){
         int tid = 4;
@@ -255,12 +249,12 @@ public class HolidayController {
         }
        return  json.put("list",list);
 
-    }
+    }*/
 
     /**
      * 通过lid查找具体请假信息
      */
-    @RequestMapping(value="/api/leave/findLeaveByLid")
+   /* @RequestMapping(value="/api/leave/findLeaveByLid")
     @ResponseBody
     public Object findLeaveByLid(){
         int lid = 1;
@@ -270,11 +264,11 @@ public class HolidayController {
 
         return  json.put("list",list);
 
-    }
+    }*/
     /**
      * 审批函数
      */
-    @RequestMapping(value="/api/leave/updateLeaveByLid")
+   /* @RequestMapping(value="/api/leave/updateLeaveByLid")
     @ResponseBody
     public void updateLeaveByLid(){
         int lid = 1;
@@ -283,5 +277,5 @@ public class HolidayController {
         int re = leaveService.updateLeaveByLid(lid,result,remark);
         System.out.print(re);
 
-    }
+    }*/
 }

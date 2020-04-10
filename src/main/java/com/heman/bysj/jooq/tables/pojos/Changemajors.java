@@ -5,6 +5,7 @@ package com.heman.bysj.jooq.tables.pojos;
 
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import javax.annotation.Generated;
 
@@ -22,84 +23,116 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Changemajors implements Serializable {
 
-    private static final long serialVersionUID = -30105135;
+    private static final long serialVersionUID = -1850063748;
 
-    private Integer cid;
-    private Integer sid;
-    private String  applyreason;
-    private String  currentprofession;
-    private String  newprofession;
-    private Double  gpa;
-    private String  rank;
-    private String  state;
-    private Integer result;
-    private String  post;
-    private String  refusereason;
+    private String    cid;
+    private String    processinstanceid;
+    private Integer   userid;
+    private String    reason;
+    private String    currentcollege;
+    private String    currentprofession;
+    private String    currentclass;
+    private String    newcollege;
+    private String    newprofession;
+    private Double    gpa;
+    private String    rank;
+    private String    contest;
+    private Integer   processstatus;
+    private Timestamp createtime;
+    private Timestamp updatetime;
 
     public Changemajors() {}
 
     public Changemajors(Changemajors value) {
         this.cid = value.cid;
-        this.sid = value.sid;
-        this.applyreason = value.applyreason;
+        this.processinstanceid = value.processinstanceid;
+        this.userid = value.userid;
+        this.reason = value.reason;
+        this.currentcollege = value.currentcollege;
         this.currentprofession = value.currentprofession;
+        this.currentclass = value.currentclass;
+        this.newcollege = value.newcollege;
         this.newprofession = value.newprofession;
         this.gpa = value.gpa;
         this.rank = value.rank;
-        this.state = value.state;
-        this.result = value.result;
-        this.post = value.post;
-        this.refusereason = value.refusereason;
+        this.contest = value.contest;
+        this.processstatus = value.processstatus;
+        this.createtime = value.createtime;
+        this.updatetime = value.updatetime;
     }
 
     public Changemajors(
-        Integer cid,
-        Integer sid,
-        String  applyreason,
-        String  currentprofession,
-        String  newprofession,
-        Double  gpa,
-        String  rank,
-        String  state,
-        Integer result,
-        String  post,
-        String  refusereason
+        String    cid,
+        String    processinstanceid,
+        Integer   userid,
+        String    reason,
+        String    currentcollege,
+        String    currentprofession,
+        String    currentclass,
+        String    newcollege,
+        String    newprofession,
+        Double    gpa,
+        String    rank,
+        String    contest,
+        Integer   processstatus,
+        Timestamp createtime,
+        Timestamp updatetime
     ) {
         this.cid = cid;
-        this.sid = sid;
-        this.applyreason = applyreason;
+        this.processinstanceid = processinstanceid;
+        this.userid = userid;
+        this.reason = reason;
+        this.currentcollege = currentcollege;
         this.currentprofession = currentprofession;
+        this.currentclass = currentclass;
+        this.newcollege = newcollege;
         this.newprofession = newprofession;
         this.gpa = gpa;
         this.rank = rank;
-        this.state = state;
-        this.result = result;
-        this.post = post;
-        this.refusereason = refusereason;
+        this.contest = contest;
+        this.processstatus = processstatus;
+        this.createtime = createtime;
+        this.updatetime = updatetime;
     }
 
-    public Integer getCid() {
+    public String getCid() {
         return this.cid;
     }
 
-    public void setCid(Integer cid) {
+    public void setCid(String cid) {
         this.cid = cid;
     }
 
-    public Integer getSid() {
-        return this.sid;
+    public String getProcessinstanceid() {
+        return this.processinstanceid;
     }
 
-    public void setSid(Integer sid) {
-        this.sid = sid;
+    public void setProcessinstanceid(String processinstanceid) {
+        this.processinstanceid = processinstanceid;
     }
 
-    public String getApplyreason() {
-        return this.applyreason;
+    public Integer getUserid() {
+        return this.userid;
     }
 
-    public void setApplyreason(String applyreason) {
-        this.applyreason = applyreason;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
+
+    public String getReason() {
+        return this.reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getCurrentcollege() {
+        return this.currentcollege;
+    }
+
+    public void setCurrentcollege(String currentcollege) {
+        this.currentcollege = currentcollege;
     }
 
     public String getCurrentprofession() {
@@ -108,6 +141,22 @@ public class Changemajors implements Serializable {
 
     public void setCurrentprofession(String currentprofession) {
         this.currentprofession = currentprofession;
+    }
+
+    public String getCurrentclass() {
+        return this.currentclass;
+    }
+
+    public void setCurrentclass(String currentclass) {
+        this.currentclass = currentclass;
+    }
+
+    public String getNewcollege() {
+        return this.newcollege;
+    }
+
+    public void setNewcollege(String newcollege) {
+        this.newcollege = newcollege;
     }
 
     public String getNewprofession() {
@@ -134,36 +183,36 @@ public class Changemajors implements Serializable {
         this.rank = rank;
     }
 
-    public String getState() {
-        return this.state;
+    public String getContest() {
+        return this.contest;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setContest(String contest) {
+        this.contest = contest;
     }
 
-    public Integer getResult() {
-        return this.result;
+    public Integer getProcessstatus() {
+        return this.processstatus;
     }
 
-    public void setResult(Integer result) {
-        this.result = result;
+    public void setProcessstatus(Integer processstatus) {
+        this.processstatus = processstatus;
     }
 
-    public String getPost() {
-        return this.post;
+    public Timestamp getCreatetime() {
+        return this.createtime;
     }
 
-    public void setPost(String post) {
-        this.post = post;
+    public void setCreatetime(Timestamp createtime) {
+        this.createtime = createtime;
     }
 
-    public String getRefusereason() {
-        return this.refusereason;
+    public Timestamp getUpdatetime() {
+        return this.updatetime;
     }
 
-    public void setRefusereason(String refusereason) {
-        this.refusereason = refusereason;
+    public void setUpdatetime(Timestamp updatetime) {
+        this.updatetime = updatetime;
     }
 
     @Override
@@ -171,16 +220,20 @@ public class Changemajors implements Serializable {
         StringBuilder sb = new StringBuilder("Changemajors (");
 
         sb.append(cid);
-        sb.append(", ").append(sid);
-        sb.append(", ").append(applyreason);
+        sb.append(", ").append(processinstanceid);
+        sb.append(", ").append(userid);
+        sb.append(", ").append(reason);
+        sb.append(", ").append(currentcollege);
         sb.append(", ").append(currentprofession);
+        sb.append(", ").append(currentclass);
+        sb.append(", ").append(newcollege);
         sb.append(", ").append(newprofession);
         sb.append(", ").append(gpa);
         sb.append(", ").append(rank);
-        sb.append(", ").append(state);
-        sb.append(", ").append(result);
-        sb.append(", ").append(post);
-        sb.append(", ").append(refusereason);
+        sb.append(", ").append(contest);
+        sb.append(", ").append(processstatus);
+        sb.append(", ").append(createtime);
+        sb.append(", ").append(updatetime);
 
         sb.append(")");
         return sb.toString();

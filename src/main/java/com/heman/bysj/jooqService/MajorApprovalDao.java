@@ -1,11 +1,10 @@
 package com.heman.bysj.jooqService;
 
-import com.heman.bysj.jooq.tables.records.MajorapprovalRecord;
 
 import java.util.List;
 
 public interface MajorApprovalDao {
-    int insert(MajorapprovalRecord majorapprovalRecord);
+   /* int insert(MajorapprovalRecord majorapprovalRecord);
 
     int updateCurrentAcademicOfficeByCid(int cid,String caResult,String caReason);
     int updateCurrentDeanByCid(int cid,String cdResult,String cdReason);
@@ -23,5 +22,5 @@ public interface MajorApprovalDao {
     List<MajorapprovalRecord> selectByNewDean(String NewDean);
     List<MajorapprovalRecord> selectByAcademicOffice(String AcademicOffice);
 
-
+*/
 }

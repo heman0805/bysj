@@ -7,9 +7,10 @@ import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import java.sql.Timestamp;
 
 import static com.heman.bysj.jooq.tables.Changemajors.CHANGEMAJORS;
+
 @Slf4j
 @Service
 public class ChangeMajorsDaoImpl implements ChangeMajorsDao {
@@ -30,47 +31,18 @@ public class ChangeMajorsDaoImpl implements ChangeMajorsDao {
                 .execute();
     }
 
-    /**
-     * 更新当前申请状态
-     * @param cid
-     * @param state
-     * @return
-     */
     @Override
-    public int updateState(int cid, String state) {
-        return dslContext.update(CHANGEMAJORS)
-                .set(CHANGEMAJORS.STATE,state)
-                .where(CHANGEMAJORS.CID.eq(cid))
-                .execute();
-    }
-
-    /**
-     * 更新申请结果
-     * @param cid
-     * @param result
-     * @param post
-     * @param refuseReason
-     * @return
-     */
-    @Override
-    public int updateResult(int cid, int result, String post, String refuseReason) {
-        return dslContext.update(CHANGEMAJORS)
-                .set(CHANGEMAJORS.RESULT,result)
-                .set(CHANGEMAJORS.POST,post)
-                .set(CHANGEMAJORS.REFUSEREASON,refuseReason)
-                .where(CHANGEMAJORS.CID.eq(cid))
-                .execute();
-    }
-
-    /**
-     * 通过ID查找转专业申请
-     * @param sid
-     * @return
-     */
-    @Override
-    public ChangemajorsRecord selectBySid(int sid) {
+    public ChangemajorsRecord selectByProcessInstanceId(String processInstanceId) {
         return dslContext.selectFrom(CHANGEMAJORS)
-                .where(CHANGEMAJORS.SID.eq(sid))
+                .where(CHANGEMAJORS.PROCESSINSTANCEID.eq(processInstanceId))
                 .fetchOne();
+    }
+    @Override
+    public void complete(String processInstanceId,int processStatus) {
+        dslContext.update(CHANGEMAJORS)
+                .set(CHANGEMAJORS.PROCESSSTATUS,processStatus)
+                .set(CHANGEMAJORS.UPDATETIME,new Timestamp(System.currentTimeMillis()))
+                .where(CHANGEMAJORS.PROCESSINSTANCEID.eq(processInstanceId))
+                .execute();
     }
 }

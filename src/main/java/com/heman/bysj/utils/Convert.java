@@ -2,11 +2,9 @@ package com.heman.bysj.utils;
 
 import com.heman.bysj.entity.HolidayProgress;
 import com.heman.bysj.entity.HolidayTask;
+import com.heman.bysj.entity.MajorTask;
 import com.heman.bysj.enums.UserRole;
-import com.heman.bysj.jooq.tables.pojos.HolidayCheck;
-import com.heman.bysj.jooq.tables.pojos.Holiday;
-import com.heman.bysj.jooq.tables.pojos.Student;
-import com.heman.bysj.jooq.tables.pojos.Teacher;
+import com.heman.bysj.jooq.tables.pojos.*;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -19,9 +17,6 @@ import java.util.UUID;
 
 @Service
 public class Convert {
-
-
-
 
     static float oneDay = 24*60*60*1000f;
 
@@ -56,6 +51,7 @@ public class Convert {
         student.setPassword(user.get("password").toString());
         student.setGrade(Integer.parseInt(user.get("grade").toString()));
         student.setProfession(user.get("profession").toString());
+        student.setCollege(user.get("college").toString());
         student.setClass_(user.get("class_").toString());
         student.setTid(Integer.parseInt(user.get("tid").toString()));
         student.setRole(user.get("role").toString());
@@ -138,8 +134,8 @@ public class Convert {
         holidayTask.setRole(role);
         return holidayTask;
     }
-    public static HolidayCheck formToHolidayCheck(Map<String,Object> form){
-        HolidayCheck holidayCheck = new HolidayCheck();
+    public static Examine formToHolidayCheck(Map<String,Object> form){
+        Examine holidayCheck = new Examine();
         holidayCheck.setCheckid(UUID.randomUUID().toString());
         holidayCheck.setCheckresult(form.get("checkResult").toString());
         holidayCheck.setChecktime(new Timestamp(System.currentTimeMillis()));
@@ -152,4 +148,45 @@ public class Convert {
         return holidayCheck;
     }
 
+    public static Changemajors mapToChangeMajors(Map<String,Map> params){
+        Map<String,Object> form = params.get("form");
+        Map<String,Object> user = params.get("user");
+        Student student = getStudent(user);
+        Changemajors changemajors = new Changemajors();
+        changemajors.setCid(UUID.randomUUID().toString());
+        changemajors.setCreatetime(new Timestamp(System.currentTimeMillis()));
+        changemajors.setCurrentclass(student.getClass_());
+        changemajors.setCurrentprofession(student.getProfession());
+        changemajors.setCurrentcollege(student.getCollege());
+        changemajors.setGpa(Double.valueOf(form.get("gpa").toString()));
+        changemajors.setNewcollege(form.get("newCollege").toString());
+        changemajors.setNewprofession(form.get("newProfession").toString());
+        changemajors.setProcessstatus(0);
+        changemajors.setRank(form.get("rank").toString());
+        changemajors.setReason(form.get("reason").toString());
+        changemajors.setUserid(student.getSid());
+        changemajors.setUpdatetime(new Timestamp(System.currentTimeMillis()));
+        if(form.get("contest").toString()!=null)
+            changemajors.setContest(form.get("contest").toString());
+        return changemajors;
+    }
+    public static MajorTask changeMajorToMajorTask(String name,String role,int userId,String class_,String taskId,Changemajors changemajors){
+        MajorTask majorTask = new MajorTask();
+
+        majorTask.setUserId(userId);
+        majorTask.setRole(role);
+        majorTask.setClass_(class_);
+        majorTask.setContest(changemajors.getContest());
+        majorTask.setCreateTime(changemajors.getCreatetime());
+        majorTask.setCurrentProfession(changemajors.getCurrentprofession());
+        majorTask.setGpa(changemajors.getGpa());
+        majorTask.setName(name);
+        majorTask.setNewCollege(changemajors.getNewcollege());
+        majorTask.setNewProfession(changemajors.getNewprofession());
+        majorTask.setProcessInstanceId(changemajors.getProcessinstanceid());
+        majorTask.setRank(changemajors.getRank());
+        majorTask.setReason(changemajors.getReason());
+        majorTask.setTaskId(taskId);
+        return majorTask;
+    }
 }

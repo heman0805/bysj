@@ -22,12 +22,13 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Classes implements Serializable {
 
-    private static final long serialVersionUID = 555184861;
+    private static final long serialVersionUID = -1470856856;
 
     private Integer id;
     private String  college;
     private String  profession;
     private String  class_;
+    private Integer grade;
 
     public Classes() {}
 
@@ -36,18 +37,21 @@ public class Classes implements Serializable {
         this.college = value.college;
         this.profession = value.profession;
         this.class_ = value.class_;
+        this.grade = value.grade;
     }
 
     public Classes(
         Integer id,
         String  college,
         String  profession,
-        String  class_
+        String  class_,
+        Integer grade
     ) {
         this.id = id;
         this.college = college;
         this.profession = profession;
         this.class_ = class_;
+        this.grade = grade;
     }
 
     public Integer getId() {
@@ -82,6 +86,14 @@ public class Classes implements Serializable {
         this.class_ = class_;
     }
 
+    public Integer getGrade() {
+        return this.grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Classes (");
@@ -90,6 +102,7 @@ public class Classes implements Serializable {
         sb.append(", ").append(college);
         sb.append(", ").append(profession);
         sb.append(", ").append(class_);
+        sb.append(", ").append(grade);
 
         sb.append(")");
         return sb.toString();

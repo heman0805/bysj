@@ -9,6 +9,7 @@ import com.heman.bysj.jooq.Indexes;
 import com.heman.bysj.jooq.Keys;
 import com.heman.bysj.jooq.tables.records.ChangemajorsRecord;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,11 +17,10 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row11;
+import org.jooq.Row15;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Changemajors extends TableImpl<ChangemajorsRecord> {
 
-    private static final long serialVersionUID = 690382268;
+    private static final long serialVersionUID = -1594195961;
 
     /**
      * The reference instance of <code>bysj.changemajors</code>
@@ -60,22 +60,42 @@ public class Changemajors extends TableImpl<ChangemajorsRecord> {
     /**
      * The column <code>bysj.changemajors.cid</code>. 转专业表主键ID
      */
-    public final TableField<ChangemajorsRecord, Integer> CID = createField(DSL.name("cid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "转专业表主键ID");
+    public final TableField<ChangemajorsRecord, String> CID = createField(DSL.name("cid"), org.jooq.impl.SQLDataType.VARCHAR(64).nullable(false), this, "转专业表主键ID");
 
     /**
-     * The column <code>bysj.changemajors.sid</code>. 转专业学生ID
+     * The column <code>bysj.changemajors.processInstanceId</code>. 转专业学生ID
      */
-    public final TableField<ChangemajorsRecord, Integer> SID = createField(DSL.name("sid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "转专业学生ID");
+    public final TableField<ChangemajorsRecord, String> PROCESSINSTANCEID = createField(DSL.name("processInstanceId"), org.jooq.impl.SQLDataType.VARCHAR(64).nullable(false), this, "转专业学生ID");
 
     /**
-     * The column <code>bysj.changemajors.applyReason</code>. 转专业申请理由
+     * The column <code>bysj.changemajors.userId</code>. 用户ID
      */
-    public final TableField<ChangemajorsRecord, String> APPLYREASON = createField(DSL.name("applyReason"), org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "转专业申请理由");
+    public final TableField<ChangemajorsRecord, Integer> USERID = createField(DSL.name("userId"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "用户ID");
+
+    /**
+     * The column <code>bysj.changemajors.reason</code>. 转专业申请理由
+     */
+    public final TableField<ChangemajorsRecord, String> REASON = createField(DSL.name("reason"), org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "转专业申请理由");
+
+    /**
+     * The column <code>bysj.changemajors.currentCollege</code>. 限专业所在学院
+     */
+    public final TableField<ChangemajorsRecord, String> CURRENTCOLLEGE = createField(DSL.name("currentCollege"), org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "限专业所在学院");
 
     /**
      * The column <code>bysj.changemajors.currentProfession</code>. 现专业
      */
     public final TableField<ChangemajorsRecord, String> CURRENTPROFESSION = createField(DSL.name("currentProfession"), org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "现专业");
+
+    /**
+     * The column <code>bysj.changemajors.currentClass</code>. 现班级
+     */
+    public final TableField<ChangemajorsRecord, String> CURRENTCLASS = createField(DSL.name("currentClass"), org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "现班级");
+
+    /**
+     * The column <code>bysj.changemajors.newCollege</code>. 转向专业所在学院
+     */
+    public final TableField<ChangemajorsRecord, String> NEWCOLLEGE = createField(DSL.name("newCollege"), org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "转向专业所在学院");
 
     /**
      * The column <code>bysj.changemajors.newProfession</code>. 新专业
@@ -93,24 +113,24 @@ public class Changemajors extends TableImpl<ChangemajorsRecord> {
     public final TableField<ChangemajorsRecord, String> RANK = createField(DSL.name("rank"), org.jooq.impl.SQLDataType.VARCHAR(5).nullable(false), this, "成绩排名");
 
     /**
-     * The column <code>bysj.changemajors.state</code>. 申请状态（如：当前专业院长审批中）
+     * The column <code>bysj.changemajors.contest</code>. 申请理由
      */
-    public final TableField<ChangemajorsRecord, String> STATE = createField(DSL.name("state"), org.jooq.impl.SQLDataType.VARCHAR(15).nullable(false), this, "申请状态（如：当前专业院长审批中）");
+    public final TableField<ChangemajorsRecord, String> CONTEST = createField(DSL.name("contest"), org.jooq.impl.SQLDataType.VARCHAR(100), this, "申请理由");
 
     /**
-     * The column <code>bysj.changemajors.result</code>. 转专业申请结果(0:不通过 1:通过)
+     * The column <code>bysj.changemajors.processStatus</code>. 流程状态：0 申请，1 审批中，2 已完成
      */
-    public final TableField<ChangemajorsRecord, Integer> RESULT = createField(DSL.name("result"), org.jooq.impl.SQLDataType.INTEGER, this, "转专业申请结果(0:不通过 1:通过)");
+    public final TableField<ChangemajorsRecord, Integer> PROCESSSTATUS = createField(DSL.name("processStatus"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "流程状态：0 申请，1 审批中，2 已完成");
 
     /**
-     * The column <code>bysj.changemajors.post</code>. 申请过程中拒绝的环节（原专业院长）
+     * The column <code>bysj.changemajors.createTime</code>. 创建时间
      */
-    public final TableField<ChangemajorsRecord, String> POST = createField(DSL.name("post"), org.jooq.impl.SQLDataType.VARCHAR(10), this, "申请过程中拒绝的环节（原专业院长）");
+    public final TableField<ChangemajorsRecord, Timestamp> CREATETIME = createField(DSL.name("createTime"), org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0000-00-00 00:00:00", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "创建时间");
 
     /**
-     * The column <code>bysj.changemajors.refuseReason</code>. 拒绝理由
+     * The column <code>bysj.changemajors.updateTime</code>. 更新时间
      */
-    public final TableField<ChangemajorsRecord, String> REFUSEREASON = createField(DSL.name("refuseReason"), org.jooq.impl.SQLDataType.VARCHAR(100), this, "拒绝理由");
+    public final TableField<ChangemajorsRecord, Timestamp> UPDATETIME = createField(DSL.name("updateTime"), org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0000-00-00 00:00:00", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "更新时间");
 
     /**
      * Create a <code>bysj.changemajors</code> table reference
@@ -156,11 +176,6 @@ public class Changemajors extends TableImpl<ChangemajorsRecord> {
     }
 
     @Override
-    public Identity<ChangemajorsRecord, Integer> getIdentity() {
-        return Keys.IDENTITY_CHANGEMAJORS;
-    }
-
-    @Override
     public UniqueKey<ChangemajorsRecord> getPrimaryKey() {
         return Keys.KEY_CHANGEMAJORS_PRIMARY;
     }
@@ -168,15 +183,6 @@ public class Changemajors extends TableImpl<ChangemajorsRecord> {
     @Override
     public List<UniqueKey<ChangemajorsRecord>> getKeys() {
         return Arrays.<UniqueKey<ChangemajorsRecord>>asList(Keys.KEY_CHANGEMAJORS_PRIMARY, Keys.KEY_CHANGEMAJORS_SID);
-    }
-
-    @Override
-    public List<ForeignKey<ChangemajorsRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<ChangemajorsRecord, ?>>asList(Keys.CHANGESID_FOREIGNKEY);
-    }
-
-    public Student student() {
-        return new Student(this, Keys.CHANGESID_FOREIGNKEY);
     }
 
     @Override
@@ -206,11 +212,11 @@ public class Changemajors extends TableImpl<ChangemajorsRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row11 type methods
+    // Row15 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row11<Integer, Integer, String, String, String, Double, String, String, Integer, String, String> fieldsRow() {
-        return (Row11) super.fieldsRow();
+    public Row15<String, String, Integer, String, String, String, String, String, String, Double, String, String, Integer, Timestamp, Timestamp> fieldsRow() {
+        return (Row15) super.fieldsRow();
     }
 }

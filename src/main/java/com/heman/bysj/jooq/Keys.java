@@ -34,10 +34,9 @@ import com.heman.bysj.jooq.tables.ActRuTimerJob;
 import com.heman.bysj.jooq.tables.ActRuVariable;
 import com.heman.bysj.jooq.tables.Changemajors;
 import com.heman.bysj.jooq.tables.Classes;
+import com.heman.bysj.jooq.tables.Examine;
 import com.heman.bysj.jooq.tables.Holiday;
 import com.heman.bysj.jooq.tables.HolidayCheck;
-import com.heman.bysj.jooq.tables.Leave;
-import com.heman.bysj.jooq.tables.Majorapproval;
 import com.heman.bysj.jooq.tables.Student;
 import com.heman.bysj.jooq.tables.Teacher;
 import com.heman.bysj.jooq.tables.records.ActEvtLogRecord;
@@ -70,10 +69,9 @@ import com.heman.bysj.jooq.tables.records.ActRuTimerJobRecord;
 import com.heman.bysj.jooq.tables.records.ActRuVariableRecord;
 import com.heman.bysj.jooq.tables.records.ChangemajorsRecord;
 import com.heman.bysj.jooq.tables.records.ClassesRecord;
+import com.heman.bysj.jooq.tables.records.ExamineRecord;
 import com.heman.bysj.jooq.tables.records.HolidayCheckRecord;
 import com.heman.bysj.jooq.tables.records.HolidayRecord;
-import com.heman.bysj.jooq.tables.records.LeaveRecord;
-import com.heman.bysj.jooq.tables.records.MajorapprovalRecord;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
 import com.heman.bysj.jooq.tables.records.TeacherRecord;
 
@@ -104,9 +102,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final Identity<ActEvtLogRecord, Long> IDENTITY_ACT_EVT_LOG = Identities0.IDENTITY_ACT_EVT_LOG;
-    public static final Identity<ChangemajorsRecord, Integer> IDENTITY_CHANGEMAJORS = Identities0.IDENTITY_CHANGEMAJORS;
     public static final Identity<ClassesRecord, Integer> IDENTITY_CLASSES = Identities0.IDENTITY_CLASSES;
-    public static final Identity<LeaveRecord, Integer> IDENTITY_LEAVE = Identities0.IDENTITY_LEAVE;
     public static final Identity<StudentRecord, Integer> IDENTITY_STUDENT = Identities0.IDENTITY_STUDENT;
     public static final Identity<TeacherRecord, Integer> IDENTITY_TEACHER = Identities0.IDENTITY_TEACHER;
 
@@ -148,10 +144,9 @@ public class Keys {
     public static final UniqueKey<ChangemajorsRecord> KEY_CHANGEMAJORS_PRIMARY = UniqueKeys0.KEY_CHANGEMAJORS_PRIMARY;
     public static final UniqueKey<ChangemajorsRecord> KEY_CHANGEMAJORS_SID = UniqueKeys0.KEY_CHANGEMAJORS_SID;
     public static final UniqueKey<ClassesRecord> KEY_CLASSES_PRIMARY = UniqueKeys0.KEY_CLASSES_PRIMARY;
+    public static final UniqueKey<ExamineRecord> KEY_EXAMINE_PRIMARY = UniqueKeys0.KEY_EXAMINE_PRIMARY;
     public static final UniqueKey<HolidayRecord> KEY_HOLIDAY_PRIMARY = UniqueKeys0.KEY_HOLIDAY_PRIMARY;
     public static final UniqueKey<HolidayCheckRecord> KEY_HOLIDAY_CHECK_PRIMARY = UniqueKeys0.KEY_HOLIDAY_CHECK_PRIMARY;
-    public static final UniqueKey<LeaveRecord> KEY_LEAVE_PRIMARY = UniqueKeys0.KEY_LEAVE_PRIMARY;
-    public static final UniqueKey<MajorapprovalRecord> KEY_MAJORAPPROVAL_PRIMARY = UniqueKeys0.KEY_MAJORAPPROVAL_PRIMARY;
     public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = UniqueKeys0.KEY_STUDENT_PRIMARY;
     public static final UniqueKey<StudentRecord> KEY_STUDENT_SUSERNAME_UNIQUE = UniqueKeys0.KEY_STUDENT_SUSERNAME_UNIQUE;
     public static final UniqueKey<TeacherRecord> KEY_TEACHER_PRIMARY = UniqueKeys0.KEY_TEACHER_PRIMARY;
@@ -199,9 +194,6 @@ public class Keys {
     public static final ForeignKey<ActRuVariableRecord, ActRuExecutionRecord> ACT_FK_VAR_EXE = ForeignKeys0.ACT_FK_VAR_EXE;
     public static final ForeignKey<ActRuVariableRecord, ActRuExecutionRecord> ACT_FK_VAR_PROCINST = ForeignKeys0.ACT_FK_VAR_PROCINST;
     public static final ForeignKey<ActRuVariableRecord, ActGeBytearrayRecord> ACT_FK_VAR_BYTEARRAY = ForeignKeys0.ACT_FK_VAR_BYTEARRAY;
-    public static final ForeignKey<ChangemajorsRecord, StudentRecord> CHANGESID_FOREIGNKEY = ForeignKeys0.CHANGESID_FOREIGNKEY;
-    public static final ForeignKey<LeaveRecord, TeacherRecord> LEAVE_TID_FORIEGINKEY = ForeignKeys0.LEAVE_TID_FORIEGINKEY;
-    public static final ForeignKey<MajorapprovalRecord, ChangemajorsRecord> APPROVECID_FOREIGNKEY = ForeignKeys0.APPROVECID_FOREIGNKEY;
     public static final ForeignKey<StudentRecord, TeacherRecord> STUDENT_TID_FORIENGINKEY = ForeignKeys0.STUDENT_TID_FORIENGINKEY;
 
     // -------------------------------------------------------------------------
@@ -210,9 +202,7 @@ public class Keys {
 
     private static class Identities0 {
         public static Identity<ActEvtLogRecord, Long> IDENTITY_ACT_EVT_LOG = Internal.createIdentity(ActEvtLog.ACT_EVT_LOG, ActEvtLog.ACT_EVT_LOG.LOG_NR_);
-        public static Identity<ChangemajorsRecord, Integer> IDENTITY_CHANGEMAJORS = Internal.createIdentity(Changemajors.CHANGEMAJORS, Changemajors.CHANGEMAJORS.CID);
         public static Identity<ClassesRecord, Integer> IDENTITY_CLASSES = Internal.createIdentity(Classes.CLASSES, Classes.CLASSES.ID);
-        public static Identity<LeaveRecord, Integer> IDENTITY_LEAVE = Internal.createIdentity(Leave.LEAVE, Leave.LEAVE.LID);
         public static Identity<StudentRecord, Integer> IDENTITY_STUDENT = Internal.createIdentity(Student.STUDENT, Student.STUDENT.SID);
         public static Identity<TeacherRecord, Integer> IDENTITY_TEACHER = Internal.createIdentity(Teacher.TEACHER, Teacher.TEACHER.TID);
     }
@@ -250,12 +240,11 @@ public class Keys {
         public static final UniqueKey<ActRuTimerJobRecord> KEY_ACT_RU_TIMER_JOB_PRIMARY = Internal.createUniqueKey(ActRuTimerJob.ACT_RU_TIMER_JOB, "KEY_act_ru_timer_job_PRIMARY", ActRuTimerJob.ACT_RU_TIMER_JOB.ID_);
         public static final UniqueKey<ActRuVariableRecord> KEY_ACT_RU_VARIABLE_PRIMARY = Internal.createUniqueKey(ActRuVariable.ACT_RU_VARIABLE, "KEY_act_ru_variable_PRIMARY", ActRuVariable.ACT_RU_VARIABLE.ID_);
         public static final UniqueKey<ChangemajorsRecord> KEY_CHANGEMAJORS_PRIMARY = Internal.createUniqueKey(Changemajors.CHANGEMAJORS, "KEY_changemajors_PRIMARY", Changemajors.CHANGEMAJORS.CID);
-        public static final UniqueKey<ChangemajorsRecord> KEY_CHANGEMAJORS_SID = Internal.createUniqueKey(Changemajors.CHANGEMAJORS, "KEY_changemajors_sid", Changemajors.CHANGEMAJORS.SID);
+        public static final UniqueKey<ChangemajorsRecord> KEY_CHANGEMAJORS_SID = Internal.createUniqueKey(Changemajors.CHANGEMAJORS, "KEY_changemajors_sid", Changemajors.CHANGEMAJORS.PROCESSINSTANCEID);
         public static final UniqueKey<ClassesRecord> KEY_CLASSES_PRIMARY = Internal.createUniqueKey(Classes.CLASSES, "KEY_classes_PRIMARY", Classes.CLASSES.ID);
+        public static final UniqueKey<ExamineRecord> KEY_EXAMINE_PRIMARY = Internal.createUniqueKey(Examine.EXAMINE, "KEY_examine_PRIMARY", Examine.EXAMINE.CHECKID);
         public static final UniqueKey<HolidayRecord> KEY_HOLIDAY_PRIMARY = Internal.createUniqueKey(Holiday.HOLIDAY, "KEY_holiday_PRIMARY", Holiday.HOLIDAY.FORMID);
         public static final UniqueKey<HolidayCheckRecord> KEY_HOLIDAY_CHECK_PRIMARY = Internal.createUniqueKey(HolidayCheck.HOLIDAY_CHECK, "KEY_holiday_check_PRIMARY", HolidayCheck.HOLIDAY_CHECK.CHECKID);
-        public static final UniqueKey<LeaveRecord> KEY_LEAVE_PRIMARY = Internal.createUniqueKey(Leave.LEAVE, "KEY_leave_PRIMARY", Leave.LEAVE.LID);
-        public static final UniqueKey<MajorapprovalRecord> KEY_MAJORAPPROVAL_PRIMARY = Internal.createUniqueKey(Majorapproval.MAJORAPPROVAL, "KEY_majorapproval_PRIMARY", Majorapproval.MAJORAPPROVAL.AID);
         public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = Internal.createUniqueKey(Student.STUDENT, "KEY_student_PRIMARY", Student.STUDENT.SID);
         public static final UniqueKey<StudentRecord> KEY_STUDENT_SUSERNAME_UNIQUE = Internal.createUniqueKey(Student.STUDENT, "KEY_student_susername_unique", Student.STUDENT.USERNAME);
         public static final UniqueKey<TeacherRecord> KEY_TEACHER_PRIMARY = Internal.createUniqueKey(Teacher.TEACHER, "KEY_teacher_PRIMARY", Teacher.TEACHER.TID);
@@ -301,9 +290,6 @@ public class Keys {
         public static final ForeignKey<ActRuVariableRecord, ActRuExecutionRecord> ACT_FK_VAR_EXE = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuVariable.ACT_RU_VARIABLE, "ACT_FK_VAR_EXE", ActRuVariable.ACT_RU_VARIABLE.EXECUTION_ID_);
         public static final ForeignKey<ActRuVariableRecord, ActRuExecutionRecord> ACT_FK_VAR_PROCINST = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_RU_EXECUTION_PRIMARY, ActRuVariable.ACT_RU_VARIABLE, "ACT_FK_VAR_PROCINST", ActRuVariable.ACT_RU_VARIABLE.PROC_INST_ID_);
         public static final ForeignKey<ActRuVariableRecord, ActGeBytearrayRecord> ACT_FK_VAR_BYTEARRAY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_ACT_GE_BYTEARRAY_PRIMARY, ActRuVariable.ACT_RU_VARIABLE, "ACT_FK_VAR_BYTEARRAY", ActRuVariable.ACT_RU_VARIABLE.BYTEARRAY_ID_);
-        public static final ForeignKey<ChangemajorsRecord, StudentRecord> CHANGESID_FOREIGNKEY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_STUDENT_PRIMARY, Changemajors.CHANGEMAJORS, "changeSid_foreignkey", Changemajors.CHANGEMAJORS.SID);
-        public static final ForeignKey<LeaveRecord, TeacherRecord> LEAVE_TID_FORIEGINKEY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_TEACHER_PRIMARY, Leave.LEAVE, "leave_tid_forieginkey", Leave.LEAVE.TID);
-        public static final ForeignKey<MajorapprovalRecord, ChangemajorsRecord> APPROVECID_FOREIGNKEY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_CHANGEMAJORS_PRIMARY, Majorapproval.MAJORAPPROVAL, "approvecid_foreignkey", Majorapproval.MAJORAPPROVAL.CID);
         public static final ForeignKey<StudentRecord, TeacherRecord> STUDENT_TID_FORIENGINKEY = Internal.createForeignKey(com.heman.bysj.jooq.Keys.KEY_TEACHER_PRIMARY, Student.STUDENT, "student_tid_forienginkey", Student.STUDENT.TID);
     }
 }
