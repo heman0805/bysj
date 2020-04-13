@@ -278,19 +278,24 @@ public class HolidayServiceImpl implements HolidayService {
 
     @Override
     public List<HolidayByClass> searchTeacherHoliday(String param,String colpro) {
+        log.info("进入查询任务");
         List<HolidayByClass> holidayByClasses = new ArrayList<>();
         List<TeacherRecord> teacherRecords = new ArrayList<>();
-        if(param.equals("college"))
+        if(param.equals("college")){
             teacherRecords = teacherDao.selectByCollege(colpro);
+            log.info("教师数量："+teacherRecords.size());
+        }
         else if(param.equals("profession"))
             teacherRecords = teacherDao.selectByProfession(colpro);
         for (TeacherRecord teacherRecord:teacherRecords) {
+            log.info("请假人ID："+teacherRecord.getTid());
             //每个教师的请假记录
             List<HolidayRecord> holidays = holidayDao.selectByUidAndRole(teacherRecord.getTid(),UserRole.TEACHER);
             if(holidays.size()==0||holidays==null){
                 continue;
             }
             for (HolidayRecord holidayRecord:holidays) {//处理每条请假记录
+                log.info("请假单ID："+holidayRecord.getFormid());
                 ExamineRecord holidayCheckRecord = examineDao.selectByProcessInstanceId(holidayRecord.getProcessinstanceid());
                 HolidayByClass holiday = new HolidayByClass();
                 if(holidayCheckRecord==null){

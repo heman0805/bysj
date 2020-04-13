@@ -2,10 +2,10 @@
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/test" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1586247588057" name="" targetNamespace="http://www.activiti.org/test" typeLanguage="http://www.w3.org/2001/XMLSchema">
   <process id="majorProcess" isClosed="false" isExecutable="true" name="转专业流程" processType="None">
     <startEvent id="_2" name="StartEvent"/>
-    <userTask activiti:assignee="${name}" activiti:exclusive="true" id="_3" name="填写转专业申请"/>
+    <userTask activiti:assignee="${name}" activiti:exclusive="true" id="_3" name="填写转专业申请单"/>
     <userTask activiti:candidateGroups="Group_AcademicAffairs" activiti:exclusive="true" id="_4" name="当前学院教务办审批"/>
     <userTask activiti:candidateGroups="Group_Dean" activiti:exclusive="true" id="_5" name="当前学院院长审批"/>
-    <userTask activiti:candidateGroups="Group_AcademicAffairs" activiti:exclusive="true" id="_6" name="转向专业学院教务办"/>
+    <userTask activiti:candidateGroups="Group_AcademicAffairs" activiti:exclusive="true" id="_6" name="转向专业学院教务办审批"/>
     <userTask activiti:candidateGroups="Group_Dean" activiti:exclusive="true" id="_7" name="转向专业院长审批"/>
     <userTask activiti:candidateGroups="Group_AdministrationOffice" activiti:exclusive="true" id="_8" name="学校教务办审批"/>
     <sequenceFlow id="_9" sourceRef="_2" targetRef="_3"/>

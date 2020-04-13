@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Changemajors implements Serializable {
 
-    private static final long serialVersionUID = -1850063748;
+    private static final long serialVersionUID = 370382936;
 
     private String    cid;
     private String    processinstanceid;
@@ -34,9 +34,11 @@ public class Changemajors implements Serializable {
     private String    currentclass;
     private String    newcollege;
     private String    newprofession;
+    private String    post;
     private Double    gpa;
     private String    rank;
     private String    contest;
+    private String    society;
     private Integer   processstatus;
     private Timestamp createtime;
     private Timestamp updatetime;
@@ -53,9 +55,11 @@ public class Changemajors implements Serializable {
         this.currentclass = value.currentclass;
         this.newcollege = value.newcollege;
         this.newprofession = value.newprofession;
+        this.post = value.post;
         this.gpa = value.gpa;
         this.rank = value.rank;
         this.contest = value.contest;
+        this.society = value.society;
         this.processstatus = value.processstatus;
         this.createtime = value.createtime;
         this.updatetime = value.updatetime;
@@ -71,9 +75,11 @@ public class Changemajors implements Serializable {
         String    currentclass,
         String    newcollege,
         String    newprofession,
+        String    post,
         Double    gpa,
         String    rank,
         String    contest,
+        String    society,
         Integer   processstatus,
         Timestamp createtime,
         Timestamp updatetime
@@ -87,9 +93,11 @@ public class Changemajors implements Serializable {
         this.currentclass = currentclass;
         this.newcollege = newcollege;
         this.newprofession = newprofession;
+        this.post = post;
         this.gpa = gpa;
         this.rank = rank;
         this.contest = contest;
+        this.society = society;
         this.processstatus = processstatus;
         this.createtime = createtime;
         this.updatetime = updatetime;
@@ -167,6 +175,14 @@ public class Changemajors implements Serializable {
         this.newprofession = newprofession;
     }
 
+    public String getPost() {
+        return this.post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
+    }
+
     public Double getGpa() {
         return this.gpa;
     }
@@ -189,6 +205,14 @@ public class Changemajors implements Serializable {
 
     public void setContest(String contest) {
         this.contest = contest;
+    }
+
+    public String getSociety() {
+        return this.society;
+    }
+
+    public void setSociety(String society) {
+        this.society = society;
     }
 
     public Integer getProcessstatus() {
@@ -228,9 +252,11 @@ public class Changemajors implements Serializable {
         sb.append(", ").append(currentclass);
         sb.append(", ").append(newcollege);
         sb.append(", ").append(newprofession);
+        sb.append(", ").append(post);
         sb.append(", ").append(gpa);
         sb.append(", ").append(rank);
         sb.append(", ").append(contest);
+        sb.append(", ").append(society);
         sb.append(", ").append(processstatus);
         sb.append(", ").append(createtime);
         sb.append(", ").append(updatetime);

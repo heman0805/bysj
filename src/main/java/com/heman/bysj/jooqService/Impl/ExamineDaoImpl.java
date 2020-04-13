@@ -27,4 +27,11 @@ public class ExamineDaoImpl implements ExamineDao {
                 .where(EXAMINE.PROCESSINSTANCEID.eq(processInstanceId))
                 .fetchOne();
     }
+
+    @Override
+    public ExamineRecord selectByTaskId(String taskId) {
+        return dslContext.selectFrom(EXAMINE)
+                .where(EXAMINE.TASKID.eq(taskId))
+                .fetchOne();
+    }
 }

@@ -12,11 +12,15 @@ import com.heman.bysj.jooq.tables.pojos.Teacher;
 import com.heman.bysj.service.HolidayService;
 import com.heman.bysj.service.UserService;
 import com.heman.bysj.utils.Convert;
+import com.heman.bysj.utils.Page;
+import com.heman.bysj.utils.PageUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+@Slf4j
 @RestController
 public class HolidayController {
 
@@ -99,17 +103,46 @@ public class HolidayController {
      * 2、查询所有所属任务
      * @return
      */
-    /*@RequestMapping(value="/user/holiday/teacherSearch/{uid}/{role}")*/
-    @RequestMapping(value="/user/holiday/teacherSearch/{tid}")
+    @RequestMapping(value="/user/holiday/teacherSearch/{tid}/{page}/{size}")
     @ResponseBody
-    public Map<String,Object> teacherSearchList(@PathVariable("tid") int tid){
+    public Page teacherSearchList(@PathVariable("tid") int tid
+                                                ,@PathVariable("page") int pageNum,
+                                                @PathVariable("size") int limit){
 
         Teacher teacher = userService.selectTeacherById(tid).into(Teacher.class);
         System.out.println("登录教师ID："+tid+"，登录教师所在学院："+teacher.getCollege()+"，登录教师所在专业："+teacher.getProfession()+"，登录教师所在分组："+teacher.getGroup());
-        Map<String,Object> map = new HashMap<>();
         List<HolidayTask> holidayTasks = holidayService.teacherSeacherTaskList(teacher);
-        map.put("holidayTasks",holidayTasks);
-        return map;
+
+        PageUtils pageUtils = new PageUtils();
+        Page page = pageUtils.resultPage(holidayTasks,pageNum,limit);
+        return page;
+
+        /*int offest;
+        if(pageNum>0){
+            offest =(pageNum-1)*limit;
+        }else{
+            offest=0;
+        }
+        List<HolidayTask> result = new ArrayList<>();
+        if(holidayTasks==null){
+            result = null;
+            Page page = new Page();
+            page.setData(result);
+            page.setSize(limit);
+            page.setTotalElement(0);
+            return page;
+        }
+        else if(offest+limit<holidayTasks.size()) {
+            result = holidayTasks.subList(offest, offest + limit);
+        }else{
+            result = holidayTasks.subList(offest,holidayTasks.size());
+        }
+        Page page = new Page();
+        page.setData(result);
+        page.setSize(limit);
+        page.setTotalElement(holidayTasks.size());
+        return page;
+*/
     }
 
     /**
@@ -159,11 +192,38 @@ public class HolidayController {
      * 4、返回结果
      * @return
      */
-    @RequestMapping(value="/user/holiday/holidayHistory/{userId}/{role}")
+    @RequestMapping(value="/user/holiday/holidayHistory/{userId}/{role}/{page}/{size}")
     @ResponseBody
-    public List<HolidayHistory> holidayHistory(@PathVariable("userId") int userId,@PathVariable("role") String role ){
+    public Page holidayHistory(@PathVariable("userId") int userId,@PathVariable("role") String role
+                                ,@PathVariable("page") int pageNum,
+                               @PathVariable("size") int limit){
+
         List<HolidayHistory> holidayHistorys = holidayService.holidayHistory(userId,role);
-        return holidayHistorys;
+        PageUtils pageUtils = new PageUtils();
+        Page page = pageUtils.resultPage(holidayHistorys,pageNum,limit);
+        return page;
+        /*int offest;
+        if(pageNum>0){
+            offest =(pageNum-1)*limit;
+        }else{
+            offest=0;
+        }
+        List<HolidayHistory> result = new ArrayList<>();
+        int toIndex = 0;
+        if(holidayHistorys==null){
+            PageUtils pageUtils = new PageUtils();
+            Page page = pageUtils.toPage(null,limit,0);
+            return page;
+        }
+        else if(offest+limit<holidayHistorys.size()) {
+            toIndex = offest+limit;
+        }else{
+            toIndex = holidayHistorys.size();
+        }
+        result = holidayHistorys.subList(offest,toIndex);
+        PageUtils pageUtils = new PageUtils();
+        Page page = pageUtils.toPage(result,limit,holidayHistorys.size());
+   */
     }
 
     /**
@@ -202,11 +262,19 @@ public class HolidayController {
      * @param class_
      * @return
      */
-    @RequestMapping(value="/user/holiday/searchHoliday/{tid}/{param}/{class}")
+    @RequestMapping(value="/user/holiday/searchHoliday/{tid}/{param}/{class}/{page}/{size}")
     @ResponseBody
-    public List<HolidayByClass> selectHolidayByClass(@PathVariable("tid") int tid,@PathVariable("param") String param,@PathVariable("class") String class_ ){
-        List<HolidayByClass> result = holidayService.selectHolidayByClass( tid,param,class_);
-        return result;
+    public Page selectHolidayByClass(@PathVariable("tid") int tid,@PathVariable("param") String param,
+                                                     @PathVariable("class") String class_ ,@PathVariable("page") int pageNum,
+                                                     @PathVariable("size") int limit){
+
+        log.info("searchHoliday-------pageNum={},size={}",pageNum,limit);
+        List<HolidayByClass> holidayByClasses = holidayService.selectHolidayByClass( tid,param,class_);
+
+        log.info("holidayByClasses.size()={}",holidayByClasses.size());
+        PageUtils pageUtils = new PageUtils();
+        Page page = pageUtils.resultPage(holidayByClasses,pageNum,limit);
+        return page;
     }
 
     /**
@@ -214,12 +282,43 @@ public class HolidayController {
      * @param
      * @return
      */
-    @RequestMapping(value="/user/holiday/searchTeacherHoliday/{param}/{profession}")
+    @RequestMapping(value="/user/holiday/searchTeacherHoliday/{param}/{profession}/{page}/{size}")
     @ResponseBody
-    public List<HolidayByClass> searchTeacherHoliday(@PathVariable("param") String param,@PathVariable("profession") String colpro ){
-//        List<HolidayByClass> result = holidayService.selectHolidayByClass(class_);
-        List<HolidayByClass> result = holidayService.searchTeacherHoliday(param,colpro);
-        return result;
+    public Page searchTeacherHoliday(@PathVariable("param") String param,@PathVariable("profession") String colpro
+                                                    ,@PathVariable("page") int pageNum,
+                                                     @PathVariable("size") int limit){
+
+        log.info("查询教师请假信息");
+        List<HolidayByClass> holidayByClasses = holidayService.searchTeacherHoliday(param,colpro);
+
+        PageUtils pageUtils = new PageUtils();
+        Page page = pageUtils.resultPage(holidayByClasses,pageNum,limit);
+        return page;
+        /*int offest;
+        if(pageNum>0){
+            offest =(pageNum-1)*limit;
+        }else{
+            offest=0;
+        }
+        List<HolidayByClass> result = new ArrayList<>();
+        if(holidayByClasses==null){
+            result = null;
+            Page page = new Page();
+            page.setData(result);
+            page.setSize(limit);
+            page.setTotalElement(0);
+            return page;
+        }
+        else if(offest+limit<holidayByClasses.size()) {
+            result = holidayByClasses.subList(offest, offest + limit);
+        }else{
+            result = holidayByClasses.subList(offest,holidayByClasses.size());
+        }
+        Page page = new Page();
+        page.setData(result);
+        page.setSize(limit);
+        page.setTotalElement(holidayByClasses.size());
+        return page;*/
     }
 
 

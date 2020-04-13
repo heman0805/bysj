@@ -153,6 +153,13 @@ public class Convert {
         Map<String,Object> user = params.get("user");
         Student student = getStudent(user);
         Changemajors changemajors = new Changemajors();
+
+        if(form.get("post")!=null){
+            changemajors.setPost(form.get("post").toString());
+        }
+        if(form.get("society")!=null){
+            changemajors.setSociety(form.get("society").toString());
+        }
         changemajors.setCid(UUID.randomUUID().toString());
         changemajors.setCreatetime(new Timestamp(System.currentTimeMillis()));
         changemajors.setCurrentclass(student.getClass_());
@@ -173,6 +180,8 @@ public class Convert {
     public static MajorTask changeMajorToMajorTask(String name,String role,int userId,String class_,String taskId,Changemajors changemajors){
         MajorTask majorTask = new MajorTask();
 
+        majorTask.setPost(changemajors.getPost());
+        majorTask.setSociety(changemajors.getSociety());
         majorTask.setUserId(userId);
         majorTask.setRole(role);
         majorTask.setClass_(class_);

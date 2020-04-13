@@ -14,6 +14,8 @@ public class MajorTask {
     private String role;
     private String currentProfession;
     private String class_;
+    private String post;
+    private String society;
     private String newCollege;
     private String newProfession;
     private String reason;
@@ -21,6 +23,22 @@ public class MajorTask {
     private String rank;
     private String contest;
     private Date createTime;
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
+    }
+
+    public String getSociety() {
+        return society;
+    }
+
+    public void setSociety(String society) {
+        this.society = society;
+    }
 
     public int getUserId() {
         return userId;

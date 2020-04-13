@@ -8,9 +8,16 @@ import com.heman.bysj.jooqService.ExamineDao;
 import com.heman.bysj.jooqService.StudentDao;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.HistoryService;
+import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
+import org.activiti.engine.history.HistoricTaskInstanceQuery;
+import org.activiti.engine.impl.RepositoryServiceImpl;
+import org.activiti.engine.impl.TaskServiceImpl;
+import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,9 +90,28 @@ public class Activiti_Major {
             String processInstanceId = task.getProcessInstanceId();
             ChangemajorsRecord changemajorsRecord = changeMajorsDao.selectByProcessInstanceId(processInstanceId);
 
-            if(changemajorsRecord.getCurrentcollege().equals(teacher.getCollege())){
-                   taskService.claim(task.getId(),teacher.getTid().toString());
+            if(changemajorsRecord.getProcessstatus()==1){//当前教务办审批中
+                if(changemajorsRecord.getCurrentcollege().equals(teacher.getCollege())){
+                    taskService.claim(task.getId(),teacher.getTid().toString());
+                }
+            }else if(changemajorsRecord.getProcessstatus()==2){//当前院长审批中
+                if(changemajorsRecord.getCurrentcollege().equals(teacher.getCollege())){
+                    taskService.claim(task.getId(),teacher.getTid().toString());
+                }
+            }else if(changemajorsRecord.getProcessstatus()==3){//转向教务办审批中
+                if(changemajorsRecord.getNewcollege().equals(teacher.getCollege())){
+                    taskService.claim(task.getId(),teacher.getTid().toString());
+                }
+            }else if(changemajorsRecord.getProcessstatus()==4){//转向院长审批中
+                if(changemajorsRecord.getNewcollege().equals(teacher.getCollege())){
+                    taskService.claim(task.getId(),teacher.getTid().toString());
+                    log.info("拾取任务人：{},任务ID:{}",teacher.getTid(),task.getId());
+                }
+            }else if(changemajorsRecord.getProcessstatus()==5){//学校教务办审批中
+                taskService.claim(task.getId(),teacher.getTid().toString());
+                log.info("拾取任务人：{},任务ID:{}",teacher.getTid(),task.getId());
             }
+
         }
     }
     /**
@@ -138,6 +164,16 @@ public class Activiti_Major {
         taskService.complete(task.getId());
         return task.getId();
     }
+    /**
+     * 拒绝申请
+     * 通过processDefinitionKey及processInstanceID查找任务并完成任务
+     * @param
+     * @param processInstanceId
+     * @return
+     */
+    public void refuse(String processInstanceId){
+        runtimeService.suspendProcessInstanceById(processInstanceId);
+    }
     /**查询流程状态（判断流程正在执行，还是结束）*/
     public boolean isProcessEnd(String processInstanceId){
         //去正在执行的任务表查询
@@ -154,5 +190,63 @@ public class Activiti_Major {
             return false;
         }
     }
+
+
+    /**
+     * 终止正在运行的流程实例
+     */
+
+    public void stopRunProcessInstance( String processInstanceId) {
+
+        runtimeService.deleteProcessInstance(processInstanceId,"结束流程");
+
+    }
+    /**
+     * 通过processDefinitionKey及processInstanceID查找任务并完成任务
+     * @param processDefinitionKey
+     * @param processInstanceId
+     * @return
+     */
+    public String stopProcessInstance(String processDefinitionKey,String processInstanceId){
+        Task task = taskService.createTaskQuery()
+                .processDefinitionKey(processDefinitionKey)
+                .processInstanceId(processInstanceId)
+                .singleResult();
+        runtimeService.deleteProcessInstance(processInstanceId,"结束流程");
+        return task.getId();
+    }
+    /**查询历史流程实例*/
+    public HistoricProcessInstance findHistoryProcessInstance(String businessKey){
+        HistoricProcessInstance pi = historyService//与历史数据（历史表）相关的Service
+                .createHistoricProcessInstanceQuery()//创建历史流程实例查询
+                .processDefinitionKey("majorProcess")
+                .processInstanceBusinessKey(businessKey)//使用流程实例ID查询
+                .singleResult();
+        log.info("查询历史流程实例完成,业务ID：{}，流程实例：{}",businessKey,pi);
+        return pi;
+    }
+    /**查询历史任务*/
+    public List<HistoricTaskInstance> findHistoryTaskByBusinessKey(String processInstanceId){
+        List<HistoricTaskInstance> majorProcess = historyService//与历史数据（历史表）相关的Service
+                .createHistoricTaskInstanceQuery()
+                .processDefinitionKey("majorProcess")
+                .processInstanceId(processInstanceId)
+                .list();
+        for (HistoricTaskInstance hti:majorProcess) {
+            System.out.println("查询任务进度：流程ID："+hti.getProcessInstanceId());
+            System.out.println("查询任务进度：活动ID："+hti.getId());
+            System.out.println("查询任务进度：办理人"+hti.getAssignee());
+            System.out.println();
+        }
+        return majorProcess;
+    }
+
+
+
+
+
+
+
+
 
 }

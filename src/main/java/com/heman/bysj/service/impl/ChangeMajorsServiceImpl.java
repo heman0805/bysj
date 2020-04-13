@@ -2,11 +2,14 @@ package com.heman.bysj.service.impl;
 
 import com.heman.bysj.activiti.Activiti_Holiday;
 import com.heman.bysj.activiti.Activiti_Major;
+import com.heman.bysj.entity.ChangeMajorResult;
+import com.heman.bysj.entity.MajorProgress;
 import com.heman.bysj.entity.MajorTask;
 import com.heman.bysj.jooq.tables.pojos.*;
 import com.heman.bysj.jooq.tables.records.ChangemajorsRecord;
 import com.heman.bysj.jooq.tables.records.ExamineRecord;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
+import com.heman.bysj.jooq.tables.records.TeacherRecord;
 import com.heman.bysj.jooqService.*;
 import com.heman.bysj.service.ChangeMajorsService;
 import com.heman.bysj.utils.Convert;
@@ -40,15 +43,15 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
 
     @Override
     public boolean startMajor(Changemajors changemajors) {
-        //1、启动请假流程实例
+        //1、启动转专业流程实例
         String processInstanceId = activiti_major.startInstance(changemajors);
-        //2、插入请假表
+        //2、插入转专业表
         changemajors.setProcessinstanceid(processInstanceId);
         changemajors.setProcessstatus(1);//设置审批流程状态为审批中
         ChangemajorsRecord changemajorsRecord = new ChangemajorsRecord();
         changemajorsRecord.from(changemajors);
         int result = changeMajorsDao.insert(changemajorsRecord);
-        //3.完成请假单填写
+        //3.完成转专业表单填写
         activiti_major.completeWrite(changemajors);
         return result==1?true:false;
     }
@@ -104,16 +107,111 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
     @Override
     public void major_Check(Examine examine) {
         //完成任务并获得任务ID
-        String taskId = activiti_major.teacherCompleteTask("majorProcess",examine.getProcessinstanceid());
+        String taskId = "";
+        if(examine.getCheckresult().equals("通过")){
+            taskId = activiti_major.teacherCompleteTask("majorProcess",examine.getProcessinstanceid());
+            changeMajorsDao.complete(examine.getProcessinstanceid());
+        }else if(examine.getCheckresult().equals("拒绝")){
+            taskId = activiti_major.stopProcessInstance("majorProcess",examine.getProcessinstanceid());
+            changeMajorsDao.stopRunProcessInstance(examine.getProcessinstanceid());
+        }
         //封装任务ID
         examine.setTaskid(taskId);
         //ExaminRecord
         ExamineRecord examineRecord = new ExamineRecord();
         examineRecord.from(examine);
         examineDao.insert(examineRecord);
-        //修改Holiday表,设置审批状态为已完成
-        if(activiti_major.isProcessEnd(examine.getProcessinstanceid())){//流程已走完
-            changeMajorsDao.complete(examine.getProcessinstanceid(),2);
+
+    }
+
+    /**
+     *       1、根据用户查询业务表获取businessKey
+     *       3、根据业务表及examine表封装审核数据
+     *      *
+     * @param userId
+     */
+    @Override
+    public List<MajorProgress> userSearch(int userId){
+        //存放结果
+        List<MajorProgress> result = new ArrayList<>();
+        //查询请假单进度
+        System.out.println("进入service");
+        //根据用户id查询业务表
+        List<ChangemajorsRecord> changemajorsRecords = changeMajorsDao.selectByUserId(userId);
+        if(changemajorsRecords.size()==0)
+            return null;
+        for (ChangemajorsRecord changemajorsRecord: changemajorsRecords) {//循环每个申请任务
+            Changemajors changemajors = changemajorsRecord.into(Changemajors.class);
+            //通过流程ID查找历史任务
+            List<HistoricTaskInstance> historicTaskInstances = activiti_major.findHistoryTaskByBusinessKey(changemajors.getProcessinstanceid());
+            for (HistoricTaskInstance hti:historicTaskInstances) {
+                MajorProgress majorProgress = new MajorProgress();
+                ExamineRecord examineRecord = examineDao.selectByTaskId(hti.getId());
+                if(examineRecord!=null){
+                    Examine examine = examineRecord.into(Examine.class);
+                    majorProgress.setProcessInstanceId(changemajors.getProcessinstanceid());
+                    majorProgress.setTaskId(examine.getTaskid());
+                    majorProgress.setNewCollege(changemajors.getNewcollege());
+                    majorProgress.setNewProfession(changemajors.getNewprofession());
+                    majorProgress.setOpinion(examine.getOpinion());
+                    majorProgress.setCheckTime(examine.getChecktime());
+                    majorProgress.setCheckResult(examine.getCheckresult());
+                    Teacher teacher = teacherDao.selectById(Integer.parseInt(hti.getAssignee())).into(Teacher.class);
+                    majorProgress.setTaskStatus(teacher.getCollege()+"/"+teacher.getPosition()+"/审批完成");
+                    result.add(majorProgress);
+                }
+
+            }
         }
+        log.info("查询用户转账任务完成");
+        System.out.println(result.toArray());
+        return result;
+    }
+
+    /**
+     * 通过学院名称查找转专业申请结果
+     * 1、查找changeMajor表
+     * （where currentCollege = college and processStatus=6 or processStatus=7）
+     * @param college
+     * @return
+     */
+    @Override
+    public List<Changemajors> selectMajor(String college) {
+        List<Changemajors> changemajorsList = new ArrayList<>();
+
+        return null;
+    }
+
+    /**
+     * 通过专业查找转专业结果
+     * @param profession
+     * @return
+     */
+    @Override
+    public List<ChangeMajorResult> getByProfession(String profession) {
+        List<ChangeMajorResult> result = new ArrayList<>();
+        List<ChangemajorsRecord> changemajorsRecords = changeMajorsDao.selectByProfessionAndProcessStatus(profession, 6);
+        System.out.println("profession:"+profession+",审核通过列表："+changemajorsRecords);
+        for (ChangemajorsRecord record:changemajorsRecords) {
+            Changemajors changemajors = record.into(Changemajors.class);
+            ChangeMajorResult changeMajorResult = new ChangeMajorResult();
+            Student student = studentDao.selectById(changemajors.getUserid()).into(Student.class);
+            changeMajorResult.setName(student.getName());
+            changeMajorResult.setNumber(student.getUsername());
+            changeMajorResult.setSex(student.getSex());
+            changeMajorResult.setNewProfession(changemajors.getNewprofession());
+            changeMajorResult.setGpa(changemajors.getGpa());
+            result.add(changeMajorResult);
+        }
+        return result;
+    }
+
+    /**
+     *
+     * @param
+     * @return
+     */
+    @Override
+    public void setClass(List<ChangeMajorResult> list) {
     }
 }

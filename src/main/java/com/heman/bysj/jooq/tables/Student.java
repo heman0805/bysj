@@ -20,7 +20,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row11;
+import org.jooq.Row12;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student extends TableImpl<StudentRecord> {
 
-    private static final long serialVersionUID = -646502532;
+    private static final long serialVersionUID = 230954688;
 
     /**
      * The reference instance of <code>bysj.student</code>
@@ -66,6 +66,11 @@ public class Student extends TableImpl<StudentRecord> {
      * The column <code>bysj.student.name</code>. 学生姓名
      */
     public final TableField<StudentRecord, String> NAME = createField(DSL.name("name"), org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "学生姓名");
+
+    /**
+     * The column <code>bysj.student.sex</code>. 性别：女，男
+     */
+    public final TableField<StudentRecord, String> SEX = createField(DSL.name("sex"), org.jooq.impl.SQLDataType.VARCHAR(2).nullable(false), this, "性别：女，男");
 
     /**
      * The column <code>bysj.student.username</code>. 用户名
@@ -206,11 +211,11 @@ public class Student extends TableImpl<StudentRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row11 type methods
+    // Row12 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row11<Integer, String, String, String, Integer, String, String, String, Integer, String, String> fieldsRow() {
-        return (Row11) super.fieldsRow();
+    public Row12<Integer, String, String, String, String, Integer, String, String, String, Integer, String, String> fieldsRow() {
+        return (Row12) super.fieldsRow();
     }
 }

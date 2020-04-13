@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import static com.heman.bysj.jooq.tables.Changemajors.CHANGEMAJORS;
 
@@ -38,11 +39,36 @@ public class ChangeMajorsDaoImpl implements ChangeMajorsDao {
                 .fetchOne();
     }
     @Override
-    public void complete(String processInstanceId,int processStatus) {
+    public void complete(String processInstanceId) {
         dslContext.update(CHANGEMAJORS)
-                .set(CHANGEMAJORS.PROCESSSTATUS,processStatus)
+                .set(CHANGEMAJORS.PROCESSSTATUS,CHANGEMAJORS.PROCESSSTATUS.add(1))
                 .set(CHANGEMAJORS.UPDATETIME,new Timestamp(System.currentTimeMillis()))
                 .where(CHANGEMAJORS.PROCESSINSTANCEID.eq(processInstanceId))
                 .execute();
+    }
+
+    @Override
+    public void stopRunProcessInstance(String processInstanceId) {
+        dslContext.update(CHANGEMAJORS)
+                .set(CHANGEMAJORS.PROCESSSTATUS,7)
+                .set(CHANGEMAJORS.UPDATETIME,new Timestamp(System.currentTimeMillis()))
+                .where(CHANGEMAJORS.PROCESSINSTANCEID.eq(processInstanceId))
+                .execute();
+    }
+
+    @Override
+    public List<ChangemajorsRecord> selectByUserId(int userId) {
+        return dslContext.selectFrom(CHANGEMAJORS)
+                .where(CHANGEMAJORS.USERID.eq(userId))
+                .fetch();
+
+    }
+
+    @Override
+    public List<ChangemajorsRecord> selectByProfessionAndProcessStatus(String profession, int processStatus) {
+        return dslContext.selectFrom(CHANGEMAJORS)
+                .where(CHANGEMAJORS.NEWPROFESSION.eq(profession))
+                .and(CHANGEMAJORS.PROCESSSTATUS.eq(processStatus))
+                .fetch();
     }
 }
