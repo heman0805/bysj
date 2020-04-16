@@ -4,17 +4,53 @@ package com.heman.bysj.entity;
  * 转专业审批结果实体类
  */
 public class ChangeMajorResult {
+    private int sid;
     private String name;//学生姓名
     private String number;//学生学号
     private String sex;
     private String class_;
+    private String currentCollege;
     private String currentProfession;
+    private String currentClass;
     private String newCollege;
     private String newProfession;
     private String newClass_;
     private double gpa;
+    private int grade;
     private String processStatus;
     private String updateTime;
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+
+    public String getCurrentClass() {
+        return currentClass;
+    }
+
+    public void setCurrentClass(String currentClass) {
+        this.currentClass = currentClass;
+    }
+
+    public String getCurrentCollege() {
+        return currentCollege;
+    }
+
+    public void setCurrentCollege(String currentCollege) {
+        this.currentCollege = currentCollege;
+    }
+
+    public int getSid() {
+        return sid;
+    }
+
+    public void setSid(int sid) {
+        this.sid = sid;
+    }
 
     public String getSex() {
         return sex;

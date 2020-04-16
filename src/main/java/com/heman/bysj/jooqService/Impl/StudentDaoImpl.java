@@ -1,8 +1,10 @@
 package com.heman.bysj.jooqService.Impl;
 
+import com.heman.bysj.entity.ChangeMajorResult;
 import com.heman.bysj.jooq.tables.pojos.Student;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
 import com.heman.bysj.jooqService.StudentDao;
+import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Record1;
@@ -10,10 +12,12 @@ import org.jooq.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.heman.bysj.jooq.tables.Student.STUDENT;
 
+@Slf4j
 @Service
 public class StudentDaoImpl implements StudentDao {
 
@@ -107,5 +111,20 @@ public class StudentDaoImpl implements StudentDao {
         return dslContext.selectFrom(STUDENT)
                 .where(STUDENT.COLLEGE.eq(college))
                 .fetch();
+    }
+
+    @Override
+    public void updateChangeMajor(ChangeMajorResult result,int tid) {
+        log.info("更新学生信息Dao");
+        dslContext.update(STUDENT)
+                .set(STUDENT.COLLEGE,result.getNewCollege())
+                .set(STUDENT.PROFESSION,result.getNewProfession())
+                .set(STUDENT.CLASS_,result.getNewClass_())
+                .set(STUDENT.TID,tid)
+                .where(STUDENT.SID.eq(result.getSid()))
+                .execute();
+
+
+
     }
 }

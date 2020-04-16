@@ -176,10 +176,35 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
      * @return
      */
     @Override
-    public List<Changemajors> selectMajor(String college) {
-        List<Changemajors> changemajorsList = new ArrayList<>();
+    public List<ChangeMajorResult> selectMajor(String college) {
+        List<ChangeMajorResult> result = new ArrayList<>();
+        List<ChangemajorsRecord> changemajorsList = new ArrayList<>();
+        if(college!=null&&!college.equals("null")){
+            //按照学院及状态查找转专业申请
+            changemajorsList = changeMajorsDao.selectByCollegeAndProcessStatus(college,10);
+        }else{
+            log.info("查找全校转专业结果");
+            changemajorsList = changeMajorsDao.selectByProcessStatus(10);
+            log.info("转专业结果为:{}",changemajorsList);
+        }
+        for (ChangemajorsRecord changeMajor:changemajorsList) {
+            ChangeMajorResult changeMajorResult = new ChangeMajorResult();
+            changeMajorResult.setNewCollege(changeMajor.getNewcollege());
+            changeMajorResult.setNewProfession(changeMajor.getNewprofession());
 
-        return null;
+            changeMajorResult.setCurrentCollege(changeMajor.getCurrentcollege());
+            changeMajorResult.setCurrentProfession(changeMajor.getCurrentprofession());
+            changeMajorResult.setCurrentClass(changeMajor.getCurrentclass());
+            StudentRecord studentRecord = studentDao.selectById(changeMajor.getUserid());
+            changeMajorResult.setSid(studentRecord.getSid());
+            changeMajorResult.setName(studentRecord.getName());
+            changeMajorResult.setSex(studentRecord.getSex());
+            changeMajorResult.setGrade(studentRecord.getGrade());
+            changeMajorResult.setNumber(studentRecord.getUsername());
+            changeMajorResult.setNewClass_(studentRecord.getClass_());
+            result.add(changeMajorResult);
+        }
+        return result;
     }
 
     /**
@@ -188,30 +213,57 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
      * @return
      */
     @Override
-    public List<ChangeMajorResult> getByProfession(String profession) {
+    public List<ChangeMajorResult> getByProfession(String profession,String param) {
         List<ChangeMajorResult> result = new ArrayList<>();
-        List<ChangemajorsRecord> changemajorsRecords = changeMajorsDao.selectByProfessionAndProcessStatus(profession, 6);
+        List<ChangemajorsRecord> changemajorsRecords = new ArrayList<>();
+        if(param.equals("college"))
+            changemajorsRecords = changeMajorsDao.selectByCollegeAndProcessStatus(profession,6);
+        else if(param.equals("profession"))
+            changemajorsRecords = changeMajorsDao.selectByProfessionAndProcessStatus(profession, 6);
         System.out.println("profession:"+profession+",审核通过列表："+changemajorsRecords);
         for (ChangemajorsRecord record:changemajorsRecords) {
             Changemajors changemajors = record.into(Changemajors.class);
             ChangeMajorResult changeMajorResult = new ChangeMajorResult();
             Student student = studentDao.selectById(changemajors.getUserid()).into(Student.class);
+            changeMajorResult.setSid(student.getSid());
             changeMajorResult.setName(student.getName());
             changeMajorResult.setNumber(student.getUsername());
             changeMajorResult.setSex(student.getSex());
             changeMajorResult.setNewProfession(changemajors.getNewprofession());
             changeMajorResult.setGpa(changemajors.getGpa());
+            changeMajorResult.setNewCollege(changemajors.getNewcollege());
             result.add(changeMajorResult);
         }
         return result;
     }
 
     /**
-     *
-     * @param
+     * 分配新专业及班级
+     * @param list
      * @return
      */
     @Override
     public void setClass(List<ChangeMajorResult> list) {
+        String profession = list.get(0).getNewProfession();//获取更新学生的专业
+        log.info("新专业：{}",profession);
+        TeacherRecord teacherRecord = teacherDao.selectByProfessionAndPosition(profession, "辅导员");
+        for (ChangeMajorResult result:list) {
+            log.info("学生更新信息：{}",result);
+            if(result.getNewClass_()!=null){
+                log.info("更新{}个人信息:",result.getSid());
+                //更新学生信息
+                studentDao.updateChangeMajor(result,teacherRecord.getTid());
+                //更新转专业业务表
+                changeMajorsDao.updateProcessStatusCompleteByUserId(result.getSid());
+            }else{
+                log.info("该学生新班级为空:{}，班级：{}",result.getSid(),result.getNewClass_());
+            }
+        }
     }
+
+    @Override
+    public void download(String college) {
+        selectMajor(college);
+    }
+    
 }

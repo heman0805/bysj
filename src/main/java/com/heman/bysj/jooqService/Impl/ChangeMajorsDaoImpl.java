@@ -71,4 +71,26 @@ public class ChangeMajorsDaoImpl implements ChangeMajorsDao {
                 .and(CHANGEMAJORS.PROCESSSTATUS.eq(processStatus))
                 .fetch();
     }
+    @Override
+    public List<ChangemajorsRecord> selectByCollegeAndProcessStatus(String college, int processStatus) {
+        return dslContext.selectFrom(CHANGEMAJORS)
+                .where(CHANGEMAJORS.NEWCOLLEGE.eq(college))
+                .and(CHANGEMAJORS.PROCESSSTATUS.eq(processStatus))
+                .fetch();
+    }
+
+    @Override
+    public void updateProcessStatusCompleteByUserId(int userId) {
+        dslContext.update(CHANGEMAJORS)
+                .set(CHANGEMAJORS.PROCESSSTATUS,10)
+                .where(CHANGEMAJORS.USERID.eq(userId))
+                .execute();
+    }
+
+    @Override
+    public List<ChangemajorsRecord> selectByProcessStatus(int processStatus) {
+        return dslContext.selectFrom(CHANGEMAJORS)
+                .where(CHANGEMAJORS.PROCESSSTATUS.eq(processStatus))
+                .fetch();
+    }
 }

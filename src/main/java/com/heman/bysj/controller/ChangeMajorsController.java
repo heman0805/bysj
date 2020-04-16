@@ -6,19 +6,15 @@ import com.heman.bysj.entity.MajorTask;
 import com.heman.bysj.jooq.tables.pojos.Changemajors;
 import com.heman.bysj.jooq.tables.pojos.Examine;
 import com.heman.bysj.jooq.tables.pojos.Student;
-import com.heman.bysj.jooq.tables.pojos.Teacher;
-import com.heman.bysj.jooq.tables.records.ChangemajorsRecord;
 import com.heman.bysj.service.ChangeMajorsService;
 import com.heman.bysj.service.UserService;
 import com.heman.bysj.utils.Convert;
 import com.heman.bysj.utils.Page;
 import com.heman.bysj.utils.PageUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.jooq.meta.derby.sys.Sys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +27,8 @@ public class ChangeMajorsController {
     private ChangeMajorsService changeMajorsService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ExportDataService exportDataService;
     /**
      * 学生请假申请
      * 1、根据参数获得请假表单、学生信息
@@ -134,35 +132,68 @@ public class ChangeMajorsController {
      * @param limit
      * @return
      */
-    @RequestMapping(value="/user/major/getByProfession/{profession}/{page}/{size}")
+    @RequestMapping(value="/user/major/getByProfession/{profession}/{param}/{page}/{size}")
     @ResponseBody
-    public Page getByProfession(@PathVariable("profession") String profession,@PathVariable("page") int pageNum,@PathVariable("size") int limit){
+    public Page getByProfession(@PathVariable("profession") String profession,
+                                @PathVariable("param") String param
+                                ,@PathVariable("page") int pageNum,@PathVariable("size") int limit){
 
         log.info("searchHoliday-------pageNum={},size={}",pageNum,limit);
-        List<ChangeMajorResult> ChangeMajorResult = changeMajorsService.getByProfession(profession);
+        List<ChangeMajorResult> ChangeMajorResult = changeMajorsService.getByProfession(profession,param);
         log.info("selectMajor.size()={}",ChangeMajorResult.size());
         PageUtils pageUtils = new PageUtils();
         Page page = pageUtils.resultPage(ChangeMajorResult,pageNum,limit);
         return page;
     }
+    @RequestMapping(value="/user/major/setClass")
+    @ResponseBody
+    public String setClass(@RequestBody List<ChangeMajorResult> list){
+        changeMajorsService.setClass(list);
+        String msg = "分配班级成功";
+        return msg;
+    }
     /**
-     * 通过班级/专业查询请假列表
-     * 1、通过班级查询sid
-     * 2、根据学生ID查找holiday_check表
-     * 3、进行数据封装
+     * 查找转专业申请结果
      * @param
      * @return
      */
-    @RequestMapping(value="/user/major/searchMajor/{college}/{page}/{size}")
+    @RequestMapping(value="/user/major/result/{college}/{page}/{size}")
     @ResponseBody
-    public Page selectMajor(@PathVariable("college") String college,@PathVariable("page") int pageNum,@PathVariable("size") int limit){
-
-        log.info("searchHoliday-------pageNum={},size={}",pageNum,limit);
-        List<Changemajors> holidayByClasses = changeMajorsService.selectMajor( college);
+    public Page selectMajor(@PathVariable("college") String college,
+                            @PathVariable("page") int pageNum,@PathVariable("size") int limit){
+        log.info("查找学院:{}",college);
+        if(college.equals("null")){
+            log.info("college==null");
+            college=null;
+        }
+        List<ChangeMajorResult> holidayByClasses = changeMajorsService.selectMajor(college);
         log.info("selectMajor.size()={}",holidayByClasses.size());
         PageUtils pageUtils = new PageUtils();
         Page page = pageUtils.resultPage(holidayByClasses,pageNum,limit);
         return page;
     }
 
+   /* @GetMapping(value = "/user/major/download/{college}")
+    public void getUserInfoEx(
+            HttpServletResponse response,
+            @PathVariable("college") String college
+    ) {
+        List<ChangeMajorResult> holidayByClasses = changeMajorsService.selectMajor(college);
+        List<Map<String, Object>> src_list = Convert.listResultToMap(holidayByClasses);
+        ArrayList<String> titleKeyList= new ColumnTitleMap("changeMajor").getTitleKeyList();
+        Map<String, String> titleMap = new ColumnTitleMap("changeMajor").getColumnTitleMap();
+        exportDataService.exportDataToEx(response, titleKeyList, titleMap, src_list);
+
+    }
+*/
 }
+
+
+
+
+
+
+
+
+
+

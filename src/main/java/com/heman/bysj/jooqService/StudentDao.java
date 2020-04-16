@@ -1,5 +1,6 @@
 package com.heman.bysj.jooqService;
 
+import com.heman.bysj.entity.ChangeMajorResult;
 import com.heman.bysj.jooq.tables.pojos.Student;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
 import org.jooq.Record1;
@@ -27,4 +28,6 @@ public interface StudentDao {
     List<StudentRecord> selectByClass(String class_);
     List<StudentRecord> selectByProfession(String profession);
     List<StudentRecord> selectByCollege(String college);
+
+    void updateChangeMajor(ChangeMajorResult result,int tid);
 }

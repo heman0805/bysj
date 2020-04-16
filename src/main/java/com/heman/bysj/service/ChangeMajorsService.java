@@ -16,7 +16,8 @@ public interface ChangeMajorsService {
     Changemajors selectHolidayByProcessInstanceId(String processInstanceId);
     void major_Check(Examine examine);
     List<MajorProgress> userSearch(int userId);
-    List<Changemajors> selectMajor(String college);
+    List<ChangeMajorResult> selectMajor(String college);
     void setClass(List<ChangeMajorResult> list);
-    List<ChangeMajorResult> getByProfession(String profession);
+    List<ChangeMajorResult> getByProfession(String profession,String param);
+    void download(String college);
 }

@@ -1,5 +1,6 @@
 package com.heman.bysj.utils;
 
+import com.heman.bysj.entity.ChangeMajorResult;
 import com.heman.bysj.entity.HolidayProgress;
 import com.heman.bysj.entity.HolidayTask;
 import com.heman.bysj.entity.MajorTask;
@@ -11,9 +12,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class Convert {
@@ -197,5 +196,23 @@ public class Convert {
         majorTask.setReason(changemajors.getReason());
         majorTask.setTaskId(taskId);
         return majorTask;
+    }
+    public static List<Map<String,Object>> listResultToMap(List<ChangeMajorResult> list){
+        List<Map<String,Object>> result = new ArrayList<>();
+
+        for (ChangeMajorResult item:list) {
+            Map<String,Object> map = new HashMap<>();
+            map.put("newClass",item.getNewClass_());
+            map.put("newProfession",item.getNewProfession());
+            map.put("currentClass",item.getCurrentClass());
+            map.put("currentProfession",item.getCurrentProfession());
+            map.put("name",item.getName());
+            map.put("number",item.getNumber());
+            map.put("sex",item.getSex());
+            map.put("id",item.getSid());
+            map.put("grade",item.getGrade());
+            result.add(map);
+        }
+        return result;
     }
 }
