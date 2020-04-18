@@ -37,6 +37,7 @@ import com.heman.bysj.jooq.tables.Classes;
 import com.heman.bysj.jooq.tables.Examine;
 import com.heman.bysj.jooq.tables.Holiday;
 import com.heman.bysj.jooq.tables.HolidayCheck;
+import com.heman.bysj.jooq.tables.Project;
 import com.heman.bysj.jooq.tables.Student;
 import com.heman.bysj.jooq.tables.Teacher;
 
@@ -163,6 +164,7 @@ public class Indexes {
     public static final Index EXAMINE_PRIMARY = Indexes0.EXAMINE_PRIMARY;
     public static final Index HOLIDAY_PRIMARY = Indexes0.HOLIDAY_PRIMARY;
     public static final Index HOLIDAY_CHECK_PRIMARY = Indexes0.HOLIDAY_CHECK_PRIMARY;
+    public static final Index PROJECT_PRIMARY = Indexes0.PROJECT_PRIMARY;
     public static final Index STUDENT_PRIMARY = Indexes0.STUDENT_PRIMARY;
     public static final Index STUDENT_STUDENT_TID_FORIENGINKEY = Indexes0.STUDENT_STUDENT_TID_FORIENGINKEY;
     public static final Index STUDENT_SUSERNAME_UNIQUE = Indexes0.STUDENT_SUSERNAME_UNIQUE;
@@ -273,6 +275,7 @@ public class Indexes {
         public static Index EXAMINE_PRIMARY = Internal.createIndex("PRIMARY", Examine.EXAMINE, new OrderField[] { Examine.EXAMINE.CHECKID }, true);
         public static Index HOLIDAY_PRIMARY = Internal.createIndex("PRIMARY", Holiday.HOLIDAY, new OrderField[] { Holiday.HOLIDAY.FORMID }, true);
         public static Index HOLIDAY_CHECK_PRIMARY = Internal.createIndex("PRIMARY", HolidayCheck.HOLIDAY_CHECK, new OrderField[] { HolidayCheck.HOLIDAY_CHECK.CHECKID }, true);
+        public static Index PROJECT_PRIMARY = Internal.createIndex("PRIMARY", Project.PROJECT, new OrderField[] { Project.PROJECT.FORMID }, true);
         public static Index STUDENT_PRIMARY = Internal.createIndex("PRIMARY", Student.STUDENT, new OrderField[] { Student.STUDENT.SID }, true);
         public static Index STUDENT_STUDENT_TID_FORIENGINKEY = Internal.createIndex("student_tid_forienginkey", Student.STUDENT, new OrderField[] { Student.STUDENT.TID }, false);
         public static Index STUDENT_SUSERNAME_UNIQUE = Internal.createIndex("susername_unique", Student.STUDENT, new OrderField[] { Student.STUDENT.USERNAME }, true);

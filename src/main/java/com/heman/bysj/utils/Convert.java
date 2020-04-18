@@ -1,11 +1,9 @@
 package com.heman.bysj.utils;
 
-import com.heman.bysj.entity.ChangeMajorResult;
-import com.heman.bysj.entity.HolidayProgress;
-import com.heman.bysj.entity.HolidayTask;
-import com.heman.bysj.entity.MajorTask;
+import com.heman.bysj.entity.*;
 import com.heman.bysj.enums.UserRole;
 import com.heman.bysj.jooq.tables.pojos.*;
+import com.heman.bysj.jooq.tables.records.StudentRecord;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -77,6 +75,30 @@ public class Convert {
         return teacher;
 
     }
+    public static User studentToUser(Student student){
+        User user = new User();
+        user.setUserId(student.getSid());
+        user.setName(student.getName());
+        user.setRole(student.getRole());
+        user.setUsername(student.getUsername());
+        user.setProfession(student.getProfession());
+        user.setCollege(student.getCollege());
+        user.setGroup(student.getGroup());
+        user.setPassword(student.getPassword());
+        return user;
+    }
+    public static User teacherToUser(Teacher teacher){
+        User user = new User();
+        user.setUserId(teacher.getTid());
+        user.setName(teacher.getName());
+        user.setRole(teacher.getRole());
+        user.setUsername(teacher.getUsername());
+        user.setProfession(teacher.getProfession());
+        user.setCollege(teacher.getCollege());
+        user.setGroup(teacher.getGroup());
+        user.setPassword(teacher.getPassword());
+        return user;
+    }
     /**
      * @param timestamp  参数格式timestamp
      * @return
@@ -144,37 +166,40 @@ public class Convert {
         holidayCheck.setProcessinstanceid(form.get("processInstanceId").toString());
         holidayCheck.setRole(form.get("role").toString());
         holidayCheck.setUserid((int)form.get("userId"));
+        if(form.get("taskId")!=null){
+            holidayCheck.setTaskid(form.get("taskId").toString());
+        }
         return holidayCheck;
     }
 
-    public static Changemajors mapToChangeMajors(Map<String,Map> params){
+    public static Project mapToProject(Map<String,Map> params){
         Map<String,Object> form = params.get("form");
         Map<String,Object> user = params.get("user");
-        Student student = getStudent(user);
-        Changemajors changemajors = new Changemajors();
+        String role = user.get("role").toString();
 
-        if(form.get("post")!=null){
-            changemajors.setPost(form.get("post").toString());
+        Project project = new Project();
+        project.setFormid(UUID.randomUUID().toString());
+        project.setProjectname(form.get("projectName").toString());
+        project.setContext(form.get("context").toString());
+        project.setMean(form.get("mean").toString());
+        project.setResult(form.get("result").toString());
+        project.setFund(Double.valueOf(form.get("fund").toString()));
+        if(form.get("fundItem")!=null){
+            project.setFunditem(form.get("fundItem").toString());
         }
-        if(form.get("society")!=null){
-            changemajors.setSociety(form.get("society").toString());
+        if(role.equals(UserRole.STUDENT)){
+            Student student = getStudent(user);
+            project.setUserid(student.getSid());
+            project.setRole(student.getRole());
+        }else if(role.equals(UserRole.TEACHER)){
+            Teacher teacher = getTeacher(user);
+            project.setUserid(teacher.getTid());
+            project.setRole(teacher.getRole());
         }
-        changemajors.setCid(UUID.randomUUID().toString());
-        changemajors.setCreatetime(new Timestamp(System.currentTimeMillis()));
-        changemajors.setCurrentclass(student.getClass_());
-        changemajors.setCurrentprofession(student.getProfession());
-        changemajors.setCurrentcollege(student.getCollege());
-        changemajors.setGpa(Double.valueOf(form.get("gpa").toString()));
-        changemajors.setNewcollege(form.get("newCollege").toString());
-        changemajors.setNewprofession(form.get("newProfession").toString());
-        changemajors.setProcessstatus(0);
-        changemajors.setRank(form.get("rank").toString());
-        changemajors.setReason(form.get("reason").toString());
-        changemajors.setUserid(student.getSid());
-        changemajors.setUpdatetime(new Timestamp(System.currentTimeMillis()));
-        if(form.get("contest").toString()!=null)
-            changemajors.setContest(form.get("contest").toString());
-        return changemajors;
+        project.setCreatetime(new Timestamp(System.currentTimeMillis()));
+        project.setUpdatetime(new Timestamp(System.currentTimeMillis()));
+
+        return project;
     }
     public static MajorTask changeMajorToMajorTask(String name,String role,int userId,String class_,String taskId,Changemajors changemajors){
         MajorTask majorTask = new MajorTask();
@@ -214,5 +239,73 @@ public class Convert {
             result.add(map);
         }
         return result;
+    }
+    public static Changemajors mapToChangeMajors(Map<String,Map> params){
+        Map<String,Object> form = params.get("form");
+        Map<String,Object> user = params.get("user");
+        Student student = getStudent(user);
+        Changemajors changemajors = new Changemajors();
+
+        if(form.get("post")!=null){
+            changemajors.setPost(form.get("post").toString());
+        }
+        if(form.get("society")!=null){
+            changemajors.setSociety(form.get("society").toString());
+        }
+        changemajors.setCid(UUID.randomUUID().toString());
+        changemajors.setCreatetime(new Timestamp(System.currentTimeMillis()));
+        changemajors.setCurrentclass(student.getClass_());
+        changemajors.setCurrentprofession(student.getProfession());
+        changemajors.setCurrentcollege(student.getCollege());
+        changemajors.setGpa(Double.valueOf(form.get("gpa").toString()));
+        changemajors.setNewcollege(form.get("newCollege").toString());
+        changemajors.setNewprofession(form.get("newProfession").toString());
+        changemajors.setProcessstatus(0);
+        changemajors.setRank(form.get("rank").toString());
+        changemajors.setReason(form.get("reason").toString());
+        changemajors.setUserid(student.getSid());
+        changemajors.setUpdatetime(new Timestamp(System.currentTimeMillis()));
+        if(form.get("contest").toString()!=null)
+            changemajors.setContest(form.get("contest").toString());
+        return changemajors;
+    }
+
+    /**
+     private String processInstanceId;
+     private String userId;
+     private String name;
+     private String role;
+     private String college;
+     private String profession;
+     private String projectName;
+     private String context;//项目背景
+     private String mean;//研究意义
+     private String result;//预期结果
+     private Double fund;//申请资金
+     private String fundItem;
+     private Date createTime;
+     private Date updateTime;
+     * @param project
+     * @return
+     */
+    public static ProjectTask changeProjectToProjectTask(Project project,User user,String taskId){
+        ProjectTask projectTask = new ProjectTask();
+        projectTask.setUserId(user.getUserId());
+        projectTask.setProcessInstanceId(project.getProcessinstanceid());
+        projectTask.setTaskId(taskId);
+        projectTask.setName(user.getName());
+        projectTask.setRole(user.getRole());
+        projectTask.setCollege(user.getCollege());
+        projectTask.setProfession(user.getProfession());
+        projectTask.setProjectName(project.getProjectname());
+        projectTask.setMean(project.getMean());
+        projectTask.setContext(project.getContext());
+        projectTask.setResult(project.getResult());
+        projectTask.setFund(project.getFund());
+        projectTask.setCreateTime(project.getCreatetime());
+        projectTask.setUpdateTime(project.getUpdatetime());
+        if(project.getFunditem()!=null)
+            projectTask.setFundItem(project.getFunditem());
+        return projectTask;
     }
 }

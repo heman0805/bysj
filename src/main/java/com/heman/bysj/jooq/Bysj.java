@@ -37,6 +37,7 @@ import com.heman.bysj.jooq.tables.Classes;
 import com.heman.bysj.jooq.tables.Examine;
 import com.heman.bysj.jooq.tables.Holiday;
 import com.heman.bysj.jooq.tables.HolidayCheck;
+import com.heman.bysj.jooq.tables.Project;
 import com.heman.bysj.jooq.tables.Student;
 import com.heman.bysj.jooq.tables.Teacher;
 
@@ -64,7 +65,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Bysj extends SchemaImpl {
 
-    private static final long serialVersionUID = 1731616744;
+    private static final long serialVersionUID = 1967973091;
 
     /**
      * The reference instance of <code>bysj</code>
@@ -237,6 +238,11 @@ public class Bysj extends SchemaImpl {
     public final HolidayCheck HOLIDAY_CHECK = com.heman.bysj.jooq.tables.HolidayCheck.HOLIDAY_CHECK;
 
     /**
+     * The table <code>bysj.project</code>.
+     */
+    public final Project PROJECT = com.heman.bysj.jooq.tables.Project.PROJECT;
+
+    /**
      * The table <code>bysj.student</code>.
      */
     public final Student STUDENT = com.heman.bysj.jooq.tables.Student.STUDENT;
@@ -301,6 +307,7 @@ public class Bysj extends SchemaImpl {
             Examine.EXAMINE,
             Holiday.HOLIDAY,
             HolidayCheck.HOLIDAY_CHECK,
+            Project.PROJECT,
             Student.STUDENT,
             Teacher.TEACHER);
     }

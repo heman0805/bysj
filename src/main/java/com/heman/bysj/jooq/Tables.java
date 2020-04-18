@@ -37,6 +37,7 @@ import com.heman.bysj.jooq.tables.Classes;
 import com.heman.bysj.jooq.tables.Examine;
 import com.heman.bysj.jooq.tables.Holiday;
 import com.heman.bysj.jooq.tables.HolidayCheck;
+import com.heman.bysj.jooq.tables.Project;
 import com.heman.bysj.jooq.tables.Student;
 import com.heman.bysj.jooq.tables.Teacher;
 
@@ -220,6 +221,11 @@ public class Tables {
      * The table <code>bysj.holiday_check</code>.
      */
     public static final HolidayCheck HOLIDAY_CHECK = HolidayCheck.HOLIDAY_CHECK;
+
+    /**
+     * The table <code>bysj.project</code>.
+     */
+    public static final Project PROJECT = Project.PROJECT;
 
     /**
      * The table <code>bysj.student</code>.

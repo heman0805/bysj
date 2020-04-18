@@ -27,8 +27,6 @@ public class ChangeMajorsController {
     private ChangeMajorsService changeMajorsService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private ExportDataService exportDataService;
     /**
      * 学生请假申请
      * 1、根据参数获得请假表单、学生信息
@@ -173,19 +171,6 @@ public class ChangeMajorsController {
         return page;
     }
 
-   /* @GetMapping(value = "/user/major/download/{college}")
-    public void getUserInfoEx(
-            HttpServletResponse response,
-            @PathVariable("college") String college
-    ) {
-        List<ChangeMajorResult> holidayByClasses = changeMajorsService.selectMajor(college);
-        List<Map<String, Object>> src_list = Convert.listResultToMap(holidayByClasses);
-        ArrayList<String> titleKeyList= new ColumnTitleMap("changeMajor").getTitleKeyList();
-        Map<String, String> titleMap = new ColumnTitleMap("changeMajor").getColumnTitleMap();
-        exportDataService.exportDataToEx(response, titleKeyList, titleMap, src_list);
-
-    }
-*/
 }
 
 

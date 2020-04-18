@@ -30,7 +30,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ChangemajorsRecord extends UpdatableRecordImpl<ChangemajorsRecord> implements Record17<String, String, Integer, String, String, String, String, String, String, String, Double, String, String, String, Integer, Timestamp, Timestamp> {
 
-    private static final long serialVersionUID = -1875763880;
+    private static final long serialVersionUID = -469091332;
 
     /**
      * Setter for <code>bysj.changemajors.cid</code>. 转专业表主键ID
@@ -229,16 +229,16 @@ public class ChangemajorsRecord extends UpdatableRecordImpl<ChangemajorsRecord> 
     }
 
     /**
-     * Setter for <code>bysj.changemajors.processStatus</code>. 流程状态：0 申请，1 当前教务办，2 当前院长，3 转向教务办，4 转向院长，5 学校教务办，6 完成
-,7 拒绝
+     * Setter for <code>bysj.changemajors.processStatus</code>. 流程状态：0 申请，1 当前教务办，2 当前院长，3 转向教务办，4 转向院长，5 学校教务办，6 全部通过
+,7 拒绝，10 完成（班级分配完成，全部任务结束）
      */
     public void setProcessstatus(Integer value) {
         set(14, value);
     }
 
     /**
-     * Getter for <code>bysj.changemajors.processStatus</code>. 流程状态：0 申请，1 当前教务办，2 当前院长，3 转向教务办，4 转向院长，5 学校教务办，6 完成
-,7 拒绝
+     * Getter for <code>bysj.changemajors.processStatus</code>. 流程状态：0 申请，1 当前教务办，2 当前院长，3 转向教务办，4 转向院长，5 学校教务办，6 全部通过
+,7 拒绝，10 完成（班级分配完成，全部任务结束）
      */
     public Integer getProcessstatus() {
         return (Integer) get(14);

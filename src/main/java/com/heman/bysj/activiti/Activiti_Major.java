@@ -202,7 +202,7 @@ public class Activiti_Major {
 
     }
     /**
-     * 通过processDefinitionKey及processInstanceID查找任务并完成任务
+     * 通过processDefinitionKey及processInstanceID查找任务并拒绝任务
      * @param processDefinitionKey
      * @param processInstanceId
      * @return

@@ -37,6 +37,7 @@ import com.heman.bysj.jooq.tables.Classes;
 import com.heman.bysj.jooq.tables.Examine;
 import com.heman.bysj.jooq.tables.Holiday;
 import com.heman.bysj.jooq.tables.HolidayCheck;
+import com.heman.bysj.jooq.tables.Project;
 import com.heman.bysj.jooq.tables.Student;
 import com.heman.bysj.jooq.tables.Teacher;
 import com.heman.bysj.jooq.tables.records.ActEvtLogRecord;
@@ -72,6 +73,7 @@ import com.heman.bysj.jooq.tables.records.ClassesRecord;
 import com.heman.bysj.jooq.tables.records.ExamineRecord;
 import com.heman.bysj.jooq.tables.records.HolidayCheckRecord;
 import com.heman.bysj.jooq.tables.records.HolidayRecord;
+import com.heman.bysj.jooq.tables.records.ProjectRecord;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
 import com.heman.bysj.jooq.tables.records.TeacherRecord;
 
@@ -147,6 +149,7 @@ public class Keys {
     public static final UniqueKey<ExamineRecord> KEY_EXAMINE_PRIMARY = UniqueKeys0.KEY_EXAMINE_PRIMARY;
     public static final UniqueKey<HolidayRecord> KEY_HOLIDAY_PRIMARY = UniqueKeys0.KEY_HOLIDAY_PRIMARY;
     public static final UniqueKey<HolidayCheckRecord> KEY_HOLIDAY_CHECK_PRIMARY = UniqueKeys0.KEY_HOLIDAY_CHECK_PRIMARY;
+    public static final UniqueKey<ProjectRecord> KEY_PROJECT_PRIMARY = UniqueKeys0.KEY_PROJECT_PRIMARY;
     public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = UniqueKeys0.KEY_STUDENT_PRIMARY;
     public static final UniqueKey<StudentRecord> KEY_STUDENT_SUSERNAME_UNIQUE = UniqueKeys0.KEY_STUDENT_SUSERNAME_UNIQUE;
     public static final UniqueKey<TeacherRecord> KEY_TEACHER_PRIMARY = UniqueKeys0.KEY_TEACHER_PRIMARY;
@@ -245,6 +248,7 @@ public class Keys {
         public static final UniqueKey<ExamineRecord> KEY_EXAMINE_PRIMARY = Internal.createUniqueKey(Examine.EXAMINE, "KEY_examine_PRIMARY", Examine.EXAMINE.CHECKID);
         public static final UniqueKey<HolidayRecord> KEY_HOLIDAY_PRIMARY = Internal.createUniqueKey(Holiday.HOLIDAY, "KEY_holiday_PRIMARY", Holiday.HOLIDAY.FORMID);
         public static final UniqueKey<HolidayCheckRecord> KEY_HOLIDAY_CHECK_PRIMARY = Internal.createUniqueKey(HolidayCheck.HOLIDAY_CHECK, "KEY_holiday_check_PRIMARY", HolidayCheck.HOLIDAY_CHECK.CHECKID);
+        public static final UniqueKey<ProjectRecord> KEY_PROJECT_PRIMARY = Internal.createUniqueKey(Project.PROJECT, "KEY_project_PRIMARY", Project.PROJECT.FORMID);
         public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = Internal.createUniqueKey(Student.STUDENT, "KEY_student_PRIMARY", Student.STUDENT.SID);
         public static final UniqueKey<StudentRecord> KEY_STUDENT_SUSERNAME_UNIQUE = Internal.createUniqueKey(Student.STUDENT, "KEY_student_susername_unique", Student.STUDENT.USERNAME);
         public static final UniqueKey<TeacherRecord> KEY_TEACHER_PRIMARY = Internal.createUniqueKey(Teacher.TEACHER, "KEY_teacher_PRIMARY", Teacher.TEACHER.TID);

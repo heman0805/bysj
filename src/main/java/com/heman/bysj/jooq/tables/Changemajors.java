@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Changemajors extends TableImpl<ChangemajorsRecord> {
 
-    private static final long serialVersionUID = 1084620684;
+    private static final long serialVersionUID = 1211752152;
 
     /**
      * The reference instance of <code>bysj.changemajors</code>
@@ -128,10 +128,10 @@ public class Changemajors extends TableImpl<ChangemajorsRecord> {
     public final TableField<ChangemajorsRecord, String> SOCIETY = createField(DSL.name("society"), org.jooq.impl.SQLDataType.VARCHAR(100), this, "参加的社团及职位");
 
     /**
-     * The column <code>bysj.changemajors.processStatus</code>. 流程状态：0 申请，1 当前教务办，2 当前院长，3 转向教务办，4 转向院长，5 学校教务办，6 完成
-,7 拒绝
+     * The column <code>bysj.changemajors.processStatus</code>. 流程状态：0 申请，1 当前教务办，2 当前院长，3 转向教务办，4 转向院长，5 学校教务办，6 全部通过
+,7 拒绝，10 完成（班级分配完成，全部任务结束）
      */
-    public final TableField<ChangemajorsRecord, Integer> PROCESSSTATUS = createField(DSL.name("processStatus"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "流程状态：0 申请，1 当前教务办，2 当前院长，3 转向教务办，4 转向院长，5 学校教务办，6 完成\r\n,7 拒绝");
+    public final TableField<ChangemajorsRecord, Integer> PROCESSSTATUS = createField(DSL.name("processStatus"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "流程状态：0 申请，1 当前教务办，2 当前院长，3 转向教务办，4 转向院长，5 学校教务办，6 全部通过\r\n,7 拒绝，10 完成（班级分配完成，全部任务结束）");
 
     /**
      * The column <code>bysj.changemajors.createTime</code>. 创建时间
