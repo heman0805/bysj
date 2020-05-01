@@ -12,14 +12,13 @@ public interface TeacherDao {
     TeacherRecord selectById(int id);
     //插入教师信息
     int insertTeacher(TeacherRecord teacherRecord);
-    //修改教师信息
-    int updateTeacher(TeacherRecord teacherRecord);
-    //通过ID删除教师信息
-    int deleteById(int id);
 
+    int updatePasswordByTid(int tid,String password);
     TeacherRecord getTeacherByUsername(String userName,String password);
-
+    TeacherRecord getByUserName(String userName);
+    TeacherRecord selectByProfessionAndPositionAndGrade(String profession,  String position,int grade);
+    TeacherRecord selectByParam(String grade,String college,String profession,String position);
     List<TeacherRecord> selectByCollege(String college);
-
     List<TeacherRecord> selectByProfession(String profession);
+
 }

@@ -22,10 +22,11 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Teacher implements Serializable {
 
-    private static final long serialVersionUID = 1082754439;
+    private static final long serialVersionUID = 1720005777;
 
     private Integer tid;
     private String  name;
+    private String  sex;
     private String  username;
     private String  password;
     private Integer grade;
@@ -40,6 +41,7 @@ public class Teacher implements Serializable {
     public Teacher(Teacher value) {
         this.tid = value.tid;
         this.name = value.name;
+        this.sex = value.sex;
         this.username = value.username;
         this.password = value.password;
         this.grade = value.grade;
@@ -53,6 +55,7 @@ public class Teacher implements Serializable {
     public Teacher(
         Integer tid,
         String  name,
+        String  sex,
         String  username,
         String  password,
         Integer grade,
@@ -64,6 +67,7 @@ public class Teacher implements Serializable {
     ) {
         this.tid = tid;
         this.name = name;
+        this.sex = sex;
         this.username = username;
         this.password = password;
         this.grade = grade;
@@ -88,6 +92,14 @@ public class Teacher implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSex() {
+        return this.sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public String getUsername() {
@@ -160,6 +172,7 @@ public class Teacher implements Serializable {
 
         sb.append(tid);
         sb.append(", ").append(name);
+        sb.append(", ").append(sex);
         sb.append(", ").append(username);
         sb.append(", ").append(password);
         sb.append(", ").append(grade);

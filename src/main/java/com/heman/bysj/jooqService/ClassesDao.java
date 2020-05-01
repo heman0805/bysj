@@ -9,4 +9,5 @@ import java.util.List;
 public interface ClassesDao {
     List<ClassesRecord> selectClassByProfession(String profession);
     Result<Record1<String>> selectProfessionByCollege(String college);
+    Result<Record1<String>> selectAllCollege();
 }

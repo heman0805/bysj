@@ -45,21 +45,17 @@ public class TeacherDaoImpl implements TeacherDao {
 
     @Override
     public int insertTeacher(TeacherRecord teacherRecord) {
+        System.out.println("插入教师表");
         return dslContext.insertInto(TEACHER)
                 .set(teacherRecord)
                 .execute();
     }
+
     @Override
-    public int updateTeacher(TeacherRecord teacherRecord) {
+    public int updatePasswordByTid(int tid, String password) {
         return dslContext.update(TEACHER)
-                .set(teacherRecord)
-                .where(TEACHER.TID.eq(teacherRecord.getTid()))
-                .execute();
-    }
-    @Override
-    public int deleteById(int id) {
-        return dslContext.deleteFrom(TEACHER)
-                .where(TEACHER.TID.eq(id))
+                .set(TEACHER.PASSWORD,password)
+                .where(TEACHER.TID.eq(tid))
                 .execute();
     }
 
@@ -68,6 +64,43 @@ public class TeacherDaoImpl implements TeacherDao {
         return dslContext.selectFrom(TEACHER)
                 .where(TEACHER.USERNAME.eq(userName))
                 .and(TEACHER.PASSWORD.eq(password))
+                .fetchOne();
+    }
+
+    @Override
+    public TeacherRecord selectByProfessionAndPositionAndGrade(String profession, String position, int grade) {
+        return dslContext.selectFrom(TEACHER)
+                .where(TEACHER.PROFESSION.eq(profession))
+                .and(TEACHER.POSITION.eq(position))
+                .and(TEACHER.GRADE.eq(grade))
+                .fetchOne();
+    }
+
+    @Override
+    public TeacherRecord selectByParam(String grade, String college, String profession, String position) {
+
+        if(grade!=null&&grade!=""){
+            int gra;
+            gra = Integer.parseInt(grade);
+            return dslContext.selectFrom(TEACHER)
+                    .where(TEACHER.GRADE.eq(gra))
+                    .and(TEACHER.COLLEGE.eq(college))
+                    .and(TEACHER.PROFESSION.eq(profession))
+                    .and(TEACHER.POSITION.eq(position))
+                    .fetchOne();
+        }else{
+            return dslContext.selectFrom(TEACHER)
+                    .where(TEACHER.COLLEGE.eq(college))
+                    .and(TEACHER.PROFESSION.eq(profession))
+                    .and(TEACHER.POSITION.eq(position))
+                    .fetchOne();
+        }
+    }
+
+    @Override
+    public TeacherRecord getByUserName(String userName) {
+        return dslContext.selectFrom(TEACHER)
+                .where(TEACHER.USERNAME.eq(userName))
                 .fetchOne();
     }
 

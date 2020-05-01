@@ -52,28 +52,6 @@ public class StudentDaoImpl implements StudentDao {
                 .execute();
     }
 
-    @Override
-    public int updateStudent(StudentRecord studentRecord) {
-        return dslContext.update(STUDENT)
-                .set(studentRecord)
-                .where(STUDENT.SID.eq(studentRecord.getSid()))
-                .execute();
-    }
-
-    @Override
-    public int deleteById(int id) {
-        return dslContext.deleteFrom(STUDENT)
-                .where(STUDENT.SID.eq(id))
-                .execute();
-    }
-
-    @Override
-    public int countStudent() {
-
-        return dslContext.selectCount()
-                .from(STUDENT)
-                .fetchOne(0,int.class);
-    }
 
     @Override
     public StudentRecord getStudnetByUsername(String username, String password) {
@@ -84,12 +62,10 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public Result<Record1<Integer>> selectIdsByClass(String class_) {
-        Result<Record1<Integer>> s =  dslContext.select(STUDENT.SID)
-                .from(STUDENT)
-                .where(STUDENT.CLASS_.eq(class_))
-                .fetch();
-        return s;
+    public StudentRecord getByUserName(String userName) {
+        return dslContext.selectFrom(STUDENT)
+                .where(STUDENT.USERNAME.eq(userName))
+                .fetchOne();
     }
 
     @Override
@@ -126,5 +102,13 @@ public class StudentDaoImpl implements StudentDao {
 
 
 
+    }
+
+    @Override
+    public int updatePasswordBySid(int sid, String password) {
+        return dslContext.update(STUDENT)
+                .set(STUDENT.PASSWORD,password)
+                .where(STUDENT.SID.eq(sid))
+                .execute();
     }
 }

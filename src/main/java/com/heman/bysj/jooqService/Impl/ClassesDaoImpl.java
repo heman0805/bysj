@@ -35,4 +35,11 @@ public class ClassesDaoImpl implements ClassesDao {
 
         return fetch;
     }
+
+    @Override
+    public Result<Record1<String>> selectAllCollege() {
+        Result<Record1<String>> fetch = dslContext.selectDistinct(CLASSES.COLLEGE).from(CLASSES)
+                .fetch();
+        return fetch;
+    }
 }

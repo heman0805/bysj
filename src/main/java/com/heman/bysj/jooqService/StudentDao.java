@@ -14,20 +14,15 @@ public interface StudentDao {
     List<StudentRecord> listTest(int limit,int offest);
     //根据ID获取学生信息
     StudentRecord selectById(int id);
-    //查询总学生数
-    int countStudent();
     //插入学生信息
     int insertStudent(StudentRecord studentRecord);
-    //修改学生信息
-    int updateStudent(StudentRecord studentRecord);
-    //通过ID删除学生信息
-    int deleteById(int id);
     //通过用户名密码获取学生信息
     StudentRecord getStudnetByUsername(String username,String password);
-    Result<Record1<Integer>> selectIdsByClass(String class_);
+    StudentRecord getByUserName(String userName);
     List<StudentRecord> selectByClass(String class_);
     List<StudentRecord> selectByProfession(String profession);
     List<StudentRecord> selectByCollege(String college);
 
     void updateChangeMajor(ChangeMajorResult result,int tid);
+    int updatePasswordBySid(int sid,String password);
 }

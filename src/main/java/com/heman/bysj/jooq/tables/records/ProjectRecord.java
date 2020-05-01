@@ -30,7 +30,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ProjectRecord extends UpdatableRecordImpl<ProjectRecord> implements Record13<String, String, Integer, String, String, String, String, String, Double, String, Integer, Timestamp, Timestamp> {
 
-    private static final long serialVersionUID = 1293533835;
+    private static final long serialVersionUID = 1394358889;
 
     /**
      * Setter for <code>bysj.project.formId</code>. 项目申请表主键ID
@@ -173,14 +173,14 @@ public class ProjectRecord extends UpdatableRecordImpl<ProjectRecord> implements
     }
 
     /**
-     * Setter for <code>bysj.project.processStatus</code>. 流程状态：0 申请，1 辅导员/系主任审核，2 副院长审核，3 科技处审核，4 财务处审核，5  全部通过,6 拒绝
+     * Setter for <code>bysj.project.processStatus</code>. 流程状态：0 申请，1 辅导员/系主任审核，2 副院长审核，3 科技处审核，4 财务处审核中，5  全部通过,6 拒绝
      */
     public void setProcessstatus(Integer value) {
         set(10, value);
     }
 
     /**
-     * Getter for <code>bysj.project.processStatus</code>. 流程状态：0 申请，1 辅导员/系主任审核，2 副院长审核，3 科技处审核，4 财务处审核，5  全部通过,6 拒绝
+     * Getter for <code>bysj.project.processStatus</code>. 流程状态：0 申请，1 辅导员/系主任审核，2 副院长审核，3 科技处审核，4 财务处审核中，5  全部通过,6 拒绝
      */
     public Integer getProcessstatus() {
         return (Integer) get(10);

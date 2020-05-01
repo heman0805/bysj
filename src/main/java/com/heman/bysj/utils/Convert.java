@@ -58,6 +58,24 @@ public class Convert {
 
     }
 
+    public static Student registerStudent(Map<String,Object> user){
+        Student student = new Student();
+
+        student.setName(user.get("name").toString());
+        student.setUsername(user.get("userName").toString());
+        student.setPassword(user.get("password").toString());
+        student.setSex(user.get("sex").toString());
+        student.setGrade(Integer.parseInt(user.get("grade").toString()));
+        student.setProfession(user.get("profession").toString());
+        student.setCollege(user.get("college").toString());
+        student.setClass_(user.get("class_").toString());
+        student.setRole("学生");
+        student.setGroup("Group_Student");
+
+        return student;
+
+    }
+
     public static Teacher getTeacher(Map<String,Object> user){
         Teacher teacher = new Teacher();
 
@@ -71,6 +89,27 @@ public class Convert {
         teacher.setPosition(user.get("position").toString());
         teacher.setRole(user.get("role").toString());
         teacher.setGroup(user.get("group").toString());
+
+        return teacher;
+
+    }
+    public static Teacher registerTeacher(Map<String,Object> user){
+        Teacher teacher = new Teacher();
+
+        teacher.setName(user.get("name").toString());
+        teacher.setSex(user.get("sex").toString());
+        teacher.setUsername(user.get("userName").toString());
+        teacher.setPassword(user.get("password").toString());
+        if(user.get("grade")!=null&&user.get("grade")!=""){
+            teacher.setGrade(Integer.parseInt(user.get("grade").toString()));
+        }
+        if(user.get("profession")!=null){
+            teacher.setProfession(user.get("profession").toString());
+        }
+        if(user.get("college")!=null){
+            teacher.setCollege(user.get("college").toString());
+        }
+        teacher.setPosition(user.get("position").toString());
 
         return teacher;
 

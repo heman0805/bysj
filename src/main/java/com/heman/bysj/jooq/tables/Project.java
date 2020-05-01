@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Project extends TableImpl<ProjectRecord> {
 
-    private static final long serialVersionUID = -889343054;
+    private static final long serialVersionUID = -2120857456;
 
     /**
      * The reference instance of <code>bysj.project</code>
@@ -108,9 +108,9 @@ public class Project extends TableImpl<ProjectRecord> {
     public final TableField<ProjectRecord, String> FUNDITEM = createField(DSL.name("fundItem"), org.jooq.impl.SQLDataType.VARCHAR(128), this, "经费详细信息");
 
     /**
-     * The column <code>bysj.project.processStatus</code>. 流程状态：0 申请，1 辅导员/系主任审核，2 副院长审核，3 科技处审核，4 财务处审核，5  全部通过,6 拒绝
+     * The column <code>bysj.project.processStatus</code>. 流程状态：0 申请，1 辅导员/系主任审核，2 副院长审核，3 科技处审核，4 财务处审核中，5  全部通过,6 拒绝
      */
-    public final TableField<ProjectRecord, Integer> PROCESSSTATUS = createField(DSL.name("processStatus"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "流程状态：0 申请，1 辅导员/系主任审核，2 副院长审核，3 科技处审核，4 财务处审核，5  全部通过,6 拒绝");
+    public final TableField<ProjectRecord, Integer> PROCESSSTATUS = createField(DSL.name("processStatus"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "流程状态：0 申请，1 辅导员/系主任审核，2 副院长审核，3 科技处审核，4 财务处审核中，5  全部通过,6 拒绝");
 
     /**
      * The column <code>bysj.project.createTime</code>. 项目申请创建时间
