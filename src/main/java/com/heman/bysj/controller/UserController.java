@@ -1,10 +1,13 @@
 package com.heman.bysj.controller;
 
 import com.heman.bysj.entity.User;
+import com.heman.bysj.entity.UserStudent;
 import com.heman.bysj.enums.UserRole;
+import com.heman.bysj.jooq.tables.records.TeacherRecord;
 import com.heman.bysj.jooqService.StudentDao;
 import com.heman.bysj.service.TokenService;
 import com.heman.bysj.service.UserService;
+import com.heman.bysj.utils.Convert;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -49,7 +52,7 @@ public class UserController {
         }
         else if(user.getRole().equals(UserRole.TEACHER)){
             Teacher teacher = userService.getTeacherByUsername(user.getUsername(),user.getPassword());
-            if(teacher==null){
+            if(teacher==null||!teacher.getRole().equals(UserRole.TEACHER)){
                 msg = "用户名或者密码错误";
                 map.put("msg",msg);
                 return map;
@@ -118,5 +121,27 @@ public class UserController {
         msg = userService.changePassword(form,user);
 
         return msg;
+    }
+    /**
+     * 学生查询个人信息
+     */
+    @RequestMapping("/selectStudentById/{id}")
+    public UserStudent selectStudentById(@PathVariable("id") int id){
+        //查询学生信息
+        Student student = userService.selectStudentById(id);
+        //查询辅导员信息
+        TeacherRecord teacherRecord = userService.selectTeacherById(student.getTid());
+        //类型转换
+        UserStudent userStudent = Convert.ToUserStudent(student,teacherRecord.getName());
+        return userStudent;
+    }
+    /**
+     * 教师查询个人信息
+     */
+    @RequestMapping("/selectTeacherById/{id}")
+    public Teacher selectTeacherById(@PathVariable("id") int id){
+        //查询教师信息
+        TeacherRecord teacherRecord = userService.selectTeacherById(id);
+        return teacherRecord.into(Teacher.class);
     }
 }

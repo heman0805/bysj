@@ -28,11 +28,11 @@ public class ChangeMajorsController {
     @Autowired
     private UserService userService;
     /**
-     * 学生请假申请
-     * 1、根据参数获得请假表单、学生信息
-     * 2、启动请假流程实例
-     * 3、完成填写请假单任务
-     * 4、插入请假表及请假审批表
+     * 学生转专业申请
+     * 1、根据参数获得转专业表单、学生信息
+     * 2、启动转专业流程实例
+     * 3、完成填写转专业单任务
+     * 4、插入转专业表及转专业审批表
      * @param params
      */
     @RequestMapping(value="/user/major/insert",method = RequestMethod.POST)
@@ -41,13 +41,21 @@ public class ChangeMajorsController {
         Map<String,Object> map = new HashMap<>();
         //数据类型转化
         Changemajors changemajors = Convert.mapToChangeMajors(params);
-        //提交请假表单
+        //判断是否已有转专业申请
+        boolean test = changeMajorsService.selectMajorByUserId(changemajors.getUserid());
+        if(test==false){
+            msg = "请勿重复提交";
+            map.put("msg",msg);
+            return map;
+        }
+
+        //提交转专业表单
         boolean result = changeMajorsService.startMajor(changemajors);
         if(result){
-            msg = "请假申请成功";
+            msg = "转专业申请成功";
 
         }else{
-            msg = "请假申请失败";
+            msg = "转专业申请失败";
         }
         map.put("msg",msg);
         return map;
@@ -82,7 +90,7 @@ public class ChangeMajorsController {
     @RequestMapping(value="/user/major/searchByProcessInstanceId/{processInstanceId}")
     @ResponseBody
     public MajorTask selectHolidayByProcessId(@PathVariable("processInstanceId") String processInstanceId){
-        Changemajors changemajors = changeMajorsService.selectHolidayByProcessInstanceId(processInstanceId);
+        Changemajors changemajors = changeMajorsService.selectMajorByProcessInstanceId(processInstanceId);
         MajorTask majorTask = new MajorTask();
         Student student = userService.selectStudentById(changemajors.getUserid());
         majorTask = Convert.changeMajorToMajorTask(student.getName(),student.getRole(),student.getSid(),student.getClass_(),null,changemajors);
@@ -119,7 +127,7 @@ public class ChangeMajorsController {
     public List<MajorProgress> userSearch(@PathVariable("uid")int userId){
         System.out.println("进入方法");
         //查询正在执行的请假流程
-        List<MajorProgress> MajorProgress = changeMajorsService.userSearch(userId);
+        List<MajorProgress> MajorProgress = changeMajorsService. userSearch(userId);
         return MajorProgress;
     }
 

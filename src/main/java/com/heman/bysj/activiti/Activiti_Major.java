@@ -90,6 +90,11 @@ public class Activiti_Major {
             String processInstanceId = task.getProcessInstanceId();
             ChangemajorsRecord changemajorsRecord = changeMajorsDao.selectByProcessInstanceId(processInstanceId);
 
+            if(changemajorsRecord==null){
+                System.out.println("changeMajor表查询结果为空");
+                continue;
+            }
+
             if(changemajorsRecord.getProcessstatus()==1){//当前教务办审批中
                 if(changemajorsRecord.getCurrentcollege().equals(teacher.getCollege())){
                     taskService.claim(task.getId(),teacher.getTid().toString());

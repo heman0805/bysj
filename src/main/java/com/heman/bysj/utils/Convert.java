@@ -347,4 +347,18 @@ public class Convert {
             projectTask.setFundItem(project.getFunditem());
         return projectTask;
     }
+    public static UserStudent ToUserStudent(Student student,String instructor){
+        UserStudent userStudent = new UserStudent();
+
+        userStudent.setName(student.getName());
+        userStudent.setSex(student.getSex());
+        userStudent.setUserName(student.getUsername());
+        userStudent.setCollege(student.getCollege());
+        userStudent.setProfession(student.getProfession());
+        userStudent.setClass_(student.getClass_());
+        userStudent.setGrade(student.getGrade());
+        userStudent.setInstructor(instructor);
+
+        return userStudent;
+    }
 }

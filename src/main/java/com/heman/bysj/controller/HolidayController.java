@@ -42,22 +42,18 @@ public class HolidayController {
     public Map<String,Object> holiday(@RequestBody Map<String,Map> params){
         String msg = "";
         Map<String,Object> map = new HashMap<>();
-        //数据类型转化
+        //1、数据类型转化
         Map<String,Object> form = params.get("form");
         Map<String,Object> user = params.get("user");
         Holiday holiday = Convert.formToHoliday(form,user);
-        //根据用户角色封装用户
-        /*if(user.get("role").toString().equals("学生")){
-            Student student = Convert.getStudent(user);
-        }else if(user.get("role").toString().equals("教师")){
-            Teacher teacher = Convert.getTeacher(user);
-        }else{
-            msg = "登录信息有误";
+        //2、检查该用户是否存在请假审批单
+        List<Holiday> history = holidayService.selectByUserIdAndRoleAndProcessStatus(holiday.getUserid(), user.get("role").toString(),1);
+        if(history!=null){
+            msg = "已有请假任务，请勿重复提交";
             map.put("msg",msg);
             return map;
-        }*/
-
-        //提交请假表单
+        }
+        //2、提交请假表单
         boolean result = holidayService.startHoliday(holiday);
         if(result){
             msg = "请假申请成功";

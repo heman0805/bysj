@@ -317,4 +317,18 @@ public class HolidayServiceImpl implements HolidayService {
 
         return holidayByClasses;
     }
+
+    @Override
+    public List<Holiday> selectByUserIdAndRoleAndProcessStatus(int id, String role,int status) {
+        List<HolidayRecord> list = holidayDao.selectByUserIdAndRoleAndStatus(id, role,status);
+        System.out.println("list的内容："+list);
+        if(list.size()==0)
+            return null;
+        List<Holiday> holidayList = new ArrayList<>();
+        for (HolidayRecord item:list) {
+            log.info("holiday内容：",item.into(Holiday.class).getUserid());
+            holidayList.add(item.into(Holiday.class));
+        }
+        return holidayList;
+    }
 }

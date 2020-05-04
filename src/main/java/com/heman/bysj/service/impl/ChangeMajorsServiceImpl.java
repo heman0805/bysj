@@ -1,6 +1,5 @@
 package com.heman.bysj.service.impl;
 
-import com.heman.bysj.activiti.Activiti_Holiday;
 import com.heman.bysj.activiti.Activiti_Major;
 import com.heman.bysj.entity.ChangeMajorResult;
 import com.heman.bysj.entity.MajorProgress;
@@ -20,9 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Service
@@ -80,8 +77,10 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
         //根据任务查询changeMajor表并封装返回
         for (Task task:taskList) {
             log.info("查询带处理任务ID："+task.getId());
-            Changemajors changemajors = selectHolidayByProcessInstanceId(task.getProcessInstanceId());
+            Changemajors changemajors = selectMajorByProcessInstanceId(task.getProcessInstanceId());
             StudentRecord student = studentDao.selectById(changemajors.getUserid());
+            if(student==null)
+                continue;
             MajorTask majorTask = Convert.changeMajorToMajorTask(student.getName(),student.getRole(),student.getSid(),student.getClass_(),task.getId(),changemajors);
             holidayTasks.add(majorTask);
         }
@@ -90,7 +89,7 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
     }
 
     @Override
-    public Changemajors selectHolidayByProcessInstanceId(String processInstanceId) {
+    public Changemajors selectMajorByProcessInstanceId(String processInstanceId) {
         log.info("流程实例ID:"+processInstanceId);
         ChangemajorsRecord changemajorsRecord = changeMajorsDao.selectByProcessInstanceId(processInstanceId);
         if(changemajorsRecord!=null){
@@ -134,7 +133,7 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
     public List<MajorProgress> userSearch(int userId){
         //存放结果
         List<MajorProgress> result = new ArrayList<>();
-        //查询请假单进度
+        //查询转专业单进度
         System.out.println("进入service");
         //根据用户id查询业务表
         List<ChangemajorsRecord> changemajorsRecords = changeMajorsDao.selectByUserId(userId);
@@ -163,7 +162,7 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
 
             }
         }
-        log.info("查询用户转账任务完成");
+        log.info("查询用户转专业任务完成");
         System.out.println(result.toArray());
         return result;
     }
@@ -265,5 +264,16 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
     public void download(String college) {
         selectMajor(college);
     }
-    
+
+    /**
+     * 查找该用户是否已经有转专业申请
+     * @param id
+     * @return
+     */
+    @Override
+    public boolean selectMajorByUserId(int id) {
+        if(changeMajorsDao.selectByUserId(id).size()==0)
+            return true;
+        return false;
+    }
 }

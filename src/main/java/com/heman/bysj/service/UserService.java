@@ -1,5 +1,6 @@
 package com.heman.bysj.service;
 
+import com.heman.bysj.entity.UserStudent;
 import com.heman.bysj.jooq.tables.pojos.Student;
 import com.heman.bysj.jooq.tables.pojos.Teacher;
 import com.heman.bysj.jooq.tables.records.StudentRecord;
@@ -16,4 +17,6 @@ public interface UserService {
 
     String userRegist(Map user);
     String changePassword(Map form,Map user);
+
+    //UserStudent selectStudentById(int id);
 }

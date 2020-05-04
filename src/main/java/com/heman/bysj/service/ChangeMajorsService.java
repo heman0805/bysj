@@ -13,11 +13,13 @@ import java.util.Map;
 public interface ChangeMajorsService {
     boolean startMajor(Changemajors changemajors);
     List<MajorTask> searchTasks(int id);
-    Changemajors selectHolidayByProcessInstanceId(String processInstanceId);
+    Changemajors selectMajorByProcessInstanceId(String processInstanceId);
     void major_Check(Examine examine);
     List<MajorProgress> userSearch(int userId);
     List<ChangeMajorResult> selectMajor(String college);
     void setClass(List<ChangeMajorResult> list);
     List<ChangeMajorResult> getByProfession(String profession,String param);
     void download(String college);
+    boolean selectMajorByUserId(int id);
+    
 }

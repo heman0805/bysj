@@ -70,4 +70,14 @@ public class HolidayDaoImpl implements HolidayDao {
                 .and(HOLIDAY.ROLE.eq(role))
                 .fetch();
     }
+
+    @Override
+    public List<HolidayRecord> selectByUserIdAndRoleAndStatus(int userId, String role, int status) {
+        List<HolidayRecord> list = dslContext.selectFrom(HOLIDAY)
+                .where(HOLIDAY.USERID.eq(userId))
+                .and(HOLIDAY.ROLE.eq(role))
+                .and(HOLIDAY.PROCESSSTATUS.eq(status))//请假状态为申请中s
+                .fetch();
+        return list;
+    }
 }

@@ -14,4 +14,5 @@ public interface HolidayDao {
     void complete(String processInstanceId,int processStatus);
     List<HolidayRecord> selectByUserIdAndRoleAndProcessStatus(int userId,String role);
     List<HolidayRecord> selectByUidAndRole(int id,String role);
+    List<HolidayRecord> selectByUserIdAndRoleAndStatus(int userId,String role,int status);
 }
