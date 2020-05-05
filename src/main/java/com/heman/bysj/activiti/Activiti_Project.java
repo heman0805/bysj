@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,10 +50,11 @@ public class Activiti_Project {
      * 启动项目申请流程
      * @param project
      */
-    public  String startInstance(Project project){
+    public  String startInstance(Project project,int group){
         String businessKey = project.getFormid();
         Map<String,Object> map = new HashMap<>();
         map.put("name",project.getUserid().toString());
+        map.put("group",group);
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("projectProcess",businessKey,map);
         log.info("转专业申请流程启动成功，申请人id:{}",project.getUserid());
         return processInstance.getId();
@@ -68,7 +70,9 @@ public class Activiti_Project {
                 .taskAssignee(project.getUserid().toString())
                 .list();
         for (Task task:taskList) {
-            taskService.complete(task.getId());
+            String pid = task.getProcessInstanceId() ;
+            if(pid.equals(project.getProcessinstanceid()))
+                taskService.complete(task.getId());
         }
         log.info("完成转专业申请任务");
     }
@@ -86,11 +90,14 @@ public class Activiti_Project {
                 .processDefinitionKey(definitionKey)
                 .taskCandidateGroup(teacher.getGroup())
                 .list();
+        log.info("登录用户信息组为："+teacher.getGroup());
         for (Task task:taskList) {
             log.info("待拾取任务ID："+task.getId());
             String processInstanceId = task.getProcessInstanceId();
             ProjectRecord projectRecord = projectDao.selectByProcessInstanceId(processInstanceId);
             User user = new User();
+            if(projectRecord==null)
+                continue;
             if(projectRecord.getRole().equals(UserRole.TEACHER)){
                 TeacherRecord t = teacherDao.selectById(projectRecord.getUserid());
                 user.setCollege(t.getCollege());
@@ -111,7 +118,7 @@ public class Activiti_Project {
             }
 
             //判断学生/教师与审批教师是否为同一专业
-            if(teacher.getGroup().equals(UserGroup.GROUP_INSTRUCTOR)||teacher.getGroup().equals(UserGroup.Group_DEPARTMENTDIRECTOR)){//辅导员
+            if(teacher.getGroup().equals(UserGroup.GROUP_INSTRUCTOR)||teacher.getGroup().equals(UserGroup.Group_DEPARTMENTDIRECTOR)){//辅导员、系主任
                 if(teacher.getProfession().equals(user.getProfession())){
                     taskService.claim(task.getId(),teacher.getUsername());
                 }
@@ -122,6 +129,63 @@ public class Activiti_Project {
                 }
             }else if(teacher.getGroup().equals(UserGroup.GROUP_FINANCE)||teacher.getGroup().equals(UserGroup.GROUP_SCIANDTECH)){
                 taskService.claim(task.getId(),teacher.getUsername());
+            }
+        }
+    }
+    /**
+     1、查找当前用户任务
+     * 2、通过任务获取流程实例id
+     * 3、通过流程实例ID查找holiday表得到对应userid及role
+     * 4、查询对应用户表判断是否应为当前用户审批
+     * 5、进行任务放回
+     * @param definitionKey
+     * @param teacher 登录教师信息（eg:辅导员-Group_Instructor）
+     */
+    public void putPool(String definitionKey, Teacher teacher){
+        List<Task> taskList = taskService.createTaskQuery()
+                .processDefinitionKey(definitionKey)
+                .taskAssignee(teacher.getUsername())
+                .list();
+        System.out.println("释放请假任务，查询任务数量："+taskList.size());
+        log.info("登录用户信息组为："+teacher.getGroup());
+        for (Task task:taskList) {
+            log.info("待拾取任务ID："+task.getId());
+            String processInstanceId = task.getProcessInstanceId();
+            ProjectRecord projectRecord = projectDao.selectByProcessInstanceId(processInstanceId);
+            User user = new User();
+            if(projectRecord==null)
+                continue;
+            if(projectRecord.getRole().equals(UserRole.TEACHER)){
+                TeacherRecord t = teacherDao.selectById(projectRecord.getUserid());
+                user.setCollege(t.getCollege());
+                user.setProfession(t.getProfession());
+                user.setUsername(t.getUsername());
+                user.setRole(t.getRole());
+                user.setUserId(t.getTid());
+                user.setName(t.getName());
+            }
+            else if(projectRecord.getRole().equals(UserRole.STUDENT)){
+                StudentRecord s = studentDao.selectById(projectRecord.getUserid());
+                user.setCollege(s.getCollege());
+                user.setProfession(s.getProfession());
+                user.setUsername(s.getUsername());
+                user.setRole(s.getRole());
+                user.setUserId(s.getSid());
+                user.setName(s.getName());
+            }
+
+            //判断学生/教师与审批教师是否为同一专业
+            if(teacher.getGroup().equals(UserGroup.GROUP_INSTRUCTOR)||teacher.getGroup().equals(UserGroup.Group_DEPARTMENTDIRECTOR)){//辅导员、系主任
+                if(teacher.getProfession().equals(user.getProfession())){
+                    taskService.setAssignee(task.getId(),null);
+                }
+            }
+            else if(teacher.getGroup().equals(UserGroup.GROUP_VICEDEAN)){
+                if(teacher.getCollege().equals(user.getCollege())){
+                    taskService.setAssignee(task.getId(),null);
+                }
+            }else if(teacher.getGroup().equals(UserGroup.GROUP_FINANCE)||teacher.getGroup().equals(UserGroup.GROUP_SCIANDTECH)){
+                taskService.setAssignee(task.getId(),null);
             }
         }
     }
@@ -173,4 +237,15 @@ public class Activiti_Project {
         runtimeService.deleteProcessInstance(processInstanceId,"结束流程");
         return task.getId();
     }
+    /**查询历史任务*/
+    public List<HistoricTaskInstance> findHistoryTaskByBusinessKey(String processInstanceId){
+        List<HistoricTaskInstance> majorProcess = historyService//与历史数据（历史表）相关的Service
+                .createHistoricTaskInstanceQuery()
+                .processDefinitionKey("projectProcess")
+                .processInstanceId(processInstanceId)
+                .list();
+
+        return majorProcess;
+    }
+
 }

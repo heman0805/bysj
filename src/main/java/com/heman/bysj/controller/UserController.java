@@ -24,7 +24,6 @@ public class UserController {
     @Autowired
     private TokenService tokenService;
 
-
     /**
      * 用户登录方法
      * @param user
@@ -81,7 +80,7 @@ public class UserController {
         Map<String,Object> map = new HashMap<>();
         String msg = "";
         System.out.println(user.getUsername()+" "+user.getPassword()+" "+user.getRole());
-        Teacher teacher = userService.getTeacherByUsername(user.getUsername(),user.getPassword());
+        Teacher teacher = userService.getTeacherByUsernameAndStatus(user.getUsername(),user.getPassword(),1);
             if(teacher==null){
                 msg = "用户名或者密码错误";
                 map.put("msg",msg);
@@ -143,5 +142,13 @@ public class UserController {
         //查询教师信息
         TeacherRecord teacherRecord = userService.selectTeacherById(id);
         return teacherRecord.into(Teacher.class);
+    }
+    /**
+     * 教师注销
+     */
+    @RequestMapping("/cancel/{id}")
+    public void cancel(@PathVariable("id") int id){
+        //查询教师信息
+        userService.cancel(id);
     }
 }

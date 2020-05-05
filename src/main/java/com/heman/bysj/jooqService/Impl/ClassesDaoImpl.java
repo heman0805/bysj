@@ -42,4 +42,12 @@ public class ClassesDaoImpl implements ClassesDao {
                 .fetch();
         return fetch;
     }
+
+    @Override
+    public List<ClassesRecord> selectClassByProfessionAndGrade(String profession, int grade) {
+        return dslContext.selectFrom(CLASSES)
+                .where(CLASSES.PROFESSION.eq(profession))
+                .and(CLASSES.GRADE.eq(grade))
+                .fetch();
+    }
 }

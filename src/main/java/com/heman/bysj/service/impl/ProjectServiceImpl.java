@@ -1,6 +1,7 @@
 package com.heman.bysj.service.impl;
 
 import com.heman.bysj.activiti.Activiti_Project;
+import com.heman.bysj.entity.ProjectProcess;
 import com.heman.bysj.entity.ProjectTask;
 import com.heman.bysj.entity.User;
 import com.heman.bysj.enums.UserRole;
@@ -19,6 +20,7 @@ import com.heman.bysj.jooqService.TeacherDao;
 import com.heman.bysj.service.ProjectService;
 import com.heman.bysj.utils.Convert;
 import lombok.extern.slf4j.Slf4j;
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,9 +43,9 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ExamineDao examineDao;
     @Override
-    public boolean startProject(Project project) {
+    public boolean startProject(Project project,int group) {
         //1、启动转专业流程实例
-        String processInstanceId = activiti_project.startInstance(project);
+        String processInstanceId = activiti_project.startInstance(project,group);
         //2、插入转专业表
         project.setProcessinstanceid(processInstanceId);
         project.setProcessstatus(1);//设置审批流程状态为审批中
@@ -133,6 +135,10 @@ public class ProjectServiceImpl implements ProjectService {
                 if(student.getProfession().equals(teacher.getProfession())){
                     user = Convert.studentToUser(student);
                     ProjectTask projectTask = Convert.changeProjectToProjectTask(project.into(Project.class),user,null);
+                    if(param==5)
+                        projectTask.setCheckResult("通过");
+                    else
+                        projectTask.setCheckResult("拒绝");
                     result.add(projectTask);
                 }
             }
@@ -144,6 +150,10 @@ public class ProjectServiceImpl implements ProjectService {
                 if(teacher1.getProfession().equals(teacher.getProfession())){
                     user = Convert.teacherToUser(teacher1);
                     ProjectTask projectTask = Convert.changeProjectToProjectTask(project.into(Project.class),user,null);
+                    if(param==5)
+                        projectTask.setCheckResult("通过");
+                    else
+                        projectTask.setCheckResult("拒绝");
                     result.add(projectTask);
                 }
             }
@@ -156,6 +166,10 @@ public class ProjectServiceImpl implements ProjectService {
                     if(teacher1.getCollege().equals(teacher.getCollege())){
                         user = Convert.teacherToUser(teacher1);
                         ProjectTask projectTask = Convert.changeProjectToProjectTask(project.into(Project.class),user,null);
+                        if(param==5)
+                            projectTask.setCheckResult("通过");
+                        else
+                            projectTask.setCheckResult("拒绝");
                         result.add(projectTask);
                     }
                 }
@@ -164,6 +178,10 @@ public class ProjectServiceImpl implements ProjectService {
                     if(Student.getCollege().equals(teacher.getCollege())){
                         user = Convert.studentToUser(Student);
                         ProjectTask projectTask = Convert.changeProjectToProjectTask(project.into(Project.class),user,null);
+                        if(param==5)
+                            projectTask.setCheckResult("通过");
+                        else
+                            projectTask.setCheckResult("拒绝");
                         result.add(projectTask);
                     }
                 }
@@ -177,16 +195,79 @@ public class ProjectServiceImpl implements ProjectService {
                     Teacher teacher1 = teacherDao.selectById(project.getUserid()).into(Teacher.class);
                         user = Convert.teacherToUser(teacher1);
                         ProjectTask projectTask = Convert.changeProjectToProjectTask(project.into(Project.class),user,null);
+                        if(param==5)
+                            projectTask.setCheckResult("通过");
+                        else
+                            projectTask.setCheckResult("拒绝");
                         result.add(projectTask);
                 }
                 else if(project.getRole().equals(UserRole.STUDENT)){
                     Student Student = studentDao.selectById(project.getUserid()).into(Student.class);
                         user = Convert.studentToUser(Student);
                         ProjectTask projectTask = Convert.changeProjectToProjectTask(project.into(Project.class),user,null);
+                        if(param==5)
+                            projectTask.setCheckResult("通过");
+                        else
+                            projectTask.setCheckResult("拒绝");
                         result.add(projectTask);
                 }
             }
         }
+        return result;
+    }
+
+    @Override
+    public List<Project> selectByUserIdAndRole(int id, String role) {
+        List<Project> result = new ArrayList<>();
+        List<ProjectRecord> projectRecords = projectDao.selectByUserIdAndRole(id, role);
+        for (ProjectRecord projectRecord:projectRecords) {
+            result.add(projectRecord.into(Project.class));
+        }
+        return result;
+    }
+    /**
+     *       1、根据用户查询业务表获取businessKey
+     *       3、根据业务表及examine表封装审核数据
+     *      *
+     * @param userId
+     */
+    @Override
+    public List<ProjectProcess> userSearch(int userId) {
+        //存放结果
+        List<ProjectProcess> result = new ArrayList<>();
+        //查询转专业单进度
+        System.out.println("进入service");
+        //根据用户id查询业务表
+        List<ProjectRecord> projectRecords = projectDao.selectByUserId(userId);
+        if(projectRecords.size()==0)
+            return null;
+        for (ProjectRecord projectRecord: projectRecords) {//循环每个申请任务
+            Project project = projectRecord.into(Project.class);
+            //通过流程ID查找历史任务
+            List<HistoricTaskInstance> historicTaskInstances = activiti_project.findHistoryTaskByBusinessKey(project.getProcessinstanceid());
+            for (HistoricTaskInstance hti:historicTaskInstances) {
+                ProjectProcess projectProcess = new ProjectProcess();
+                ExamineRecord examineRecord = examineDao.selectByTaskId(hti.getId());
+                if(examineRecord!=null){
+                    Examine examine = examineRecord.into(Examine.class);
+                    projectProcess.setProcessInstanceId(project.getProcessinstanceid());
+                    projectProcess.setTaskId(examine.getTaskid());
+                    projectProcess.setProjectName(project.getProjectname());
+                    projectProcess.setOpinion(examine.getOpinion());
+                    projectProcess.setCheckTime(examine.getChecktime());
+                    projectProcess.setCheckResult(examine.getCheckresult());
+                    String userName = hti.getAssignee();
+                    TeacherRecord teacher = teacherDao.getByUserName(userName);
+                    if(teacher==null)
+                        continue;
+                    projectProcess.setTaskStatus(teacher.getPosition()+"审批完成");
+                    result.add(projectProcess);
+                }
+
+            }
+        }
+        log.info("查询用户立项申请任务完成");
+        System.out.println(result.toArray());
         return result;
     }
 }

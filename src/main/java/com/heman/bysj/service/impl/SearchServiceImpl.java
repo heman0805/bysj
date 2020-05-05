@@ -52,6 +52,19 @@ public class SearchServiceImpl implements SearchService {
         return classes;
     }
 
+    @Override
+    public List<String> searchClassesByProfessionAndGrade(String profession,int grade) {
+        List<ClassesRecord> classesRecords = classesDao.selectClassByProfessionAndGrade(profession,grade);
+        if(classesRecords.size()==0){
+            return null;
+        }
+        List<String> classes = new ArrayList<>();
+        for (ClassesRecord class_:classesRecords) {
+            classes.add(class_.getClass_());
+        }
+        return classes;
+    }
+
     private List<String> setList(Result<Record1<String>> records, String param){
         if(records.size()==0){
             return null;

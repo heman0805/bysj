@@ -212,7 +212,7 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
      * @return
      */
     @Override
-    public List<ChangeMajorResult> getByProfession(String profession,String param) {
+    public List<ChangeMajorResult> getByProfession(String profession,String param,int grade) {
         List<ChangeMajorResult> result = new ArrayList<>();
         List<ChangemajorsRecord> changemajorsRecords = new ArrayList<>();
         if(param.equals("college"))
@@ -224,6 +224,10 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
             Changemajors changemajors = record.into(Changemajors.class);
             ChangeMajorResult changeMajorResult = new ChangeMajorResult();
             Student student = studentDao.selectById(changemajors.getUserid()).into(Student.class);
+            if(grade!=10){
+                if(student.getGrade()!=grade)
+                    continue;
+            }
             changeMajorResult.setSid(student.getSid());
             changeMajorResult.setName(student.getName());
             changeMajorResult.setNumber(student.getUsername());

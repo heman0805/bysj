@@ -21,6 +21,15 @@ public class ProjectTask {
     private String fundItem;
     private Date createTime;
     private Date updateTime;
+    private String checkResult;
+
+    public String getCheckResult() {
+        return checkResult;
+    }
+
+    public void setCheckResult(String checkResult) {
+        this.checkResult = checkResult;
+    }
 
     public String getTaskId() {
         return taskId;

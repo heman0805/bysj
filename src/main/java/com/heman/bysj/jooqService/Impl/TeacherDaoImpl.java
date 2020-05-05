@@ -68,6 +68,15 @@ public class TeacherDaoImpl implements TeacherDao {
     }
 
     @Override
+    public TeacherRecord getTeacherByUsernameAndStatus(String userName, String password, int status) {
+        return dslContext.selectFrom(TEACHER)
+                .where(TEACHER.USERNAME.eq(userName))
+                .and(TEACHER.PASSWORD.eq(password))
+                .and(TEACHER.STATUS.eq(status))
+                .fetchOne();
+    }
+
+    @Override
     public TeacherRecord selectByProfessionAndPositionAndGrade(String profession, String position, int grade) {
         return dslContext.selectFrom(TEACHER)
                 .where(TEACHER.PROFESSION.eq(profession))
@@ -116,5 +125,13 @@ public class TeacherDaoImpl implements TeacherDao {
         return dslContext.selectFrom(TEACHER)
                 .where(TEACHER.PROFESSION.eq(profession))
                 .fetch();
+    }
+
+    @Override
+    public void cancel(int id) {
+        dslContext.update(TEACHER)
+                .set(TEACHER.STATUS,0)
+                .where(TEACHER.TID.eq(id))
+                .execute();
     }
 }

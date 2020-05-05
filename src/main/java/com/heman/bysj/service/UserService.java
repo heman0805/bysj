@@ -14,9 +14,10 @@ public interface UserService {
 
     TeacherRecord selectTeacherById(int id);
     Teacher getTeacherByUsername(String name, String password);
-
+    Teacher getTeacherByUsernameAndStatus(String name, String password,int status);
     String userRegist(Map user);
     String changePassword(Map form,Map user);
 
+    void cancel(int id);
     //UserStudent selectStudentById(int id);
 }

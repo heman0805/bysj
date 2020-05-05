@@ -1,6 +1,9 @@
 package com.heman.bysj.controller;
 
+import com.heman.bysj.entity.ProjectProcess;
 import com.heman.bysj.entity.ProjectTask;
+import com.heman.bysj.enums.UserGroup;
+import com.heman.bysj.enums.UserRole;
 import com.heman.bysj.jooq.tables.pojos.Examine;
 import com.heman.bysj.jooq.tables.pojos.Project;
 import com.heman.bysj.service.ProjectService;
@@ -35,9 +38,27 @@ public class projectController {
         Map<String,Object> map = new HashMap<>();
         //数据类型转化
         Project project = Convert.mapToProject(params);
-        //提交申请表单
+        //判断是否已有申请
+        String group = params.get("user").get("group").toString();
+        int param,id;
+        String role;
 
-        boolean result = projectService.startProject(project);
+        if(group.equals(UserGroup.GROUP_TEACHER)) {
+            param=1;
+            id = Integer.parseInt(params.get("user").get("tid").toString());
+        }
+        else {
+            param=0;
+            id = Integer.parseInt(params.get("user").get("sid").toString());
+        }
+        List<Project> projects = projectService.selectByUserIdAndRole(id, params.get("user").get("role").toString());
+        if(projects.size()!=0) {
+            msg = "请勿重复提交";
+            map.put("msg",msg);
+            return map;
+        }
+        //提交申请表单
+        boolean result = projectService.startProject(project,param);
         if(result){
             msg = "申请成功";
 
@@ -113,5 +134,21 @@ public class projectController {
         return page;
     }
 
+    /**
+     * 个人查询正在执行的请假进度
+     * 1、根据用户名及processDefinitionKey查询历史流程实例
+     * 2、判断该流程是否完成
+     * 3、返回未完成流程 流程实例ID
+     * 4、查询业务表封装数据返回给前端请假表内容
+     * /test/{page}/{size}
+     */
+    @RequestMapping(value="/user/project/userSearch/{uid}")
+    @ResponseBody
+    public List<ProjectProcess> userSearch(@PathVariable("uid")int userId){
+        System.out.println("进入方法");
+        //查询正在执行的请假流程
+        List<ProjectProcess> projectProcess = projectService. userSearch(userId);
+        return projectProcess;
+    }
 
 }

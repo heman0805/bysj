@@ -6,4 +6,5 @@ public interface SearchService {
     List<String> searchAllCollege();
     List<String> searchProfessionesByCollege(String college);
     List<String> searchClassesByProfession(String profession);
+    List<String> searchClassesByProfessionAndGrade(String profession,int grade);
 }

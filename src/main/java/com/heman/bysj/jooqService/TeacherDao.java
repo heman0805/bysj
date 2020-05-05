@@ -15,10 +15,12 @@ public interface TeacherDao {
 
     int updatePasswordByTid(int tid,String password);
     TeacherRecord getTeacherByUsername(String userName,String password);
+    TeacherRecord getTeacherByUsernameAndStatus(String userName,String password,int status);
     TeacherRecord getByUserName(String userName);
     TeacherRecord selectByProfessionAndPositionAndGrade(String profession,  String position,int grade);
     TeacherRecord selectByParam(String grade,String college,String profession,String position);
     List<TeacherRecord> selectByCollege(String college);
     List<TeacherRecord> selectByProfession(String profession);
 
+    void cancel(int id);
 }

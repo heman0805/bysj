@@ -83,7 +83,8 @@ public class Convert {
         teacher.setName(user.get("name").toString());
         teacher.setUsername(user.get("username").toString());
         teacher.setPassword(user.get("password").toString());
-        teacher.setGrade(Integer.parseInt(user.get("grade").toString()));
+        if(user.get("grade")!=null)
+            teacher.setGrade(Integer.parseInt(user.get("grade").toString()));
         teacher.setProfession(user.get("profession").toString());
         teacher.setCollege(user.get("college").toString());
         teacher.setPosition(user.get("position").toString());
@@ -329,6 +330,7 @@ public class Convert {
      */
     public static ProjectTask changeProjectToProjectTask(Project project,User user,String taskId){
         ProjectTask projectTask = new ProjectTask();
+
         projectTask.setUserId(user.getUserId());
         projectTask.setProcessInstanceId(project.getProcessinstanceid());
         projectTask.setTaskId(taskId);

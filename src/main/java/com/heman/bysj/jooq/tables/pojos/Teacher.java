@@ -22,7 +22,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Teacher implements Serializable {
 
-    private static final long serialVersionUID = 1720005777;
+    private static final long serialVersionUID = 1557646255;
 
     private Integer tid;
     private String  name;
@@ -35,6 +35,7 @@ public class Teacher implements Serializable {
     private String  position;
     private String  role;
     private String  group;
+    private Integer status;
 
     public Teacher() {}
 
@@ -50,6 +51,7 @@ public class Teacher implements Serializable {
         this.position = value.position;
         this.role = value.role;
         this.group = value.group;
+        this.status = value.status;
     }
 
     public Teacher(
@@ -63,7 +65,8 @@ public class Teacher implements Serializable {
         String  profession,
         String  position,
         String  role,
-        String  group
+        String  group,
+        Integer status
     ) {
         this.tid = tid;
         this.name = name;
@@ -76,6 +79,7 @@ public class Teacher implements Serializable {
         this.position = position;
         this.role = role;
         this.group = group;
+        this.status = status;
     }
 
     public Integer getTid() {
@@ -166,6 +170,14 @@ public class Teacher implements Serializable {
         this.group = group;
     }
 
+    public Integer getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Teacher (");
@@ -181,6 +193,7 @@ public class Teacher implements Serializable {
         sb.append(", ").append(position);
         sb.append(", ").append(role);
         sb.append(", ").append(group);
+        sb.append(", ").append(status);
 
         sb.append(")");
         return sb.toString();

@@ -1,5 +1,6 @@
 package com.heman.bysj.jooqService.Impl;
 
+import com.heman.bysj.jooq.tables.pojos.Project;
 import com.heman.bysj.jooq.tables.records.ProjectRecord;
 import com.heman.bysj.jooqService.ProjectDao;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +52,16 @@ public class ProjectDaoImpl implements ProjectDao {
     }
 
     @Override
+    public List<ProjectRecord> selectByUserIdAndRole(int id, String role) {
+        return dslContext.selectFrom(PROJECT)
+                .where(PROJECT.USERID.eq(id))
+                .and(PROJECT.ROLE.eq(role))
+                .and(PROJECT.PROCESSSTATUS.notEqual(5))
+                .and(PROJECT.PROCESSSTATUS.notEqual(6))
+                .fetch();
+    }
+
+    @Override
     public List<ProjectRecord> selectByRoleAndProcessStatus(String role,int processStatus) {
         return dslContext.selectFrom(PROJECT)
                 .where(PROJECT.ROLE.eq(role))
@@ -62,6 +73,13 @@ public class ProjectDaoImpl implements ProjectDao {
     public List<ProjectRecord> selectByProcessStatus(int processStatus) {
         return dslContext.selectFrom(PROJECT)
                 .where(PROJECT.PROCESSSTATUS.eq(processStatus))
+                .fetch();
+    }
+
+    @Override
+    public List<ProjectRecord> selectByUserId(int id) {
+        return dslContext.selectFrom(PROJECT)
+                .where(PROJECT.USERID.eq(id))
                 .fetch();
     }
 }

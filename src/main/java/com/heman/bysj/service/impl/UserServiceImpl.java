@@ -1,5 +1,8 @@
 package com.heman.bysj.service.impl;
 
+import com.heman.bysj.activiti.Activiti_Holiday;
+import com.heman.bysj.activiti.Activiti_Major;
+import com.heman.bysj.activiti.Activiti_Project;
 import com.heman.bysj.enums.TeacherPosition;
 import com.heman.bysj.enums.UserGroup;
 import com.heman.bysj.enums.UserRole;
@@ -22,6 +25,12 @@ public class UserServiceImpl implements UserService {
     private StudentDao studentDao;
     @Autowired
     private TeacherDao teacherDao;
+    @Autowired
+    private Activiti_Project activiti_project;
+    @Autowired
+    private Activiti_Holiday activiti_holiday;
+    @Autowired
+    private Activiti_Major activiti_major;
 
     @Override
     public Student selectStudentById(int id) {
@@ -40,7 +49,6 @@ public class UserServiceImpl implements UserService {
             return studentRecord.into(Student.class);
         else
             return null;
-        //return studentDao.getStudnetByUsername(name,password).into(Student.class);
     }
 
     @Override
@@ -51,6 +59,15 @@ public class UserServiceImpl implements UserService {
         else
             return null;
         //return teacherDao.getTeacherByUsername(name,password).into(Teacher.class);
+    }
+
+    @Override
+    public Teacher getTeacherByUsernameAndStatus(String name, String password, int status) {
+        TeacherRecord teacherRecord = teacherDao.getTeacherByUsernameAndStatus(name,password,status);
+        if(teacherRecord!=null)
+            return teacherRecord.into(Teacher.class);
+        else
+            return null;
     }
 
     @Override
@@ -201,5 +218,14 @@ public class UserServiceImpl implements UserService {
         }
         msg = "修改成功";
         return msg;
+    }
+
+    @Override
+    public void cancel(int id) {
+        TeacherRecord teacherRecord = teacherDao.selectById(id);
+        activiti_holiday.putPool("holidayProcess",teacherRecord.into(Teacher.class));
+        activiti_major.putPool("majorProcess",teacherRecord.into(Teacher.class));
+        activiti_project.putPool("projectProcess",teacherRecord.into(Teacher.class));
+        teacherDao.cancel(id);
     }
 }

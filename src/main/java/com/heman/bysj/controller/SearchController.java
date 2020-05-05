@@ -25,13 +25,20 @@ public class SearchController {
     @RequestMapping(value="/searchProfessionesByCollege/{college}")
     @ResponseBody
     public List<String> searchProfessionesByCollege(@PathVariable("college") String college){
-        List<String> colleges = searchService.searchProfessionesByCollege(college);
-        return colleges;
+        List<String> profession = searchService.searchProfessionesByCollege(college);
+        return profession;
     }
     @RequestMapping(value="/searchclassesByProfession/{profession}")
     @ResponseBody
     public List<String> searchclassesByProfession(@PathVariable("profession") String profession){
-        List<String> colleges = searchService.searchClassesByProfession(profession);
-        return colleges;
+        List<String> classes = searchService.searchClassesByProfession(profession);
+        return classes;
+    }
+    @RequestMapping(value="/searchclassesByProfessionAndGrade/{profession}/{grade}")
+    @ResponseBody
+    public List<String> searchclassesByProfessionAndGrade(@PathVariable("profession") String profession
+                                                         ,@PathVariable("grade") int grade){
+        List<String> classes = searchService.searchClassesByProfessionAndGrade(profession,grade);
+        return classes;
     }
 }

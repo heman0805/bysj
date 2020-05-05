@@ -20,7 +20,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row11;
+import org.jooq.Row12;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Teacher extends TableImpl<TeacherRecord> {
 
-    private static final long serialVersionUID = 2026658473;
+    private static final long serialVersionUID = 701539643;
 
     /**
      * The reference instance of <code>bysj.teacher</code>
@@ -111,6 +111,11 @@ public class Teacher extends TableImpl<TeacherRecord> {
      * The column <code>bysj.teacher.group</code>. 所属组用户
      */
     public final TableField<TeacherRecord, String> GROUP = createField(DSL.name("group"), org.jooq.impl.SQLDataType.VARCHAR(30).nullable(false), this, "所属组用户");
+
+    /**
+     * The column <code>bysj.teacher.status</code>. 用户状态：1、激活状态 0、注销状态
+     */
+    public final TableField<TeacherRecord, Integer> STATUS = createField(DSL.name("status"), org.jooq.impl.SQLDataType.INTEGER.defaultValue(org.jooq.impl.DSL.inline("1", org.jooq.impl.SQLDataType.INTEGER)), this, "用户状态：1、激活状态 0、注销状态");
 
     /**
      * Create a <code>bysj.teacher</code> table reference
@@ -197,11 +202,11 @@ public class Teacher extends TableImpl<TeacherRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row11 type methods
+    // Row12 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row11<Integer, String, String, String, String, Integer, String, String, String, String, String> fieldsRow() {
-        return (Row11) super.fieldsRow();
+    public Row12<Integer, String, String, String, String, Integer, String, String, String, String, String, Integer> fieldsRow() {
+        return (Row12) super.fieldsRow();
     }
 }

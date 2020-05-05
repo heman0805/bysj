@@ -126,7 +126,7 @@ public class ChangeMajorsController {
     @ResponseBody
     public List<MajorProgress> userSearch(@PathVariable("uid")int userId){
         System.out.println("进入方法");
-        //查询正在执行的请假流程
+        //查询正在执行的流程
         List<MajorProgress> MajorProgress = changeMajorsService. userSearch(userId);
         return MajorProgress;
     }
@@ -138,14 +138,15 @@ public class ChangeMajorsController {
      * @param limit
      * @return
      */
-    @RequestMapping(value="/user/major/getByProfession/{profession}/{param}/{page}/{size}")
+    @RequestMapping(value="/user/major/getByProfession/{profession}/{param}/{grade}/{page}/{size}")
     @ResponseBody
     public Page getByProfession(@PathVariable("profession") String profession,
-                                @PathVariable("param") String param
+                                @PathVariable("param") String param,
+                                @PathVariable("grade") int grade
                                 ,@PathVariable("page") int pageNum,@PathVariable("size") int limit){
 
         log.info("searchHoliday-------pageNum={},size={}",pageNum,limit);
-        List<ChangeMajorResult> ChangeMajorResult = changeMajorsService.getByProfession(profession,param);
+        List<ChangeMajorResult> ChangeMajorResult = changeMajorsService.getByProfession(profession,param,grade);
         log.info("selectMajor.size()={}",ChangeMajorResult.size());
         PageUtils pageUtils = new PageUtils();
         Page page = pageUtils.resultPage(ChangeMajorResult,pageNum,limit);
@@ -154,7 +155,9 @@ public class ChangeMajorsController {
     @RequestMapping(value="/user/major/setClass")
     @ResponseBody
     public String setClass(@RequestBody List<ChangeMajorResult> list){
+        //设置新专业班级
         changeMajorsService.setClass(list);
+        //已有的学生任务进行释放
         String msg = "分配班级成功";
         return msg;
     }

@@ -120,6 +120,54 @@ public class Activiti_Major {
         }
     }
     /**
+     * 教师进行任务拾取
+     * 1、查找当前用户任务
+     * 2、通过任务获取流程实例id
+     * 3、通过流程实例ID查找changeMajors表得到对应currentCollege
+     * 4、判断是否应为当前用户审批
+     * 5、放回任务池
+     * @param definitionKey
+     * @param teacher 登录教师信息（eg:辅导员-Group_Instructor）
+     */
+    public void putPool(String definitionKey, Teacher teacher){
+        List<Task> taskList = taskService.createTaskQuery()
+                .processDefinitionKey(definitionKey)
+                .taskAssignee(teacher.getTid().toString())
+                .list();
+        System.out.println("释放请假任务，查询任务数量："+taskList.size());
+        for (Task task:taskList) {
+            log.info("待拾取任务ID："+task.getId());
+            String processInstanceId = task.getProcessInstanceId();
+            ChangemajorsRecord changemajorsRecord = changeMajorsDao.selectByProcessInstanceId(processInstanceId);
+
+            if(changemajorsRecord==null){
+                System.out.println("changeMajor表查询结果为空");
+                continue;
+            }
+
+            if(changemajorsRecord.getProcessstatus()==1){//当前教务办审批中
+                if(changemajorsRecord.getCurrentcollege().equals(teacher.getCollege())){
+                    taskService.setAssignee(task.getId(),null);
+                }
+            }else if(changemajorsRecord.getProcessstatus()==2){//当前院长审批中
+                if(changemajorsRecord.getCurrentcollege().equals(teacher.getCollege())){
+                    taskService.setAssignee(task.getId(),null);
+                }
+            }else if(changemajorsRecord.getProcessstatus()==3){//转向教务办审批中
+                if(changemajorsRecord.getNewcollege().equals(teacher.getCollege())){
+                    taskService.setAssignee(task.getId(),null);
+                }
+            }else if(changemajorsRecord.getProcessstatus()==4){//转向院长审批中
+                if(changemajorsRecord.getNewcollege().equals(teacher.getCollege())){
+                    taskService.setAssignee(task.getId(),null);
+                }
+            }else if(changemajorsRecord.getProcessstatus()==5){//学校教务办审批中
+                taskService.setAssignee(task.getId(),null);
+            }
+
+        }
+    }
+    /**
      * 查询待处理任务（待审批任务）
      * @param processDefinitionKey
      * @param teacher

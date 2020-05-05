@@ -189,6 +189,56 @@ public class Activiti_Holiday {
             }
         }
     }
+    /**
+     * 教师进行任务拾取
+     * 1、查找当前用户任务
+     * 2、通过任务获取流程实例id
+     * 3、通过流程实例ID查找holiday表得到对应userid及role
+     * 4、查询对应用户表判断是否应为当前用户审批
+     * 5、放回
+     * @param definitionKey
+     * @param teacher 登录教师信息（eg:辅导员-Group_Instructor）
+     */
+    public void putPool(String definitionKey, Teacher teacher){
+        List<Task> taskList = taskService.createTaskQuery()
+                .processDefinitionKey(definitionKey)
+                .taskAssignee(teacher.getUsername())
+                .list();
+        System.out.println("释放请假任务，查询任务数量："+taskList.size());
+        for (Task task:taskList) {
+            //任务释ssssssss放
+
+            System.out.println("任务ID："+task.getId());
+            String processInstanceId = task.getProcessInstanceId();
+            HolidayRecord holidayRecord = holidayDao.selectByProcessInstanceId(processInstanceId);
+            if(holidayRecord.getRole().equals(UserRole.TEACHER)){
+                TeacherRecord teacherRecord = teacherDao.selectById(holidayRecord.getUserid());
+                //小于3天，系主任审批，申请人为教师，判断与当前用户所在专业是否一致（系主任）
+                if(holidayRecord.getDays()<=3){
+                    if(teacherRecord.getProfession().equals(teacher.getProfession())&&teacher.getGroup().equals(UserGroup.Group_DEPARTMENTDIRECTOR)){
+                        taskService.setAssignee(task.getId(),null);
+                    }
+                }else{//大于3天，学院院长审批，判断是否为同一学院（院长）
+                    if(teacherRecord.getCollege().equals(teacher.getCollege())&&teacher.getGroup().equals(UserGroup.GROUP_DEAN)){
+                        taskService.setAssignee(task.getId(),null);
+                    }
+                }
+            }
+            else if(holidayRecord.getRole().equals(UserRole.STUDENT)){
+                StudentRecord student = studentDao.selectById(holidayRecord.getUserid());
+                //小于3天，辅导员审批，申请人为学生，判断与当前用户所在专业是否一致,学生所对应的额辅导员为该审批人
+                if(holidayRecord.getDays()<=3){
+                    if(student.getTid().equals(teacher.getTid())&&student.getProfession().equals(teacher.getProfession())&&teacher.getGroup().equals(UserGroup.GROUP_INSTRUCTOR)){
+                        taskService.setAssignee(task.getId(),null);
+                    }
+                }else{//大于3天，学院书记审批，判断是否为同一学院
+                    if(student.getCollege().equals(teacher.getCollege())&&teacher.getGroup().equals(UserGroup.GROUP_SECRETARY)){
+                        taskService.setAssignee(task.getId(),null);
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * 教师查询待处理任务（待审批任务）
