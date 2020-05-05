@@ -15,5 +15,6 @@ public interface ProjectDao {
     List<ProjectRecord> selectByRoleAndProcessStatus(String role,int processStatus);
     List<ProjectRecord> selectByProcessStatus(int processStatus);
     List<ProjectRecord> selectByUserId(int id);
+    List<ProjectRecord> selectByUserIdAndRoleAndProcessStatus(int userId,String role);
 
 }

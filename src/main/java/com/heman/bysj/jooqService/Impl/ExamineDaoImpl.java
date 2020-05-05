@@ -4,9 +4,12 @@ import com.heman.bysj.jooq.tables.records.ExamineRecord;
 import com.heman.bysj.jooqService.ExamineDao;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
+import org.jooq.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.util.List;
 
 import static com.heman.bysj.jooq.tables.Examine.EXAMINE;
 @Slf4j
@@ -26,6 +29,20 @@ public class ExamineDaoImpl implements ExamineDao {
         return dslContext.selectFrom(EXAMINE)
                 .where(EXAMINE.PROCESSINSTANCEID.eq(processInstanceId))
                 .fetchOne();
+    }
+
+    @Override
+    public ExamineRecord selectByProcessInstanceIdOne(String processInstanceId) {
+        List<ExamineRecord> fetch = dslContext.selectFrom(EXAMINE)
+                .where(EXAMINE.PROCESSINSTANCEID.eq(processInstanceId))
+                .orderBy(EXAMINE.CHECKTIME.desc())
+                .fetch();
+        if(fetch.size()!=0){
+            ExamineRecord examineRecord = fetch.get(0);
+            System.out.println("时间："+examineRecord.getChecktime());
+            return examineRecord;
+        }
+        return null;
     }
 
     @Override

@@ -82,4 +82,15 @@ public class ProjectDaoImpl implements ProjectDao {
                 .where(PROJECT.USERID.eq(id))
                 .fetch();
     }
+
+    @Override
+    public List<ProjectRecord> selectByUserIdAndRoleAndProcessStatus(int userId, String role) {
+        List<ProjectRecord> list = dslContext.selectFrom(PROJECT)
+                .where(PROJECT.USERID.eq(userId))
+                .and(PROJECT.ROLE.eq(role))
+                .and(PROJECT.PROCESSSTATUS.eq(5))
+                .or(PROJECT.PROCESSSTATUS.eq(6))//请假状态为已完成
+                .fetch();
+        return list;
+    }
 }

@@ -168,6 +168,21 @@ public class Activiti_Major {
         }
     }
     /**
+     * 进行任务归还
+     * @param definitionKey
+     * @param processInstanceId 流程实例ID
+     */
+    public void revert(String definitionKey, String processInstanceId){
+        List<Task> taskList = taskService.createTaskQuery()
+                .processDefinitionKey(definitionKey)
+                //.taskCandidateGroup(teacher.getGroup())
+                .processInstanceId(processInstanceId)
+                .list();
+        for (Task task:taskList) {
+            taskService.setAssignee(task.getId(),null);
+        }
+    }
+    /**
      * 查询待处理任务（待审批任务）
      * @param processDefinitionKey
      * @param teacher

@@ -77,6 +77,7 @@ public class UserServiceImpl implements UserService {
         String msg = "";
         if(role.equals(UserRole.STUDENT)){
             System.out.println("学生注册");
+
             //判断该账号是否以注册
             StudentRecord studentRecord = studentDao.getByUserName(user.get("userName").toString());
             if(studentRecord!=null){
@@ -99,12 +100,16 @@ public class UserServiceImpl implements UserService {
         }
         else {
             System.out.println("教师注册");
-            //判断该账号是否以注册
-            TeacherRecord teacherRecord = teacherDao.getByUserName(user.get("userName").toString());
-            if(teacherRecord!=null){
-                msg = "该账号已注册";
-                return msg;
-            }
+            System.out.println("职位："+user.get("position"));
+
+
+                //判断该账号是否以注册
+                TeacherRecord teacherRecord = teacherDao.getByUserName(user.get("userName").toString());
+                if(teacherRecord!=null){
+                    msg = "该账号已注册";
+                    return msg;
+                }
+
             String grade = null;
             String college = null;
             String profession=null;
@@ -118,10 +123,12 @@ public class UserServiceImpl implements UserService {
             if(user.get("position")!=null)
                 position = user.get("position").toString();
             //查询该学院、专业、职位、年级的教师账户是否已存在
-            TeacherRecord teacherRecord1 = teacherDao.selectByParam(grade, college, profession, position);
-            if(teacherRecord1!=null){
-                msg = "该职位的账号已存在";
-                return msg;
+            if(!user.get("position").equals("教师")) {
+                TeacherRecord teacherRecord1 = teacherDao.selectByParam(grade, college, profession, position);
+                if (teacherRecord1 != null) {
+                    msg = "该职位的账号已存在";
+                    return msg;
+                }
             }
             //数据类型转换
             Teacher teacher = Convert.registerTeacher(user);

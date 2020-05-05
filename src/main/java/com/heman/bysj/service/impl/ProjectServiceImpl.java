@@ -1,6 +1,7 @@
 package com.heman.bysj.service.impl;
 
 import com.heman.bysj.activiti.Activiti_Project;
+import com.heman.bysj.entity.ProjectHistory;
 import com.heman.bysj.entity.ProjectProcess;
 import com.heman.bysj.entity.ProjectTask;
 import com.heman.bysj.entity.User;
@@ -232,42 +233,64 @@ public class ProjectServiceImpl implements ProjectService {
      * @param userId
      */
     @Override
-    public List<ProjectProcess> userSearch(int userId) {
+    public List<ProjectProcess> userSearch(int userId,String role) {
         //存放结果
         List<ProjectProcess> result = new ArrayList<>();
         //查询转专业单进度
         System.out.println("进入service");
         //根据用户id查询业务表
-        List<ProjectRecord> projectRecords = projectDao.selectByUserId(userId);
-        if(projectRecords.size()==0)
-            return null;
-        for (ProjectRecord projectRecord: projectRecords) {//循环每个申请任务
-            Project project = projectRecord.into(Project.class);
-            //通过流程ID查找历史任务
-            List<HistoricTaskInstance> historicTaskInstances = activiti_project.findHistoryTaskByBusinessKey(project.getProcessinstanceid());
-            for (HistoricTaskInstance hti:historicTaskInstances) {
-                ProjectProcess projectProcess = new ProjectProcess();
-                ExamineRecord examineRecord = examineDao.selectByTaskId(hti.getId());
-                if(examineRecord!=null){
-                    Examine examine = examineRecord.into(Examine.class);
-                    projectProcess.setProcessInstanceId(project.getProcessinstanceid());
-                    projectProcess.setTaskId(examine.getTaskid());
-                    projectProcess.setProjectName(project.getProjectname());
-                    projectProcess.setOpinion(examine.getOpinion());
-                    projectProcess.setCheckTime(examine.getChecktime());
-                    projectProcess.setCheckResult(examine.getCheckresult());
-                    String userName = hti.getAssignee();
-                    TeacherRecord teacher = teacherDao.getByUserName(userName);
-                    if(teacher==null)
-                        continue;
-                    projectProcess.setTaskStatus(teacher.getPosition()+"审批完成");
-                    result.add(projectProcess);
-                }
+        List<ProjectRecord> projectRecords = projectDao.selectByUserIdAndRole(userId, role);
+        if (projectRecords.size() != 0){
 
+            for (ProjectRecord projectRecord : projectRecords) {//循环每个申请任务
+                Project project = projectRecord.into(Project.class);
+                //通过流程ID查找历史任务
+                List<HistoricTaskInstance> historicTaskInstances = activiti_project.findHistoryTaskByBusinessKey(project.getProcessinstanceid());
+                for (HistoricTaskInstance hti : historicTaskInstances) {
+                    ProjectProcess projectProcess = new ProjectProcess();
+                    ExamineRecord examineRecord = examineDao.selectByTaskId(hti.getId());
+                    if (examineRecord != null) {
+                        Examine examine = examineRecord.into(Examine.class);
+                        projectProcess.setProcessInstanceId(project.getProcessinstanceid());
+                        projectProcess.setTaskId(examine.getTaskid());
+                        projectProcess.setProjectName(project.getProjectname());
+                        projectProcess.setOpinion(examine.getOpinion());
+                        projectProcess.setCheckTime(examine.getChecktime());
+                        projectProcess.setCheckResult(examine.getCheckresult());
+                        String userName = hti.getAssignee();
+                        TeacherRecord teacher = teacherDao.getByUserName(userName);
+                        if (teacher == null)
+                            continue;
+                        projectProcess.setTaskStatus(teacher.getPosition() + "审批完成");
+                        result.add(projectProcess);
+                    }
+
+                }
             }
-        }
+    }
         log.info("查询用户立项申请任务完成");
         System.out.println(result.toArray());
         return result;
+    }
+
+    @Override
+    public List<ProjectHistory> projectHistory(int userId, String role) {
+        List<ProjectRecord> projectRecords = projectDao.selectByUserIdAndRoleAndProcessStatus(userId,role);
+        if(projectRecords.size()==0){
+            log.info("该用户无立项记录，用户ID：{}，角色：{}",userId,role);
+            return null;
+        }
+        List<ProjectHistory> list = new ArrayList<>();
+        for (ProjectRecord project:projectRecords) {
+            Examine projectCheck = examineDao.selectByProcessInstanceIdOne(project.getProcessinstanceid()).into(Examine.class);
+            ProjectHistory projectHistory = new ProjectHistory();
+            projectHistory.setProcessInstanceId(project.getProcessinstanceid());
+            projectHistory.setProjectName(project.getProjectname());
+            projectHistory.setCheckTime(projectCheck.getChecktime());
+            projectHistory.setCheckResult(projectCheck.getCheckresult());
+            projectHistory.setOpinion(projectCheck.getOpinion());
+            list.add(projectHistory);
+        }
+        return list;
     }
 }

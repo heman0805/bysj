@@ -1,20 +1,21 @@
 package com.heman.bysj.service.impl;
 
+import com.heman.bysj.activiti.Activiti_Holiday;
 import com.heman.bysj.activiti.Activiti_Major;
+import com.heman.bysj.activiti.Activiti_Project;
 import com.heman.bysj.entity.ChangeMajorResult;
 import com.heman.bysj.entity.MajorProgress;
 import com.heman.bysj.entity.MajorTask;
+import com.heman.bysj.enums.UserRole;
 import com.heman.bysj.jooq.tables.pojos.*;
-import com.heman.bysj.jooq.tables.records.ChangemajorsRecord;
-import com.heman.bysj.jooq.tables.records.ExamineRecord;
-import com.heman.bysj.jooq.tables.records.StudentRecord;
-import com.heman.bysj.jooq.tables.records.TeacherRecord;
+import com.heman.bysj.jooq.tables.records.*;
 import com.heman.bysj.jooqService.*;
 import com.heman.bysj.service.ChangeMajorsService;
 import com.heman.bysj.utils.Convert;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.task.Task;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,10 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
     @Autowired
     private Activiti_Major activiti_major;
     @Autowired
+    private Activiti_Holiday activiti_holiday;
+    @Autowired
+    private Activiti_Project activiti_project;
+    @Autowired
     private StudentDao studentDao;
     @Autowired
     private TeacherDao teacherDao;
@@ -37,6 +42,10 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
     private ExamineDao examineDao;
     @Autowired
     private ClassesDao classesDao;
+    @Autowired
+    private HolidayDao holidayDao;
+    @Autowired
+    private ProjectDao projectDao;
 
     @Override
     public boolean startMajor(Changemajors changemajors) {
@@ -251,9 +260,22 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
         log.info("新专业：{}",profession);
         TeacherRecord teacherRecord = teacherDao.selectByProfessionAndPosition(profession, "辅导员");
         for (ChangeMajorResult result:list) {
-            log.info("学生更新信息：{}",result);
             if(result.getNewClass_()!=null){
                 log.info("更新{}个人信息:",result.getSid());
+                //归还任务
+                List<HolidayRecord> holidays = holidayDao.selectByUidAndRole(result.getSid(), UserRole.STUDENT);
+                for (HolidayRecord item:holidays) {
+                    activiti_holiday.revert("holidayProcess",item.getProcessinstanceid());
+                }
+                List<ChangemajorsRecord> changemajors = changeMajorsDao.selectByUserId(result.getSid());
+                for (ChangemajorsRecord item:changemajors) {
+                    activiti_major.revert("majorProcess",item.getProcessinstanceid());
+                }
+                List<ProjectRecord> project = projectDao.selectByUserIdAndRole(result.getSid(), UserRole.STUDENT);
+                for (ProjectRecord item:project) {
+                    activiti_project.revert("holidayProcess",item.getProcessinstanceid());
+                }
+
                 //更新学生信息
                 studentDao.updateChangeMajor(result,teacherRecord.getTid());
                 //更新转专业业务表
@@ -262,6 +284,12 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
                 log.info("该学生新班级为空:{}，班级：{}",result.getSid(),result.getNewClass_());
             }
         }
+    }
+
+    public void revertTask(int id){
+        List<HolidayRecord> holidays = holidayDao.selectByUidAndRole(id, UserRole.STUDENT);
+        List<ChangemajorsRecord> changemajors = changeMajorsDao.selectByUserId(id);
+        List<ProjectRecord> project = projectDao.selectByUserIdAndRole(id, UserRole.STUDENT);
     }
 
     @Override

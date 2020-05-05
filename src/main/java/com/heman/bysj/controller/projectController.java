@@ -1,5 +1,6 @@
 package com.heman.bysj.controller;
 
+import com.heman.bysj.entity.ProjectHistory;
 import com.heman.bysj.entity.ProjectProcess;
 import com.heman.bysj.entity.ProjectTask;
 import com.heman.bysj.enums.UserGroup;
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -142,13 +144,28 @@ public class projectController {
      * 4、查询业务表封装数据返回给前端请假表内容
      * /test/{page}/{size}
      */
-    @RequestMapping(value="/user/project/userSearch/{uid}")
+    @RequestMapping(value="/user/project/userSearch/{uid}/{role}")
     @ResponseBody
-    public List<ProjectProcess> userSearch(@PathVariable("uid")int userId){
+    public Map<String, List> userSearch(@PathVariable("uid")int userId,@PathVariable("role")String role){
         System.out.println("进入方法");
-        //查询正在执行的请假流程
-        List<ProjectProcess> projectProcess = projectService. userSearch(userId);
-        return projectProcess;
+        Map<String, List> listMap = new HashMap<>();
+        //查询正在执行的流程
+        List<ProjectProcess> result = new ArrayList<>();
+        List<ProjectProcess> projectProcess = projectService. userSearch(userId,role);
+        for (ProjectProcess item:projectProcess) {
+            result.add(item);
+        }
+        listMap.put("project",result);
+        return listMap;
     }
-
+    @RequestMapping(value="/user/project/history/{userId}/{role}/{page}/{size}")
+    @ResponseBody
+    public Page history(@PathVariable("userId") int userId,@PathVariable("role") String role
+            ,@PathVariable("page") int pageNum,
+                        @PathVariable("size") int limit){
+        List<ProjectHistory> projectHistories = projectService.projectHistory(userId, role);
+        PageUtils pageUtils = new PageUtils();
+        Page page = pageUtils.resultPage(projectHistories,pageNum,limit);
+        return page;
+    }
 }
