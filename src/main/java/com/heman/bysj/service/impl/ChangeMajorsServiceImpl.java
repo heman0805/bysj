@@ -197,13 +197,16 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
         }
         for (ChangemajorsRecord changeMajor:changemajorsList) {
             ChangeMajorResult changeMajorResult = new ChangeMajorResult();
+            StudentRecord studentRecord = studentDao.selectById(changeMajor.getUserid());
+            if(studentRecord==null)
+                continue;
             changeMajorResult.setNewCollege(changeMajor.getNewcollege());
             changeMajorResult.setNewProfession(changeMajor.getNewprofession());
 
             changeMajorResult.setCurrentCollege(changeMajor.getCurrentcollege());
             changeMajorResult.setCurrentProfession(changeMajor.getCurrentprofession());
             changeMajorResult.setCurrentClass(changeMajor.getCurrentclass());
-            StudentRecord studentRecord = studentDao.selectById(changeMajor.getUserid());
+
             changeMajorResult.setSid(studentRecord.getSid());
             changeMajorResult.setName(studentRecord.getName());
             changeMajorResult.setSex(studentRecord.getSex());
@@ -222,10 +225,24 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
      */
     @Override
     public List<ChangeMajorResult> getByProfession(String profession,String param,int grade) {
+
+
+
         List<ChangeMajorResult> result = new ArrayList<>();
         List<ChangemajorsRecord> changemajorsRecords = new ArrayList<>();
         if(param.equals("college"))
+        {
+            //判断该学院是否完成转专业审批
+            List<ChangemajorsRecord> list = changeMajorsDao.selectByCollegeAndNotComplete(profession);
+            if(list.size()!=0)
+            {
+                for (ChangemajorsRecord c:list) {
+                    log.info("c.getUserid()={},c.getProcessinstanceid()={}",c.getUserid(),c.getProcessinstanceid());
+                }
+                return null;
+            }
             changemajorsRecords = changeMajorsDao.selectByCollegeAndProcessStatus(profession,6);
+        }
         else if(param.equals("profession"))
             changemajorsRecords = changeMajorsDao.selectByProfessionAndProcessStatus(profession, 6);
         System.out.println("profession:"+profession+",审核通过列表："+changemajorsRecords);
@@ -255,8 +272,13 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
      * @return
      */
     @Override
-    public void setClass(List<ChangeMajorResult> list) {
-        String profession = list.get(0).getNewProfession();//获取更新学生的专业
+    public int setClass(List<ChangeMajorResult> list) {
+        String profession = list.get(0).getNewProfession();//获取更新学生的新专业
+        String college = list.get(0).getNewCollege();//获取更新学生的新学院
+        //判断该学院是否完成转专业审批
+        List<ChangemajorsRecord> changemajorsRecords = changeMajorsDao.selectByCollegeAndNotComplete(college);
+        if(changemajorsRecords!=null)
+            return 0;
         log.info("新专业：{}",profession);
         TeacherRecord teacherRecord = teacherDao.selectByProfessionAndPosition(profession, "辅导员");
         for (ChangeMajorResult result:list) {
@@ -283,7 +305,9 @@ public class ChangeMajorsServiceImpl  implements ChangeMajorsService{
             }else{
                 log.info("该学生新班级为空:{}，班级：{}",result.getSid(),result.getNewClass_());
             }
+
         }
+        return 1;
     }
 
     public void revertTask(int id){

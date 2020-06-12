@@ -17,7 +17,7 @@ public interface ChangeMajorsService {
     void major_Check(Examine examine);
     List<MajorProgress> userSearch(int userId);
     List<ChangeMajorResult> selectMajor(String college);
-    void setClass(List<ChangeMajorResult> list);
+    int setClass(List<ChangeMajorResult> list);
     List<ChangeMajorResult> getByProfession(String profession,String param,int grade);
     void download(String college);
     boolean selectMajorByUserId(int id);

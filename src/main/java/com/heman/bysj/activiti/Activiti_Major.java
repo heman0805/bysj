@@ -44,14 +44,15 @@ public class Activiti_Major {
     @Autowired
     private ExamineDao examineDao;
     /**
-     * 启动请假流程
+     * 启动转专业流程
      * @param changemajors
      */
     public  String startInstance(Changemajors changemajors){
         String businessKey = changemajors.getCid();
         Map<String,Object> map = new HashMap<>();
         map.put("name",changemajors.getUserid().toString());
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("majorProcess",businessKey,map);
+        ProcessInstance processInstance = runtimeService
+                .startProcessInstanceByKey("majorProcess",businessKey,map);
         log.info("转专业申请流程启动成功，申请人id:{}",changemajors.getUserid());
         return processInstance.getId();
     }

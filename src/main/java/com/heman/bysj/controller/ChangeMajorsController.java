@@ -147,7 +147,10 @@ public class ChangeMajorsController {
 
         log.info("searchHoliday-------pageNum={},size={}",pageNum,limit);
         List<ChangeMajorResult> ChangeMajorResult = changeMajorsService.getByProfession(profession,param,grade);
-        log.info("selectMajor.size()={}",ChangeMajorResult.size());
+        if(ChangeMajorResult==null)
+            log.info("selectMajor.size()={}",0);
+        else
+            log.info("selectMajor.size()={}",ChangeMajorResult.size());
         PageUtils pageUtils = new PageUtils();
         Page page = pageUtils.resultPage(ChangeMajorResult,pageNum,limit);
         return page;
@@ -156,9 +159,12 @@ public class ChangeMajorsController {
     @ResponseBody
     public String setClass(@RequestBody List<ChangeMajorResult> list){
         //设置新专业班级
-        changeMajorsService.setClass(list);
+        int result = changeMajorsService.setClass(list);
+        String msg;
+        if(result==0)
+            msg = "分配失败";
         //已有的学生任务进行释放
-        String msg = "分配班级成功";
+        msg = "分配班级成功";
         return msg;
     }
     /**

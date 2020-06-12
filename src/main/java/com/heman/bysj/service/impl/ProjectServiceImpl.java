@@ -47,7 +47,7 @@ public class ProjectServiceImpl implements ProjectService {
     public boolean startProject(Project project,int group) {
         //1、启动转专业流程实例
         String processInstanceId = activiti_project.startInstance(project,group);
-        //2、插入转专业表
+        //2、插入立项申请表
         project.setProcessinstanceid(processInstanceId);
         project.setProcessstatus(1);//设置审批流程状态为审批中
         ProjectRecord projectRecord = new ProjectRecord();

@@ -13,6 +13,7 @@ public interface ChangeMajorsDao {
     List<ChangemajorsRecord> selectByUserId(int userId);
     List<ChangemajorsRecord> selectByProfessionAndProcessStatus(String profession,int processStatus);
     List<ChangemajorsRecord> selectByCollegeAndProcessStatus(String college,int processStatus);
+    List<ChangemajorsRecord> selectByCollegeAndNotComplete(String college);
     void updateProcessStatusCompleteByUserId(int userId);
     List<ChangemajorsRecord> selectByProcessStatus(int processStatus);
 }

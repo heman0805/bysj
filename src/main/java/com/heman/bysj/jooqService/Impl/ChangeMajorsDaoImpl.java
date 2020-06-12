@@ -80,6 +80,16 @@ public class ChangeMajorsDaoImpl implements ChangeMajorsDao {
     }
 
     @Override
+    public List<ChangemajorsRecord> selectByCollegeAndNotComplete(String college) {
+        return dslContext.selectFrom(CHANGEMAJORS)
+                .where(CHANGEMAJORS.NEWCOLLEGE.eq(college))
+                .and(CHANGEMAJORS.PROCESSSTATUS.notEqual(6))
+                .and(CHANGEMAJORS.PROCESSSTATUS.notEqual(7))
+                .and(CHANGEMAJORS.PROCESSSTATUS.notEqual(10))
+                .fetch();
+    }
+
+    @Override
     public void updateProcessStatusCompleteByUserId(int userId) {
         dslContext.update(CHANGEMAJORS)
                 .set(CHANGEMAJORS.PROCESSSTATUS,10)
